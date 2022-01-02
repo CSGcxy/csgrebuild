@@ -7,7 +7,7 @@ module.exports = {
         // proxy: 'http://localhost:9001'
         proxy: {
             '/':{
-                target: 'http://localhost:9001',
+                target: 'http://103.131.169.220:8088',
                 changeOrigin: true,
                 pathRewrite:{
                     '^/': ''
