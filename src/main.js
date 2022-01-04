@@ -4,6 +4,8 @@ import router from './router'
 import './plugins/element.js'
 import ElementUI from 'element-ui'
 import * as echarts from 'echarts'
+import global_variable from "@/utils/global_variable";
+
 Vue.config.productionTip = false
 
 //vue中使用网页防复制
@@ -17,6 +19,8 @@ document.oncontextmenu = function () {
 //进行挂载
 Vue.use(ElementUI);
 Vue.prototype.$echarts = echarts;
+//挂载网段
+Vue.prototype.GLOBAL = global_variable;
 
 new Vue({
   router,

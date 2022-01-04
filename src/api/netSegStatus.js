@@ -13,5 +13,11 @@ export default {
             url: base + '/terminalStatus/getAlertFlow',
             method:'get'
         })
+    },
+    getNetworkSegmentTerminalTotal(segment) {
+        return request({
+            url: base + '/terminalStatus/getNetworkSegmentTerminalTotal/' + segment,
+            method:'get'
+        })
     }
 }
