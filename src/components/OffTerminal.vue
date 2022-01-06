@@ -34,7 +34,7 @@
             <h6>离线终端地区分布</h6>
           </div>
           <div class="center-top-Map">
-            <OfflineMap/>
+            <OfflineShenzhen/>
           </div>
         </div>
         <div class="center-bottom">
@@ -58,10 +58,10 @@ import CountChange from "@/components/viewCharts/offTerminal/CountChange";
 import CompanyCondition from "@/components/viewCharts/offTerminal/CompanyCondition";
 import NetworkSegmentDistribution from "@/components/viewCharts/offTerminal/NetworkSegmentDistribution";
 import LineChart from "@/components/viewCharts/offTerminal/LineChart";
-import OfflineMap from "@/components/viewCharts/offTerminal/OfflineMap";
+import OfflineShenzhen from "./viewCharts/offTerminal/OfflineShenzhen";
 export default {
   name: "OfflineTerminal",
-  components: {LineChart, NetworkSegmentDistribution, CompanyCondition, CountChange,OfflineMap},
+  components: {LineChart, NetworkSegmentDistribution, CompanyCondition, CountChange,OfflineShenzhen},
   mounted() {
 
   },
