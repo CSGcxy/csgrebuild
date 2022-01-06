@@ -1,6 +1,6 @@
 <template>
   <div id="div1">
-    <div class="part1">
+    <div id="part1">
       <div class="box-display">
         <div class="box-inner-text">终端1</div>
         <div class="box-inner-logo">
@@ -16,7 +16,6 @@
           <i class="el-icon-remove" style="color:hsl(55, 100%, 70%);"></i>
         </div>
       </div>
-
       <div class="box-display">
         <div class="box-inner-text">终端3</div>
         <div class="box-inner-logo">
@@ -24,7 +23,8 @@
         </div>
       </div>
     </div>
-    <div class="part2">
+
+    <div id="part2">
       <div class="box-display">
         <div class="box-inner-text">终端4</div>
         <div class="box-inner-logo">
@@ -46,7 +46,8 @@
         </div>
       </div>
     </div>
-    <div class="part3">
+
+    <div id="part3">
       <div class="box-display">
         <div class="box-inner-text">终端7</div>
         <div class="box-inner-logo">
@@ -120,17 +121,17 @@ export default {
   font-size: 20px;
   /*background-color: #FFFFff;*/
 }
-.part1{
+#part1{
   width:33%;
   height:90%;
   float: left;
 }
-.part2{
+#part2{
   width:33%;
   height:90%;
   float: left;
 }
-.part3{
+#part3{
   width:33%;
   height:90%;
   float: left;

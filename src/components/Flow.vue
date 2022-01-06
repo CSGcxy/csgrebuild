@@ -21,7 +21,7 @@ export default {
     getData() {
       this.GLOBAL.NETSEG = this.temp
       netSegStatus.getNetworkSegmentTerminalTotal(this.GLOBAL.NETSEG).then(resp => {
-        console.log("222")
+        console.log("flow222")
         console.log(resp)
       });
     }
