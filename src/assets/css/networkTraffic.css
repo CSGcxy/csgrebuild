@@ -275,8 +275,8 @@ input {
 
 .center-bottom>.timeInterval {
     float: left;
-    padding-left: 25%;
-    margin-top: -2.5%;
+    padding-left: 5px;
+    padding-top: 5px;
 }
 
 .center-bottom>.bottom-1>.title-box-center {
