@@ -15,14 +15,14 @@ export default {
   }
   },
   mounted() {
-    this.temp = '10.x.x.x'
+    this.temp = 'Others'
   },
   methods:{
     getData() {
       this.GLOBAL.NETSEG = this.temp
       netSegStatus.getNetworkSegmentTerminalTotal(this.GLOBAL.NETSEG).then(resp => {
         console.log("flow222")
-        console.log(resp)
+        console.log(resp.data.NetSegTotal[0])
       });
     }
   }

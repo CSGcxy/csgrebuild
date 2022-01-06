@@ -13,11 +13,11 @@
       <div class="box-center">
         <div class="center-top">
           <div class="title-box">
-            <h6>网段终端总体统计</h6>
+            <h6>网段流量桑基图</h6>
           </div>
           <div class="center-terminal">
 <!--            <div id="center-terminal-detail"></div>-->
-            <NetworkSegmentTerminal/>
+            <NetworkSangji/>
           </div>
         </div>
         <div class="center-mid">
@@ -68,13 +68,13 @@
 <script>
 
 import NetworkSegmentTerminalTotal from "@/components/viewCharts/networkTraffic/NetworkSegmentTerminalTotal";
-import NetworkSegmentTerminal from "@/components/viewCharts/networkTraffic/NetworkSegmentTerminal";
 import ActiveTraffic from "@/components/viewCharts/networkTraffic/ActiveTraffic";
 import SegmentTraffic from "@/components/viewCharts/networkTraffic/SegmentTraffic";
+import NetworkSangji from "@/components/viewCharts/networkTraffic/NetworkSangji";
 
 export default {
   name: "NetworkTraffic",
-  components: {NetworkSegmentTerminalTotal, NetworkSegmentTerminal, ActiveTraffic, SegmentTraffic},
+  components: {NetworkSangji, NetworkSegmentTerminalTotal , ActiveTraffic, SegmentTraffic},
 
   // mounted() {
   //   // this.getRandomNum();

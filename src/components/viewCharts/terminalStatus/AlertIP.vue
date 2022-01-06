@@ -42,8 +42,8 @@ export default {
     };
   },
   mounted() {
-    this.drawTopHosts();
-    setInterval(this.drawTopHosts,5000);
+    // this.drawTopHosts();
+    // setInterval(this.drawTopHosts,this.GLOBAL.refreshTime);
   },
   methods: {
     drawTopHosts() {

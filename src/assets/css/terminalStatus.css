@@ -59,7 +59,7 @@
 }
 
 .el-cascader-panel {
-    max-height: 100px;
+    max-height: 180px;
     background: rgb(9,34,54);
 }
 

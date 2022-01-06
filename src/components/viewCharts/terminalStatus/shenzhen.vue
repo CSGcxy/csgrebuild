@@ -1,16 +1,15 @@
 <template>
   <div
-      id="main"
+      id="shenzhenMap"
       style="width: 100%; height: 100%;"
   ></div>
 </template>
 
 <script>
-import * as echarts from "echarts";
 
 export default {
   mounted() {
-    var myChart = echarts.init(document.getElementById("main"));
+    var shenzhenChart = this.$echarts.init(document.getElementById("shenzhenMap"));
 
     var data = {
       type: "FeatureCollection",
@@ -3892,7 +3891,7 @@ export default {
         },
       ],
     };
-    echarts.registerMap("shenzhen", data);
+    this.$echarts.registerMap("shenzhen", data);
     // var geoCoordMap = {
     //   宝安区: [113.88308, 22.55329],
     //   光明区: [113.93588, 22.74894],
@@ -3905,7 +3904,7 @@ export default {
     //   南山区: [113.92822, 22.52777],
     // };
 
-    var option = {
+    var shenzhenOption = {
       title: {
         // text: "深圳XX地图",
         // subtext: "Data from Mr.He",
@@ -3992,7 +3991,7 @@ export default {
         },
       ],
     };
-    myChart.setOption(option);
+    shenzhenChart.setOption(shenzhenOption);
   },
 };
 </script>

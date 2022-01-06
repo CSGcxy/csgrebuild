@@ -23,7 +23,7 @@
           <div class="center-left">
             <div class="center-left-active">
               <!--              <div id="left-active"></div>-->
-                            <ActiveTerminal v-if="isRouterAlive"/>
+              <ActiveTerminal v-if="isRouterAlive"/>
             </div>
           </div>
           <div class="center-center">
@@ -42,7 +42,7 @@
             <h6>终端通信情况表</h6>
           </div>
           <div class="center-active">
-                        <terminalCommunication v-if="isRouterAlive"/>
+            <terminalCommunication v-if="isRouterAlive"/>
           </div>
         </div>
         <div class="center-bottom">
@@ -58,8 +58,8 @@
               <!--              <option value="7">终端7</option>-->
             </select>
           </div>
-                    <FlowTimingRecived v-if="isRouterAlive"/>
-                    <FlowTimingSent v-if="isRouterAlive"/>
+          <FlowTimingRecived v-if="isRouterAlive"/>
+          <FlowTimingSent v-if="isRouterAlive"/>
         </div>
       </div>
     </div>
@@ -88,36 +88,79 @@ export default {
       ipList: [],
       netSegList:[
         {
-          value:"innerNet",
-          label:"内网",
+          value:"SIM",
+          label:"SIM卡",
           children:[
             {
-              value: '10.x.x.x',
-              label: '10.x.x.x',
+              value: 'YD4G',
+              label: '移动4G'
+            },
+            {
+              value: 'YD5G',
+              label: '移动5G'
+            },
+            {
+              value: 'YDWLW',
+              label: '移动物联网'
+            },
+            {
+              value: 'LT4G',
+              label: '联通4G'
             }
           ]
         },
         {
-          value:"outNet",
-          label: '外网',
+          value:"WX230",
+          label: '无线',
           children: [
             {
-              value: '外网IPx.x.x.x',
-              label: '外网IPx.x.x.x',
+              value: 'WX230',
+              label: '无线'
             }
-          ],
-        }
+          ]
+        },
+        {
+          value:"PW",
+          label: '配网',
+          children: [
+            {
+              value: 'PW',
+              label: '配网'
+            }
+          ]
+        },
+        {
+          value:"ZZ",
+          label: '主站',
+          children: [
+            {
+              value: 'ZZ',
+              label: '主站'
+            }
+          ]
+        },
+        {
+          value:"Others",
+          label: '其它',
+          children: [
+            {
+              value: 'Others',
+              label: '其它'
+            }
+          ]
+        },
+
       ],
     }
   },
   mounted() {
-    this.GLOBAL.NETSEG = '10.x.x.x';
-    this.getIpList();
+    this.GLOBAL.NETSEG = 'Others';
+    // this.getIpList();
   },
   watch: {
     selectNetSeg:{
       handler(newName) {
-        this.getIpList(newName[1])
+        // this.getIpList(newName[1])
       }
     }
   },

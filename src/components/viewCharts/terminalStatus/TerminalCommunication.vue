@@ -40,14 +40,14 @@ export default {
   },
   mounted() {
     this.drawterminalCommunication();
-    setInterval(this.drawterminalCommunication,5000);
-    this.temp = '10.x.x.x'
+    setInterval(this.drawterminalCommunication,this.GLOBAL.refreshTime);
+    // this.temp = 'Others'
   },
   methods:{
     drawterminalCommunication() {
-      this.GLOBAL.NETSEG = this.temp
+      // this.GLOBAL.NETSEG = this.temp
       netSegStatus.getTerminalCommunication(this.GLOBAL.NETSEG).then(resp => {
-        this.tableValue=resp.data;
+        this.tableValue=resp.data.segCommStatusList;
       });
     }
   }

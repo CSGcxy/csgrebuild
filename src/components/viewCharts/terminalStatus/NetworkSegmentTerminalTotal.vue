@@ -79,16 +79,15 @@ export default {
   },
   mounted() {
     this.drawNetworkSegmentTerminalTotal();
-    setInterval(this.drawNetworkSegmentTerminalTotal,5000);
-    // this.temp = this.GLOBAL.NETSEG
-    this.temp = '10.x.x.x'
-
+    setInterval(this.drawNetworkSegmentTerminalTotal,this.GLOBAL.refreshTime);
+    // // this.temp = this.GLOBAL.NETSEG
   },
   methods:{
     drawNetworkSegmentTerminalTotal(){
-      // this.GLOBAL.NETSEG = this.temp
       netSegStatus.getNetworkSegmentTerminalTotal(this.GLOBAL.NETSEG).then(resp => {
-        this.dataList = resp.data[0]
+        if (resp.data.NetSegTotal.length != 0) {
+          this.dataList = resp.data.NetSegTotal[0]
+        }
       });
     }
   }

@@ -84,15 +84,14 @@ export default {
   mounted() {
     this.activeTerminalChart = this.$echarts.init(document.getElementById('left-active'));
     this.drawActiveTerminal();
-    setInterval(this.drawActiveTerminal,5000);
+    setInterval(this.drawActiveTerminal,this.GLOBAL.refreshTime);
   },
   methods:{
     drawActiveTerminal() {
       netSegStatus.getFlowTiming(this.GLOBAL.NETSEG).then(resp => {
-        this.activeTerminalOption.xAxis.data = resp.data.timeStamp;
-        this.activeTerminalOption.series[0].data = resp.data.onlineNum;
+        this.activeTerminalOption.xAxis.data = resp.data.terminalTrendList.timeStamp;
+        this.activeTerminalOption.series[0].data = resp.data.terminalTrendList.onlineNum;
         this.activeTerminalChart.setOption(this.activeTerminalOption);
-        console.log(resp)
       });
       }
     }

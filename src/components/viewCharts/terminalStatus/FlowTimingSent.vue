@@ -82,13 +82,13 @@ export default {
   mounted() {
     this.flowTimingSentChart = this.$echarts.init(document.getElementById('center-flowTiming-sent'));
     this.drawFlowTimingSent();
-    setInterval(this.drawFlowTimingSent,5000);
+    setInterval(this.drawFlowTimingSent,this.GLOBAL.refreshTime);
   },
   methods:{
     drawFlowTimingSent() {
       netSegStatus.getFlowTiming(this.GLOBAL.NETSEG).then(resp => {
-        this.flowTimingSentChartOption.xAxis.data = resp.data.timeStamp;
-        this.flowTimingSentChartOption.series[0].data = resp.data.uprate;
+        this.flowTimingSentChartOption.xAxis.data = resp.data.terminalTrendList.timeStamp;
+        this.flowTimingSentChartOption.series[0].data = resp.data.terminalTrendList.uprate;
         this.flowTimingSentChart.setOption(this.flowTimingSentChartOption);
       });
     }

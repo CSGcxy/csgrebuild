@@ -1,4 +1,6 @@
-const NETSEG = '';
+const NETSEG = 'Others';
+const refreshTime = 600000;
 export default {
-    NETSEG
+    NETSEG,
+    refreshTime
 };
