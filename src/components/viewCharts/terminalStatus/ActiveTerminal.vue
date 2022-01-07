@@ -70,7 +70,7 @@ export default {
         },
         series: [
           {
-            name: '邮件营销',
+            name: '在线终端',
             type: 'line',
             stack: '总量',
             data: []
