@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import netTraffic from "@/api/netTraffic";
 export default {
   name: "SegmentTraffic",
   data() {
@@ -41,7 +42,8 @@ export default {
           {
             type: 'category',
             boundaryGap: false,
-            data:  ["21:00", "21:10", "21:20", "21:30", "21:40", "21:50", "22:00"],
+            // data:  ["21:00", "21:10", "21:20", "21:30", "21:40", "21:50", "22:00"],
+            data: [],
             axisLine: {
               lineStyle: {
                 type: 'solid',
@@ -87,7 +89,8 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data:[140, 232, 101, 264, 90, 340, 250]
+            // data:[140, 232, 101, 264, 90, 340, 250],
+            data: []
           },
         ]
       }
@@ -97,21 +100,20 @@ export default {
   },
   mounted() {
     this.SegmentTrafficChart=this.$echarts.init(document.getElementById('center-flowTiming-detail'));
-    // this.drawSegmentTraffic();
+    this.drawSegmentTraffic();
     this.SegmentTrafficChart.setOption(this.SegmentTrafficOption);
   },
   methods:{
-    // drawSegmentTraffic() {
-    //   this.getRequest("/networkTraffic/segmentTraffic").then(resp=>{
-    //     if (resp.status != 200) {
-    //       this.$message.error("数据获取失败");
-    //     } else {
-    //       this.SegmentTrafficOption.xAxis.data=resp.data.data[0];
-    //       this.SegmentTrafficOption.series[0].data=resp.data.data[1];
-    //       this.SegmentTrafficChart.setOption(this.SegmentTrafficOption);
-    //     }
-    //   })
-    // }
+    drawSegmentTraffic() {
+      netTraffic.getSegmentTraffic("Others", "2021-01-01 12:00:00").then(resp =>{
+        console.log(resp);
+        if (resp.code == 20000) {
+          this.SegmentTrafficOption.xAxis.data=resp.data.netSegTotalBytesVO.timestamp;
+          this.SegmentTrafficOption.series.data=resp.data.netSegTotalBytesVO.totalBytes;
+          this.SegmentTrafficChart.setOption(this.SegmentTrafficOption);
+        }
+      })
+    }
   }
 
 }

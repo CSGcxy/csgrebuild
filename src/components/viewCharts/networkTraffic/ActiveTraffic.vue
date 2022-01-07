@@ -15,97 +15,42 @@
             <th>传输总字节数</th>
           </tr>
           </thead>
-          <tr>
-            <td>HTTP</td>
-            <td>TCP</td>
-            <td>192.168.1.2</td>
-            <td>178.62.3.29</td>
-            <td>00:58</td>
-            <td>3.12 Mbit/s</td>
-            <td>2.56 Mbit/s</td>
-            <td>11.32 MB</td>
+          <tr v-for="value in tableValue">
+            <td>{{value.appProto}}</td>
+            <td>{{value.proto}}</td>
+            <td>{{value.srcIp}}</td>
+            <td>{{value.dstIp}}</td>
+            <td>{{value.duration}}</td>
+            <td>{{value.frontRate.toFixed(2)+"Mbit/s"}}</td>
+            <td>{{value.backRate.toFixed(2)+"Mbit/s"}}</td>
+            <td>{{value.byteCount.toFixed(2)+"MB"}}</td>
           </tr>
-          <tr>
-            <td>HTTP</td>
-            <td>TCP</td>
-            <td>192.168.1.2</td>
-            <td>178.62.3.29</td>
-            <td>00:58</td>
-            <td>3.12 Mbit/s</td>
-            <td>2.56 Mbit/s</td>
-            <td>11.32 MB</td>
-          </tr>
-          <tr>
-            <td>HTTP</td>
-            <td>TCP</td>
-            <td>192.168.1.2</td>
-            <td>178.62.3.29</td>
-            <td>00:58</td>
-            <td>3.12 Mbit/s</td>
-            <td>2.56 Mbit/s</td>
-            <td>11.32 MB</td>
-          </tr>
-          <tr>
-            <td>HTTP</td>
-            <td>TCP</td>
-            <td>192.168.1.2</td>
-            <td>178.62.3.29</td>
-            <td>00:58</td>
-            <td>3.12 Mbit/s</td>
-            <td>2.56 Mbit/s</td>
-            <td>11.32 MB</td>
-          </tr>
-          <tr>
-            <td>HTTP</td>
-            <td>TCP</td>
-            <td>192.168.1.2</td>
-            <td>178.62.3.29</td>
-            <td>00:58</td>
-            <td>3.12 Mbit/s</td>
-            <td>2.56 Mbit/s</td>
-            <td>11.32 MB</td>
-          </tr>
-<!--          <tr>-->
-<!--            <td>HTTP</td>-->
-<!--            <td>TCP</td>-->
-<!--            <td>192.168.1.2</td>-->
-<!--            <td>178.62.3.29</td>-->
-<!--            <td>00:58</td>-->
-<!--            <td>3.12 Mbit/s</td>-->
-<!--            <td>2.56 Mbit/s</td>-->
-<!--            <td>11.32 MB</td>-->
-<!--          </tr>-->
-
         </table>
-
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
+import netTraffic from "@/api/netTraffic";
 export default {
   name: "ActiveTraffic",
   data() {
     return {
-      tableValue: []
+    tableValue: []
 
     }
   },
   mounted() {
-    // this.drawActiveTraffic();
+    this.drawActiveTraffic();
+    // setInterval(this.drawActiveTraffic,this.GLOBAL.refreshTime);
   },
   methods: {
-    // drawActiveTraffic() {
-    //   this.getRequest("/networkTraffic/activeTraffic").then(resp=>{
-    //     if (resp.status != 200) {
-    //       this.$message.error("数据获取失败");
-    //     } else {
-    //       this.tableValue=resp.data.data;
-    //     }
-    //   })
-    // }
+    drawActiveTraffic() {
+      netTraffic.getActiveTraffic("LT4G").then(resp =>{
+        this.tableValue=resp.data.activeFlowsList;
+      })
+    }
   }
 }
 </script>
