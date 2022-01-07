@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import offTer from "@/api/offTer";
 export default {
   name: "CountChange",
   data() {
@@ -83,21 +84,19 @@ export default {
   },
   mounted() {
     this.CountChangeChart = this.$echarts.init(document.getElementById('left-top-CountChange'));
-    // this.drawCountChange();
+    this.drawCountChange();
     this.CountChangeChart.setOption(this.CountChangeChartOption);
   },
   methods:{
-    // drawCountChange() {
-    //   this.getRequest("offlineTerminal/countChange").then(resp=>{
-    //     if (resp.status != 200) {
-    //       this.$message.error("数据获取失败");
-    //     } else {
-    //       this.CountChangeChartOption.xAxis.data=resp.data.data[0];
-    //       this.CountChangeChartOption.series[0].data=resp.data.data[1];
-    //       this.CountChangeChart.setOption(this.CountChangeChartOption);
-    //     }
-    //   })
-    // }
+    drawCountChange() {
+      offTer.getOffTerminalCount().then(resp =>{
+        if (resp.code == 20000) {
+          this.CountChangeChartOption.xAxis.data=resp.data.offTerminalCountList.timestamp;
+          this.CountChangeChartOption.series[0].data=resp.data.offTerminalCountList.offTerminalCount;
+          this.CountChangeChart.setOption(this.CountChangeChartOption);
+        }
+      })
+    }
   }
 }
 </script>

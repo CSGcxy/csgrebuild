@@ -39,7 +39,7 @@
         </div>
         <div class="center-bottom">
           <div class="title-box">
-            <h6>折线图堆叠</h6>
+            <h6>不同网段离线终端变化</h6>
           </div>
           <div class="center-bottom-Line">
             <LineChart/>
