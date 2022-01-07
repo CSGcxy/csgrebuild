@@ -49,8 +49,27 @@
             </select>
           </div>
           <div class="timeInterval">
-            <input placeholder="请选择起始时间" class="laydate-icon" id="startTime" value="">
-            <input placeholder="请选择结束时间" class="laydate-icon" id="endTime" value="">
+            <template>
+              <el-time-select
+                placeholder="起始时间"
+                v-model="startTime"
+                :picker-options="{
+                start: '08:30',
+                step: '00:15',
+                end: '18:30'
+                }">
+              </el-time-select>
+              <el-time-select
+                placeholder="结束时间"
+                v-model="endTime"
+                :picker-options="{
+                start: '08:30',
+                step: '00:15',
+                end: '18:30',
+                minTime: startTime
+                }">
+              </el-time-select>
+            </template>
           </div>
 
           <div class="center-flowTiming">
@@ -75,7 +94,6 @@ import NetworkSangji from "@/components/viewCharts/networkTraffic/NetworkSangji"
 export default {
   name: "NetworkTraffic",
   components: {NetworkSangji, NetworkSegmentTerminalTotal , ActiveTraffic, SegmentTraffic},
-
   // mounted() {
   //   // this.getRandomNum();
   //   this.timer = setInterval(() =>{
@@ -85,9 +103,12 @@ export default {
   data() {
     return{
       flowSegList: [],
-      timer: null
+      timer: null,
+      startTime: '',
+      endTime: ''
     }
   },
+  
 
 
   // beforeDestroy() {

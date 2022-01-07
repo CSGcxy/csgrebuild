@@ -279,6 +279,30 @@ input {
     padding-top: 5px;
 }
 
+.center-bottom>.timeInterval /deep/ .el-input__inner {
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #17283B;
+    border-radius: 0;
+}
+
+.center-bottom>.timeInterval /deep/ .el-date-editor.el-input {
+    width: 30%;
+}
+
+.center-bottom>.timeInterval /deep/ .el-input__icon {
+    line-height: 30px;
+}
+
+.center-bottom>.timeInterval /deep/ .el-input__prefix {
+    color: #2E679E;
+}
+
+.center-bottom>.timeInterval /deep/ .el-input__suffix {
+    color: #fff;
+}
+
 .center-bottom>.bottom-1>.title-box-center {
     width: 6.2rem;
     height: 15%;
