@@ -40,19 +40,19 @@
         <div class="center-bottom">
           <div class="title-box">
             <h6>不同网段离线终端变化</h6>
-            <select class='segmentTraffic' >
-              <option value="1">YD4G</option>
-              <option value="2">YD5G</option>
-              <option value="3">YDWLW</option>
-              <option value="4">LT4G</option>
-              <option value="5">WX230</option>
-              <option value="6">PW</option>
-              <option value="7">ZZ</option>
-              <option value="8">Others</option>
+            <select class='segmentTraffic' v-model="netSeg" @change="toSelectTrend">
+              <option value="YD4G">YD4G</option>
+              <option value="YD5G">YD5G</option>
+              <option value="YDWLW">YDWLW</option>
+              <option value="LT4G">LT4G</option>
+              <option value="WX230">WX230</option>
+              <option value="PW">PW</option>
+              <option value="ZZ">ZZ</option>
+              <option value="Others">Others</option>
             </select>
           </div>
           <div class="center-bottom-Line">
-            <LineChart/>
+            <LineChart v-if="terTrendAlive"/>
           </div>
         </div>
 
@@ -77,11 +77,21 @@ export default {
   },
   data() {
     return{
-
+      netSeg: '',
+      terTrendAlive: true
     }
   },
   methods:{
-
+    toSelectTrend() {
+      this.GLOBAL.trendSEG = this.netSeg;
+      this.reloadPage();
+    },
+    reloadPage() {
+      this.terTrendAlive = false;
+      this.$nextTick(function () {
+        this.terTrendAlive = true;
+      });
+    },
   }
 }
 </script>

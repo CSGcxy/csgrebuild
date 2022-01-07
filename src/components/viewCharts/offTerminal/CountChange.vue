@@ -88,7 +88,7 @@ export default {
   mounted() {
     this.CountChangeChart = this.$echarts.init(document.getElementById('left-top-CountChange'));
     this.drawCountChange();
-    this.CountChangeChart.setOption(this.CountChangeChartOption);
+    setInterval(this.drawCountChange,this.GLOBAL.refreshTime);
   },
   methods:{
     drawCountChange() {

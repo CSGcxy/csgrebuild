@@ -76,7 +76,7 @@ export default {
   mounted(){
     this.NetworkSegmentDisChart = this.$echarts.init(document.getElementById('left-bottom-NetworkSegmentDistribution'));
     this.drawNetworkSegmentDisChart();
-    this.NetworkSegmentDisChart.setOption(this.NetworkSegmentDisChartOption);
+    setInterval(this.drawNetworkSegmentDisChart,this.GLOBAL.refreshTime);
   },
   methods:{
     drawNetworkSegmentDisChart(){

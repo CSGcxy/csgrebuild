@@ -88,13 +88,12 @@ export default {
   mounted() {
     this.NetworkSangjiChart = this.$echarts.init(document.getElementById('center-terminal-detail'));
     this.drawNetworkSegmentTerminal();
-    this.NetworkSangjiChart.setOption(this.NetworkSangjiChartOption);
+    setInterval(this.drawNetworkSegmentTerminal,this.GLOBAL.refreshTime);
   },
   methods:{
     drawNetworkSegmentTerminal() {
-      netTraffic.getSangji('LT4G_Flows').then(resp => {
+      netTraffic.getSangji(this.GLOBAL.NETSEG).then(resp => {
         if (resp.code == 20000) {
-          console.log(resp.data.flowSankeyVOList)
           let ipList = resp.data.flowSankeyVOList.ip
           for (var i = 0; i < ipList.length; i++) {
             let sourceData = {"name": "", "itemStyle": {"color":""}};
@@ -103,7 +102,6 @@ export default {
             this.NetworkSangjiChartOption.series.data.push(sourceData)
           }
           this.NetworkSangjiChartOption.series.links = resp.data.flowSankeyVOList.flowSankeys;
-          console.log(this.NetworkSangjiChartOption.series.data)
           this.NetworkSangjiChart.setOption(this.NetworkSangjiChartOption);
         }
       })

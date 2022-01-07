@@ -4,7 +4,7 @@ let base = 'flows'
 export default {
     getSangji(segment) {
         return request({
-            url: base + '/getFlowSankey/' + segment,
+            url: base + '/getFlowSankey/' + segment + '_Flows',
             method: 'get'
         })
     },
@@ -16,7 +16,7 @@ export default {
     },
     getSegmentTraffic(segment, startTime) {
         return request({
-            url: base + '/getSegTotalBytes/' + segment + '/' + startTime,
+            url: 'terminalStatus' + '/getSegTotalBytes/' + segment + '/' + startTime,
             method: 'get'
         })
     }

@@ -5,9 +5,14 @@
       <div class="box-left">
         <div class="title-box">
           <h6>网段终端总体统计</h6>
+          <el-cascader v-model="selectNetSeg"
+                       :options="netSegList"
+                       @change="toSelectNetSeg"
+                       placeholder="选择网段">
+          </el-cascader>
         </div>
         <div class="left-top">
-          <NetworkSegmentTerminalTotal/>
+          <NetworkSegmentTerminalTotal v-if="isRouterAlive"/>
         </div>
       </div>
       <div class="box-center">
@@ -17,7 +22,7 @@
           </div>
           <div class="center-terminal">
 <!--            <div id="center-terminal-detail"></div>-->
-            <NetworkSangji/>
+            <NetworkSangji v-if="isRouterAlive"/>
           </div>
         </div>
         <div class="center-mid">
@@ -25,7 +30,7 @@
             <h6>活跃流表</h6>
           </div>
           <div class="center-active">
-            <ActiveTraffic/>
+            <ActiveTraffic v-if="isRouterAlive"/>
 
 <!--            <div class="center-active-detail">-->
 <!--              <div class="active-detail-table">-->
@@ -37,16 +42,16 @@
         <div class="center-bottom">
           <div class="title-box">
             <h6>网段流量时序图</h6>
-            <select class='segmentTraffic' >
-              <option value="1">YD4G</option>
-              <option value="2">YD5G</option>
-              <option value="3">YDWLW</option>
-              <option value="4">LT4G</option>
-              <option value="5">WX230</option>
-              <option value="6">PW</option>
-              <option value="7">ZZ</option>
-              <option value="8">Others</option>
-            </select>
+<!--            <select class='segmentTraffic' v-model="netSeg">-->
+<!--              <option value="1">YD4G</option>-->
+<!--              <option value="2">YD5G</option>-->
+<!--              <option value="3">YDWLW</option>-->
+<!--              <option value="4">LT4G</option>-->
+<!--              <option value="5">WX230</option>-->
+<!--              <option value="6">PW</option>-->
+<!--              <option value="7">ZZ</option>-->
+<!--              <option value="8">Others</option>-->
+<!--            </select>-->
           </div>
           <div class="timeInterval">
             <template>
@@ -74,7 +79,7 @@
 
           <div class="center-flowTiming">
 <!--            <div id="center-flowTiming-detail"></div>-->
-            <SegmentTraffic/>
+            <SegmentTraffic v-if="isRouterAlive"/>
           </div>
         </div>
 
@@ -86,7 +91,7 @@
 
 <script>
 
-import NetworkSegmentTerminalTotal from "@/components/viewCharts/networkTraffic/NetworkSegmentTerminalTotal";
+import NetworkSegmentTerminalTotal from "@/components/viewCharts/terminalStatus/NetworkSegmentTerminalTotal";
 import ActiveTraffic from "@/components/viewCharts/networkTraffic/ActiveTraffic";
 import SegmentTraffic from "@/components/viewCharts/networkTraffic/SegmentTraffic";
 import NetworkSangji from "@/components/viewCharts/networkTraffic/NetworkSangji";
@@ -94,28 +99,102 @@ import NetworkSangji from "@/components/viewCharts/networkTraffic/NetworkSangji"
 export default {
   name: "NetworkTraffic",
   components: {NetworkSangji, NetworkSegmentTerminalTotal , ActiveTraffic, SegmentTraffic},
-  // mounted() {
-  //   // this.getRandomNum();
-  //   this.timer = setInterval(() =>{
-  //     setTimeout(this.getRandomNum,0)
-  //   },1000*1)
-  // // },
   data() {
     return{
       flowSegList: [],
       timer: null,
       startTime: '',
-      endTime: ''
+      endTime: '',
+      selectNetSeg:'',
+      isRouterAlive: true,
+      ipList: [],
+      netSegList:[
+        {
+          value:"SIM",
+          label:"SIM卡",
+          children:[
+            {
+              value: 'YD4G',
+              label: '移动4G'
+            },
+            {
+              value: 'YD5G',
+              label: '移动5G'
+            },
+            {
+              value: 'YDWLW',
+              label: '移动物联网'
+            },
+            {
+              value: 'LT4G',
+              label: '联通4G'
+            }
+          ]
+        },
+        {
+          value:"WX230",
+          label: '无线',
+          children: [
+            {
+              value: 'WX230',
+              label: '无线'
+            }
+          ]
+        },
+        {
+          value:"PW",
+          label: '配网',
+          children: [
+            {
+              value: 'PW',
+              label: '配网'
+            }
+          ]
+        },
+        {
+          value:"ZZ",
+          label: '主站',
+          children: [
+            {
+              value: 'ZZ',
+              label: '主站'
+            }
+          ]
+        },
+        {
+          value:"Others",
+          label: '其它',
+          children: [
+            {
+              value: 'Others',
+              label: '其它'
+            }
+          ]
+        },
+
+      ],
     }
   },
-  
-
-
-  // beforeDestroy() {
-  //   clearInterval(this.timer);
-  //   this.timer = null;
-  // }
-
+  // /*获取select下的选择值*/
+  // watch: {
+  //   netSeg:{
+  //     handler(newName) {
+  //       console.log(newName);
+  //     }
+  //   }
+  // },
+  methods:{
+    toSelectNetSeg() {
+      this.GLOBAL.NETSEG = this.selectNetSeg[1];
+      this.reloadPage();
+    },
+    reloadPage() {
+      this.isRouterAlive = false;
+      this.$nextTick(function () {
+        this.isRouterAlive = true;
+      });
+    },
+  }
 }
 </script>
 

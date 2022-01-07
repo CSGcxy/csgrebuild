@@ -94,22 +94,19 @@ export default {
           },
         ]
       }
-
-
     };
   },
   mounted() {
     this.SegmentTrafficChart=this.$echarts.init(document.getElementById('center-flowTiming-detail'));
     this.drawSegmentTraffic();
-    this.SegmentTrafficChart.setOption(this.SegmentTrafficOption);
+    setInterval(this.drawSegmentTraffic,this.GLOBAL.refreshTime);
   },
   methods:{
     drawSegmentTraffic() {
-      netTraffic.getSegmentTraffic("Others", "2021-01-01 12:00:00").then(resp =>{
-        console.log(resp);
+      netTraffic.getSegmentTraffic(this.GLOBAL.NETSEG, "2021-01-07 16:10:00").then(resp =>{
         if (resp.code == 20000) {
-          this.SegmentTrafficOption.xAxis.data=resp.data.netSegTotalBytesVO.timestamp;
-          this.SegmentTrafficOption.series.data=resp.data.netSegTotalBytesVO.totalBytes;
+          this.SegmentTrafficOption.xAxis[0].data=resp.data.netSegTotalBytesVO.timestamp;
+          this.SegmentTrafficOption.series[0].data=resp.data.netSegTotalBytesVO.totalBytes;
           this.SegmentTrafficChart.setOption(this.SegmentTrafficOption);
         }
       })

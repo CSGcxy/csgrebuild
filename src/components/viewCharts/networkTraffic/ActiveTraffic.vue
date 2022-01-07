@@ -43,11 +43,11 @@ export default {
   },
   mounted() {
     this.drawActiveTraffic();
-    // setInterval(this.drawActiveTraffic,this.GLOBAL.refreshTime);
+    setInterval(this.drawActiveTraffic,this.GLOBAL.refreshTime);
   },
   methods: {
     drawActiveTraffic() {
-      netTraffic.getActiveTraffic("LT4G").then(resp =>{
+        netTraffic.getActiveTraffic(this.GLOBAL.NETSEG).then(resp =>{
         this.tableValue=resp.data.activeFlowsList;
       })
     }

@@ -13,7 +13,7 @@
           width="100">
       </el-table-column>
       <el-table-column
-          prop="netWorkSeg"
+          prop="networkseg"
           label="网段"
           align="center"
       >
@@ -42,13 +42,13 @@ export default {
     };
   },
   mounted() {
-    // this.drawTopHosts();
+    this.drawTopHosts();
     // setInterval(this.drawTopHosts,this.GLOBAL.refreshTime);
   },
   methods: {
     drawTopHosts() {
       netSegStatus.getAlertFlow().then(resp =>{
-        this.tableData = resp.data
+        this.tableData = resp.data.AlertFlowList
       })
 
     }

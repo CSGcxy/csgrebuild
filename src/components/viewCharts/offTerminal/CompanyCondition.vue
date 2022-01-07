@@ -26,7 +26,7 @@ export default {
           {
             type: 'category',
             // data: ["百度", "阿里巴巴", "腾讯", "京东", "美团", "字节跳动", "华为"],
-            data: ["百度"],
+            data: [],
             axisTick: {
               alignWithLabel: true
             },
@@ -37,7 +37,7 @@ export default {
               }
             },
             axisLabel: {
-              interval: 0
+              interval: 15
             }
           }
         ],
@@ -60,6 +60,7 @@ export default {
           {
             name: '离线终端',
             type: 'bar',
+            stack: "obn",
             barWidth: '60%',
             // data: [10, 52, 200, 334, 390, 330, 220]
             data: []
@@ -72,7 +73,7 @@ export default {
   mounted() {
     this.CompanyConditionChart = this.$echarts.init(document.getElementById('left-mid-CompanyCondition'));
     this.drawCompanyConditionChart();
-    this.CompanyConditionChart.setOption(this.CompanyConditionChartOption)
+    setInterval(this.drawCompanyConditionChart,this.GLOBAL.refreshTime);
   },
   methods:{
     drawCompanyConditionChart() {
