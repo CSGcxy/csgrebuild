@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       NetworkSegmentDisChart:null,
+      timer: '',
       NetworkSegmentDisChartOption:{
           // title: {
           //   text: '流数排名前10主机',
@@ -76,19 +77,23 @@ export default {
   mounted(){
     this.NetworkSegmentDisChart = this.$echarts.init(document.getElementById('left-bottom-NetworkSegmentDistribution'));
     this.drawNetworkSegmentDisChart();
-    setInterval(this.drawNetworkSegmentDisChart,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawNetworkSegmentDisChart,this.GLOBAL.refreshTime);
   },
-  methods:{
-    drawNetworkSegmentDisChart(){
-      offTer.getOffTerminalSegment().then(resp =>{
+  methods: {
+    drawNetworkSegmentDisChart() {
+      offTer.getOffTerminalSegment().then(resp => {
         if (resp.code == 20000) {
-          this. NetworkSegmentDisChartOption.yAxis.data=resp.data.offTerminalSegmentList.netSegment;
-          this. NetworkSegmentDisChartOption.series[0].data=resp.data.offTerminalSegmentList.offTerminalCount;
-          this.NetworkSegmentDisChart.setOption(this. NetworkSegmentDisChartOption);
+          this.NetworkSegmentDisChartOption.yAxis.data = resp.data.offTerminalSegmentList.netSegment;
+          this.NetworkSegmentDisChartOption.series[0].data = resp.data.offTerminalSegmentList.offTerminalCount;
+          this.NetworkSegmentDisChart.setOption(this.NetworkSegmentDisChartOption);
         }
       })
     }
-    }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
+  }
 
 }
 </script>

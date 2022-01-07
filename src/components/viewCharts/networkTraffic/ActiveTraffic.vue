@@ -37,13 +37,14 @@ export default {
   name: "ActiveTraffic",
   data() {
     return {
-    tableValue: []
+      timer: '',
+      tableValue: []
 
-    }
+      }
   },
   mounted() {
     this.drawActiveTraffic();
-    setInterval(this.drawActiveTraffic,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawActiveTraffic,this.GLOBAL.refreshTime);
   },
   methods: {
     drawActiveTraffic() {
@@ -51,6 +52,10 @@ export default {
         this.tableValue=resp.data.activeFlowsList;
       })
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 }
 </script>

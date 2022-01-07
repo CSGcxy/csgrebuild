@@ -35,12 +35,13 @@ export default {
   data(){
     return{
       tableValue:[],
-      temp: ''
+      temp: '',
+      timer:''
     }
   },
   mounted() {
     this.drawterminalCommunication();
-    setInterval(this.drawterminalCommunication,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawterminalCommunication,this.GLOBAL.refreshTime);
     // this.temp = 'Others'
   },
   methods:{
@@ -50,6 +51,10 @@ export default {
         this.tableValue=resp.data.segCommStatusList;
       });
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 }
 </script>

@@ -10,6 +10,7 @@ export default {
     return {
       colorALL:["hsl(160,50%,50%)","hsl(180,50%,50%)","hsl(340,50%,50%)","hsl(200,50%,50%)","hsl(320,50%,50%)","hsl(220,50%,50%)","hsl(300,50%,50%)","hsl(240,50%,50%)","hsl(140,50%,50%)","hsl(280,50%,50%)","hsl(280,50%,50%)","hsl(150,50%,50%)","hsl(350,50%,50%)","hsl(170,50%,50%)","hsl(330,50%,50%)","hsl(190,50%,50%)","hsl(310,50%,50%)"],
       NetworkSangjiChart: null,
+      timer: '',
       NetworkSangjiChartOption:{
         tooltip: {
           trigger: 'item',
@@ -88,7 +89,7 @@ export default {
   mounted() {
     this.NetworkSangjiChart = this.$echarts.init(document.getElementById('center-terminal-detail'));
     this.drawNetworkSegmentTerminal();
-    setInterval(this.drawNetworkSegmentTerminal,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawNetworkSegmentTerminal,this.GLOBAL.refreshTime);
   },
   methods:{
     drawNetworkSegmentTerminal() {
@@ -106,6 +107,10 @@ export default {
         }
       })
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 }
 </script>

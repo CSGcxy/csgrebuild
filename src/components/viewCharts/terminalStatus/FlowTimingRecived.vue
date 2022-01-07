@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       flowTimingReceivedChart:null,
+      timer: '',
       flowTimingRecivedChartOption:{
         color: ['#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
         title: {
@@ -82,7 +83,7 @@ export default {
   mounted() {
     this.flowTimingRecivedChart = this.$echarts.init(document.getElementById('center-flowTiming-recived'));
     this.drawFlowTimingRecived();
-    setInterval(this.drawFlowTimingRecived,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawFlowTimingRecived,this.GLOBAL.refreshTime);
   },
   methods:{
     drawFlowTimingRecived() {
@@ -93,6 +94,10 @@ export default {
 
       });
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 }
 </script>

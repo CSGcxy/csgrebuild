@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       CountChangeChart:null,
+      timer: '',
       CountChangeChartOption:{
         color: ['#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
         title: {
@@ -88,7 +89,7 @@ export default {
   mounted() {
     this.CountChangeChart = this.$echarts.init(document.getElementById('left-top-CountChange'));
     this.drawCountChange();
-    setInterval(this.drawCountChange,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawCountChange,this.GLOBAL.refreshTime);
   },
   methods:{
     drawCountChange() {
@@ -100,6 +101,10 @@ export default {
         }
       })
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 }
 </script>

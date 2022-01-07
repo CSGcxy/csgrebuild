@@ -38,12 +38,12 @@ export default {
     return {
       list1: [],
       tableData:[],
-
+      timer: ''
     };
   },
   mounted() {
     this.drawTopHosts();
-    // setInterval(this.drawTopHosts,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawTopHosts,this.GLOBAL.refreshTime);
   },
   methods: {
     drawTopHosts() {
@@ -52,6 +52,10 @@ export default {
       })
 
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 }
 </script>

@@ -79,7 +79,7 @@ export default {
   },
   mounted() {
     this.drawNetworkSegmentTerminalTotal();
-    setInterval(this.drawNetworkSegmentTerminalTotal,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawNetworkSegmentTerminalTotal, this.GLOBAL.refreshTime);
     // // this.temp = this.GLOBAL.NETSEG
   },
   methods:{
@@ -90,6 +90,10 @@ export default {
         }
       });
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 }
 </script>

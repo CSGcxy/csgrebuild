@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       CompanyConditionChart:null,
+      timer: '',
       CompanyConditionChartOption:{
         tooltip: {
           trigger: 'axis',
@@ -73,7 +74,7 @@ export default {
   mounted() {
     this.CompanyConditionChart = this.$echarts.init(document.getElementById('left-mid-CompanyCondition'));
     this.drawCompanyConditionChart();
-    setInterval(this.drawCompanyConditionChart,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawCompanyConditionChart,this.GLOBAL.refreshTime);
   },
   methods:{
     drawCompanyConditionChart() {
@@ -85,6 +86,10 @@ export default {
         }
       })
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 }
 </script>

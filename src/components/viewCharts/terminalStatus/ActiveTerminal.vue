@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       activeTerminalChart:null,
+      timer: '',
       activeTerminalOption:{
         color: ['#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
         title: {
@@ -84,7 +85,7 @@ export default {
   mounted() {
     this.activeTerminalChart = this.$echarts.init(document.getElementById('left-active'));
     this.drawActiveTerminal();
-    setInterval(this.drawActiveTerminal,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawActiveTerminal,this.GLOBAL.refreshTime);
   },
   methods:{
     drawActiveTerminal() {
@@ -94,7 +95,11 @@ export default {
         this.activeTerminalChart.setOption(this.activeTerminalOption);
       });
       }
-    }
+    },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
+  }
 }
 </script>
 

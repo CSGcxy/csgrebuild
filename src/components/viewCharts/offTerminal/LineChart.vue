@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       lineChartChart:null,
+      timer: '',
       lineChartChartOption:{
         tooltip: {
           trigger: 'axis'
@@ -73,7 +74,7 @@ export default {
   mounted() {
     this.lineChartChart=this.$echarts.init(document.getElementById('left-bottom-LineChart'));
     this.drawlineChartChart();
-    setInterval(this.drawlineChartChart,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawlineChartChart,this.GLOBAL.refreshTime);
   },
   methods:{
     drawlineChartChart() {
@@ -87,7 +88,12 @@ export default {
         }
       })
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
+
 }
 </script>
 

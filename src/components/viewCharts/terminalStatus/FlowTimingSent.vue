@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       flowTimingSentChart:null,
+      timer: '',
       flowTimingSentChartOption:{
         color: ['#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
         title: {
@@ -82,7 +83,7 @@ export default {
   mounted() {
     this.flowTimingSentChart = this.$echarts.init(document.getElementById('center-flowTiming-sent'));
     this.drawFlowTimingSent();
-    setInterval(this.drawFlowTimingSent,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawFlowTimingSent,this.GLOBAL.refreshTime);
   },
   methods:{
     drawFlowTimingSent() {
@@ -92,6 +93,10 @@ export default {
         this.flowTimingSentChart.setOption(this.flowTimingSentChartOption);
       });
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 }
 </script>

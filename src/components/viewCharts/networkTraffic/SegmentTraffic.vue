@@ -8,6 +8,7 @@ export default {
   name: "SegmentTraffic",
   data() {
     return {
+      timer: '',
       SegmentTrafficChart:null,
       SegmentTrafficOption:{
         color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
@@ -99,7 +100,7 @@ export default {
   mounted() {
     this.SegmentTrafficChart=this.$echarts.init(document.getElementById('center-flowTiming-detail'));
     this.drawSegmentTraffic();
-    setInterval(this.drawSegmentTraffic,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawSegmentTraffic,this.GLOBAL.refreshTime);
   },
   methods:{
     drawSegmentTraffic() {
@@ -111,6 +112,10 @@ export default {
         }
       })
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 
 }

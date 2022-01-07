@@ -41,14 +41,14 @@
           <div class="title-box">
             <h6>不同网段离线终端变化</h6>
             <select class='segmentTraffic' v-model="netSeg" @change="toSelectTrend">
-              <option value="YD4G">YD4G</option>
-              <option value="YD5G">YD5G</option>
-              <option value="YDWLW">YDWLW</option>
-              <option value="LT4G">LT4G</option>
-              <option value="WX230">WX230</option>
-              <option value="PW">PW</option>
-              <option value="ZZ">ZZ</option>
-              <option value="Others">Others</option>
+              <option value="YD4G">移动4G</option>
+              <option value="YD5G">移动5G</option>
+              <option value="YDWLW">移动物联网</option>
+              <option value="LT4G">联通4G</option>
+              <option value="WX230">无线230</option>
+              <option value="PW">配网</option>
+              <option value="ZZ">主站</option>
+              <option value="Others">其它</option>
             </select>
           </div>
           <div class="center-bottom-Line">
