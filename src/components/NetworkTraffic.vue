@@ -82,19 +82,12 @@ export default {
   //     setTimeout(this.getRandomNum,0)
   //   },1000*1)
   // // },
-  // data() {
-  //   return{
-  //     upload:'',
-  //     download:'',
-  //     warnFlow:'',
-  //     localHost:'',
-  //     remoteHost:'',
-  //     onlineNum:'',
-  //     offlineNum:'',
-  //     activeFlow:'',
-  //     timer: null
-  //   }
-  // },
+  data() {
+    return{
+      flowSegList: [],
+      timer: null
+    }
+  },
 
 
   // beforeDestroy() {
