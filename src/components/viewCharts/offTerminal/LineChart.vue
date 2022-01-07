@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import offTer from "@/api/offTer";
 export default {
   name: "LineChart",
   data() {
@@ -21,7 +22,8 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00"],
+          // data: ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00"],
+          data: [],
           axisLine: {
             lineStyle: {
               type: 'solid',
@@ -31,6 +33,7 @@ export default {
         },
         yAxis: {
           type: 'value',
+          scale:true,
           axisLine: {
             lineStyle: {
               type: 'solid',
@@ -44,49 +47,57 @@ export default {
         },
         series: [
           {
-            name: 'Email',
+            name: 'PW',
             type: 'line',
             stack: 'Total',
             data: [120, 132, 101, 134, 90, 230, 210]
           },
-          {
-            name: 'Union Ads',
-            type: 'line',
-            stack: 'Total',
-            data: [220, 182, 191, 234, 290, 330, 310]
-          },
-          {
-            name: 'Video Ads',
-            type: 'line',
-            stack: 'Total',
-            data: [150, 232, 201, 154, 190, 330, 410]
-          }
-        ]
+          // {
+          //   name: 'Union Ads',
+          //   type: 'line',
+          //   stack: 'Total',
+          //   data: [220, 182, 191, 234, 290, 330, 310]
+          // },
+          // {
+          //   name: 'Video Ads',
+          //   type: 'line',
+          //   stack: 'Total',
+          //   data: [150, 232, 201, 154, 190, 330, 410]
+          // }
+        ],
       }
 
     };
   },
   mounted() {
     this.lineChartChart=this.$echarts.init(document.getElementById('left-bottom-LineChart'));
-    // this.drawlineChartChart();
+    this.drawlineChartChart();
     this.lineChartChart.setOption(this.lineChartChartOption)
   },
   methods:{
-    // drawlineChartChart() {
-    //   this.getRequest("offlineTerminal/lineChart").then(resp=>{
-    //     if (resp.status != 200) {
-    //       this.$message.error("数据获取失败");
-    //     } else {
-    //       this.lineChartChartOption.xAxis.data=resp.data.data[0];
-    //       this.lineChartChartOption.series[0].data=resp.data.data[1];
-    //       this.lineChartChartOption.series[1].data=resp.data.data[2];
-    //       this.lineChartChartOption.series[2].data=resp.data.data[3];
-    //       this.lineChartChart.setOption(this.lineChartChartOption);
-    //     }
-    //   })
+    drawlineChartChart() {
 
+      offTer.getOffTerminalSegTimeSequence('PW').then(resp =>{
+        if (resp.code == 20000) {
+          console.log(resp);
+          this.lineChartChartOption.xAxis.data=resp.data.offTerminalSegTimeSequenceList.timestamp;
+          this.lineChartChartOption.series[0].data=resp.data.offTerminalSegTimeSequenceList.offTerminalCount;
+          this.lineChartChart.setOption(this.lineChartChartOption);
+        }
+      })
 
-    // }
+      // this.getRequest("offlineTerminal/lineChart").then(resp=>{
+      //   if (resp.status != 200) {
+      //     this.$message.error("数据获取失败");
+      //   } else {
+      //     this.lineChartChartOption.xAxis.data=resp.data.data[0];
+      //     this.lineChartChartOption.series[0].data=resp.data.data[1];
+      //     this.lineChartChartOption.series[1].data=resp.data.data[2];
+      //     this.lineChartChartOption.series[2].data=resp.data.data[3];
+      //     this.lineChartChart.setOption(this.lineChartChartOption);
+      //   }
+      // })
+    }
   }
 }
 </script>

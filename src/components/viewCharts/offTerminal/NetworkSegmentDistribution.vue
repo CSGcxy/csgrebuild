@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import offTer from "@/api/offTer";
 export default {
   name: "NetworkSegmentDistribution",
   data() {
@@ -74,21 +75,19 @@ export default {
   },
   mounted(){
     this.NetworkSegmentDisChart = this.$echarts.init(document.getElementById('left-bottom-NetworkSegmentDistribution'));
-    // this.drawNetworkSegmentDisChart();
+    this.drawNetworkSegmentDisChart();
     this.NetworkSegmentDisChart.setOption(this.NetworkSegmentDisChartOption);
   },
   methods:{
-    // drawNetworkSegmentDisChart(){
-    //   this.getRequest("offlineTerminal/networkSegmentDistribution").then(resp=>{
-    //     if (resp.status != 200) {
-    //       this.$message.error("数据获取失败");
-    //     } else {
-    //       this. NetworkSegmentDisChartOption.yAxis.data=resp.data.data[0];
-    //       this. NetworkSegmentDisChartOption.series[0].data=resp.data.data[1];
-    //       this.NetworkSegmentDisChart.setOption(this. NetworkSegmentDisChartOption);
-    //     }
-    //   })
-    // }
+    drawNetworkSegmentDisChart(){
+      offTer.getOffTerminalSegment().then(resp =>{
+        if (resp.code == 20000) {
+          this. NetworkSegmentDisChartOption.yAxis.data=resp.data.offTerminalSegmentList.netSegment;
+          this. NetworkSegmentDisChartOption.series[0].data=resp.data.offTerminalSegmentList.offTerminalCount;
+          this.NetworkSegmentDisChart.setOption(this. NetworkSegmentDisChartOption);
+        }
+      })
+    }
     }
 
 }

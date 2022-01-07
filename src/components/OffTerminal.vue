@@ -40,6 +40,16 @@
         <div class="center-bottom">
           <div class="title-box">
             <h6>不同网段离线终端变化</h6>
+            <select class='segmentTraffic' >
+              <option value="1">YD4G</option>
+              <option value="2">YD5G</option>
+              <option value="3">YDWLW</option>
+              <option value="4">LT4G</option>
+              <option value="5">WX230</option>
+              <option value="6">PW</option>
+              <option value="7">ZZ</option>
+              <option value="8">Others</option>
+            </select>
           </div>
           <div class="center-bottom-Line">
             <LineChart/>

@@ -144,4 +144,17 @@
     height: 75%;
     background-color: #10121A;
     position: relative;
+    float: left;
+}
+
+.segmentTraffic {
+    background-color: rgb(9, 34, 54);
+    border-color: rgb(9, 34, 54);
+    color: white;
+    font-size: 14px;
+    position: absolute;
+    margin: -2px;
+    right: 8%;
+    width: 34%;
+    height: 100%;
 }

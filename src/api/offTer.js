@@ -7,4 +7,22 @@ export default {
             method:'get'
         })
     },
+    getOffTerminalManufactor() {
+        return request({
+            url: base + '/getOffTerminalManufactor',
+            method:'get'
+        })
+    },
+    getOffTerminalSegment() {
+        return request({
+            url: base + '/getOffTerminalSegment',
+            method:'get'
+        })
+    },
+    getOffTerminalSegTimeSequence(segment) {
+        return request({
+            url: base + '/getOffTerminalSegTimeSequence/'  + segment,
+            method:'get'
+        })
+    }
 }
