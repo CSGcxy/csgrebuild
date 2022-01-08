@@ -280,27 +280,39 @@ input {
 }
 
 .center-bottom>.timeInterval /deep/ .el-input__inner {
-    color: #fff;
     height: 30px;
     line-height: 30px;
     border: 1px solid #17283B;
     border-radius: 0;
+    background-color: #17273B;
 }
 
 .center-bottom>.timeInterval /deep/ .el-date-editor.el-input {
     width: 30%;
 }
 
-.center-bottom>.timeInterval /deep/ .el-input__icon {
+.center-bottom>.timeInterval /deep/ .el-date-editor .el-range__icon {
+    height: 30px;
+    color: #fff;
+}
+
+.center-bottom>.timeInterval /deep/ .el-date-editor .el-range-separator {
+    color: #fff;
+    height: 30px;
     line-height: 30px;
 }
 
-.center-bottom>.timeInterval /deep/ .el-input__prefix {
-    color: #2E679E;
+.center-bottom>.timeInterval /deep/ .el-date-editor .el-range__close-icon {
+    color: #fff;
+    line-height: 30px;
 }
 
-.center-bottom>.timeInterval /deep/ .el-input__suffix {
+.center-bottom>.timeInterval /deep/ .el-date-editor .el-range-input {
     color: #fff;
+}
+
+.center-bottom>.timeInterval /deep/ .el-input__icon {
+    height: 30px;
 }
 
 .center-bottom>.bottom-1>.title-box-center {
