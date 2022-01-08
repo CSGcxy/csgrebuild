@@ -104,11 +104,31 @@ export default {
   },
   methods:{
     drawSegmentTraffic() {
-      netTraffic.getSegmentTraffic(this.GLOBAL.NETSEG, "2021-01-07 16:10:00").then(resp =>{
+      if (this.GLOBAL.timeRange != null) {
+        console.log(this.GLOBAL.timeRange)
+        let startTime = this.GLOBAL.timeRange[0].getTime();
+        let endTime = this.GLOBAL.timeRange[1].getTime();
+        this.getSegTotalBytesByTime(startTime, endTime);
+      } else {
+        this.getSegTotalBytes()
+      }
+    },
+    getSegTotalBytes() {
+      netTraffic.getSegTotalBytes(this.GLOBAL.NETSEG).then(resp =>{
         if (resp.code == 20000) {
           this.SegmentTrafficOption.xAxis[0].data=resp.data.netSegTotalBytesVO.timestamp;
           this.SegmentTrafficOption.series[0].data=resp.data.netSegTotalBytesVO.totalBytes;
           this.SegmentTrafficChart.setOption(this.SegmentTrafficOption);
+        }
+      })
+    },
+    getSegTotalBytesByTime(startTime,endTime) {
+      netTraffic.getSegTotalBytesByTime(this.GLOBAL.NETSEG, startTime,endTime).then(resp =>{
+        if (resp.code == 20000) {
+          this.SegmentTrafficOption.xAxis[0].data=resp.data.netSegTotalBytesVO.timestamp;
+          this.SegmentTrafficOption.series[0].data=resp.data.netSegTotalBytesVO.totalBytes;
+          this.SegmentTrafficChart.setOption(this.SegmentTrafficOption);
+
         }
       })
     }
@@ -116,6 +136,7 @@ export default {
   beforeDestroy() {
     clearInterval(this.timer);
     this.timer = null;
+    // this.GLOBAL.timeRange = null
   }
 
 }

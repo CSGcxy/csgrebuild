@@ -60,6 +60,7 @@
                   type="datetimerange"
                   range-separator="-"
                   start-placeholder="开始日期"
+                  @change="selectTimeRange"
                   end-placeholder="结束日期">
               </el-date-picker>
             </template>
@@ -67,7 +68,7 @@
 
           <div class="center-flowTiming">
 <!--            <div id="center-flowTiming-detail"></div>-->
-            <SegmentTraffic v-if="isRouterAlive"/>
+            <SegmentTraffic v-if="isRouterAlive && isTrafficAlive"/>
           </div>
         </div>
 
@@ -93,6 +94,7 @@ export default {
       timer: null,
       selectNetSeg:'',
       isRouterAlive: true,
+      isTrafficAlive: true,
       ipList: [],
       timeValue: '',
       pickerBeginDateBefore: {
@@ -175,18 +177,14 @@ export default {
   //     }
   //   }
   // },
-  watch: {
-    timeValue:{
-      handler(newName) {
-        console.log(newName[0].getTime())
-        console.log(newName[1].getTime())
-      }
-    }
-  },
   methods:{
     toSelectNetSeg() {
       this.GLOBAL.NETSEG = this.selectNetSeg[1];
       this.reloadPage();
+    },
+    selectTimeRange() {
+      this.GLOBAL.timeRange = this.timeValue;
+      this.reloadSegTraffic();
     },
     reloadPage() {
       this.isRouterAlive = false;
@@ -194,6 +192,12 @@ export default {
         this.isRouterAlive = true;
       });
     },
+    reloadSegTraffic() {
+      this.isTrafficAlive = false;
+      this.$nextTick(function () {
+        this.isTrafficAlive = true;
+      });
+    }
   }
 }
 </script>

@@ -14,10 +14,16 @@ export default {
             method: 'get'
         })
     },
-    getSegmentTraffic(segment, startTime) {
+    getSegTotalBytesByTime(segment, startTime,endTime) {
         return request({
-            url: 'terminalStatus' + '/getSegTotalBytes/' + segment + '/' + startTime,
+            url: 'terminalStatus' + '/getSegTotalBytesByTime/' + segment + '/' + startTime + '/' + endTime,
             method: 'get'
         })
-    }
+    },
+    getSegTotalBytes(segment) {
+        return request({
+            url: 'terminalStatus' + '/getSegTotalBytes/' + segment ,
+            method: 'get'
+        })
+    },
 }

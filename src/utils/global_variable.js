@@ -1,8 +1,10 @@
 const NETSEG = 'Others';
 const trendSEG = 'Others';
-const refreshTime = 5000000;
+const timeRange = null;
+const refreshTime = 5000;
 export default {
     NETSEG,
     trendSEG,
+    timeRange,
     refreshTime
 };
