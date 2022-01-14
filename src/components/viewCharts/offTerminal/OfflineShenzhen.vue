@@ -3905,7 +3905,68 @@ export default {
     //   南山区: [113.92822, 22.52777],
     // };
 
+    // 随机0-1000的数
+    function randomData() {
+      return Math.round(Math.random() * 1000);
+    }
+    // 中心点坐标
+    var geoCoordMap = {
+      宝安区: [113.88308, 22.55329],
+      光明区: [113.93588, 22.74894],
+      龙华区: [114.04495, 22.69005],
+      福田区: [114.05454, 22.52291],
+      罗湖区: [114.13166, 22.54836],
+      盐田区: [114.23679, 22.557],
+      龙岗区: [114.24779, 22.71991],
+      坪山区: [114.34632, 22.69084],
+      南山区: [113.92822, 22.52777],
+      光明供电局: [113.891472, 22.781691],
+      南山供电局: [113.915507, 22.566429],
+      坪地供电分局: [114.308916, 22.773071],
+      坪山供电局: [114.352779, 22.69993],
+      大鹏供电局: [114.47554, 22.592491],
+      宝城供电分局: [113.914939, 22.547284],
+      布吉供电分局: [114.126904, 22.605956],
+      平湖供电分局: [114.131127, 22.693391],
+      松岗供电分局: [113.848455, 22.767851],
+      横岗供电分局: [114.211287, 22.648233],
+      沙井供电分局: [113.834586, 22.71905],
+      深圳供电局: [114.121894, 22.533173],
+      盐田供电局: [114.240728, 22.558262],
+      石岩供电分局: [113.935585, 22.680113],
+      福永供电分局: [113.825484, 22.666104],
+      福田供电局: [114.084151, 22.546263],
+      罗湖供电局: [114.129702, 22.564424],
+      龙华供电局: [114.039984, 22.703801],
+      龙岗一部: [114.253873, 22.711718],
+      龙岗二部: [114.195135, 22.633001],
+    };
+    var convertData = function (data) {
+      var res = [];
+      for (var i = 0; i < data.length; i++) {
+        var geoCoord = geoCoordMap[data[i].name];
+        if (geoCoord) {
+          res.push({
+            name: data[i].name,
+            value: geoCoord.concat(data[i].value),
+          });
+        }
+      }
+      return res;
+    };
+
     var option = {
+      cityId: {
+        宝安区: 0,
+        光明区: 1,
+        龙华区: 2,
+        福田区: 3,
+        罗湖区: 4,
+        盐田区: 5,
+        龙岗区: 6,
+        坪山区: 7,
+        南山区: 8,
+      },
       title: {
         // text: "深圳XX地图",
         // subtext: "Data from Mr.He",
@@ -3913,82 +3974,174 @@ export default {
       },
       tooltip: {
         trigger: "item",
-        formatter: "{b}<br/>{c}",
+        formatter: function (params) {
+          return params.name + " : " + params.value[2];
+        },
       },
-      // toolbox: {
-      //   show: true,
-      //   orient: "vertical",
-      //   left: "right",
-      //   top: "center",
-      //   feature: {
-      //     dataView: { readOnly: false },
-      //     restore: {},
-      //     saveAsImage: {},
-      //   },
-      // },
+      toolbox: {
+        show: false,
+        orient: "vertical",
+        left: "right",
+        top: "center",
+        feature: {
+          dataView: { readOnly: false },
+          restore: {},
+          saveAsImage: {},
+        },
+      },
       visualMap: {
+        show: false,
         min: 0,
-        max: 200,
+        max: 1000,
         text: ["High", "Low"],
         realtime: false,
         calculable: true,
-        show: false,
         inRange: {
-          color: ["#2986a2", "#2982a2", "#2957A2"],
+          color: ["lightskyblue", "yellow", "orangered"],
         },
       },
+      geo: {
+        map: "shenzhen",
+
+        label: {
+          normal: {
+            show: false,
+            color: "#fff",
+          },
+          emphasis: {
+            show: true,
+            color: "#fff",
+          },
+        },
+        itemStyle: {
+          normal: {
+            areaColor: "rgb(41,134,162)",
+            borderColor: "#111",
+          },
+          emphasis: {
+            // areaColor: "#2a333d",
+            areaColor: "rgb(255,201,14)",
+          },
+        },
+      },
+
       series: [
         {
           name: "南方电网深圳地图",
+          type: "scatter",
+          coordinateSystem: "geo",
+          data: convertData([
+            {
+              name: "光明供电局",
+              value: randomData(),
+            },
+            {
+              name: "南山供电局",
+              value: randomData(),
+            },
+            {
+              name: "坪地供电分局",
+              value: randomData(),
+            },
+            {
+              name: "坪山供电局",
+              value: randomData(),
+            },
+            {
+              name: "大鹏供电局",
+              value: randomData(),
+            },
+            {
+              name: "宝城供电分局",
+              value: randomData(),
+            },
+            {
+              name: "布吉供电分局",
+              value: randomData(),
+            },
+            {
+              name: "平湖供电分局",
+              value: randomData(),
+            },
+            {
+              name: "松岗供电分局",
+              value: randomData(),
+            },
+            {
+              name: "横岗供电分局",
+              value: randomData(),
+            },
 
-          type: "map",
-          map: "shenzhen",
-          label: {
-            show: true,
+            {
+              name: "沙井供电分局",
+              value: randomData(),
+            },
+            {
+              name: "深圳供电局",
+              value: randomData(),
+            },
+            {
+              name: "盐田局",
+              value: randomData(),
+            },
+            {
+              name: "石岩供电分局",
+              value: randomData(),
+            },
+            {
+              name: "福永供电分局",
+              value: randomData(),
+            },
+            {
+              name: "罗湖供电局",
+              value: randomData(),
+            },
+            {
+              name: "龙华供电局",
+              value: randomData(),
+            },
+            {
+              name: "龙岗一部",
+              value: randomData(),
+            },
+            {
+              name: "龙岗二部",
+              value: randomData(),
+            },
+          ]),
+          symbol: "circle",
+          symbolSize: function (value) {
+            var r = value[2] / 50;
+            return r > 5 ? (r > 20 ? 20 : r) : 5;
           },
-
-          data: [
-            {
-              name: "宝安区",
-              value: 10,
+          symbolOffset: [0, 0],
+          label: {
+            normal: {
+              show: true,
+              color: "#fff",
+              offset: [30, 0],
+              formatter: function (params) {
+                return params.name;
+              },
+              textStyle: {
+                fontSize: 8
+              }
             },
-            {
-              name: "光明区",
-              value: 30,
+            emphasis: {
+              show: true,
+              color: "#fff",
+              offset: [30, 0],
             },
-            {
-              name: "龙华区",
-              value: 60,
+          },
+          itemStyle: {
+            normal: {
+              color: "#2982a2",
             },
-            {
-              name: "福田区",
-              value: 90,
+            emphasis: {
+              borderColor: "#fff",
+              borderWidth: 1,
             },
-            {
-              name: "罗湖区",
-              value: 110,
-            },
-            {
-              name: "盐田区",
-              value: 130,
-            },
-            {
-              name: "龙岗区",
-              value: 150,
-            },
-            {
-              name: "坪山区",
-              value: 180,
-            },
-            {
-              name: "南山区",
-              value: 200,
-            },
-            {
-              name: "大鹏新区",
-              value: 100,
-            },
-          ],
+          },
         },
       ],
     };
