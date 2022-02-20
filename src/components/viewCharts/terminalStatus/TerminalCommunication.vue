@@ -1,31 +1,41 @@
 <template>
-<div>
-  <table>
-    <thead>
-    <tr>
-      <th>IP</th>
-      <th>位置</th>
-      <th>流数</th>
-      <th>总发送字节数</th>
-      <th>名称</th>
-      <th>上次出现时间</th>
-      <th>上下行速率</th>
-      <th>总字节数</th>
-    </tr>
-    </thead>
-    <tr v-for="value in tableValue">
-      <td>{{value.ip}}</td>
-      <td>{{value.location}}</td>
-      <td>{{value.flows}}</td>
-      <td>{{value.totalrecvbytes+"bytes"}}</td>
-      <td>{{value.name}}</td>
-      <td>{{value.lastseen}}</td>
-      <td>{{value.rates.toFixed(2)+"bit/s"}}</td>
-      <td>{{value.totalbytes+"bytes"}}</td>
-    </tr>
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th>IP</th>
+        <th>位置</th>
+        <th>流数</th>
+        <th>总发送字节数</th>
+        <th>名称</th>
+        <th>上次出现时间</th>
+        <th>上下行速率</th>
+        <th>总字节数</th>
+      </tr>
+      </thead>
+      <tr v-for="value in tableValue">
+        <td>{{ value.ip }}</td>
+        <td>{{ value.location }}</td>
+        <td>{{ value.flows }}</td>
+        <td>{{ value.totalrecvbytes + "bytes" }}</td>
+        <td>{{ value.name }}</td>
+        <td>{{ value.lastseen }}</td>
+        <td>{{ value.rates.toFixed(2) + "bit/s" }}</td>
+        <td>{{ value.totalbytes + "bytes" }}</td>
+      </tr>
 
-  </table>
-</div>
+    </table>
+    <div style="text-align: center">
+      <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page.sync="currentPage"
+          :page-size="100"
+          layout="total, prev, pager, next"
+          :total="1000">
+      </el-pagination>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -36,7 +46,8 @@ export default {
     return{
       tableValue:[],
       temp: '',
-      timer:''
+      timer:'',
+      currentPage:1,
     }
   },
   mounted() {
@@ -50,7 +61,13 @@ export default {
       netSegStatus.getTerminalCommunication(this.GLOBAL.NETSEG).then(resp => {
         this.tableValue=resp.data.segCommStatusList;
       });
-    }
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
   },
   beforeDestroy() {
     clearInterval(this.timer);

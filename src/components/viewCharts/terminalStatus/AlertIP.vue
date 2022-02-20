@@ -25,7 +25,6 @@
           width="80">
       </el-table-column>
     </el-table>
-
   </div>
 
 </template>
@@ -38,7 +37,7 @@ export default {
     return {
       list1: [],
       tableData:[],
-      timer: ''
+      timer: '',
     };
   },
   mounted() {
@@ -48,10 +47,10 @@ export default {
   methods: {
     drawTopHosts() {
       netSegStatus.getAlertFlow().then(resp =>{
-        this.tableData = resp.data.AlertFlowList
+        this.tableData = resp.data.AlertFlowList.list
       })
+    },
 
-    }
   },
   beforeDestroy() {
     clearInterval(this.timer);
