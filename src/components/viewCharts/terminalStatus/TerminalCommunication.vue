@@ -33,9 +33,9 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page.sync="currentPage"
-          :page-size="100"
+          :page-size="5"
           layout="total, prev, pager, next"
-          :total="1000">
+          :total="10">
       </el-pagination>
     </div>
   </div>
@@ -116,7 +116,7 @@ td {
 /*background-color: #61d2f7;*/
   position: absolute;
   bottom: 1px;
-  left: 300px;
+  left: 35%;
 }
 
 /deep/ .el-pager li{

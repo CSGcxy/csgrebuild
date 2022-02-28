@@ -2,10 +2,10 @@
   <div class="chart-box">
     <div class="left-name">
       <div class="txt">
-        <h2>上传速率</h2>
+        <h2>上行速率</h2>
       </div>
       <div class="txt">
-        <h2>下载速率</h2>
+        <h2>下行速率</h2>
       </div>
       <div class="txt">
         <h2>告警流数</h2>

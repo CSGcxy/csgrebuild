@@ -38,5 +38,10 @@ export default {
             method:'get'
         })
     },
-
+    getlocation(segment) {
+        return request({
+            url: base + '/getlocation/' + segment,
+            method:'get'
+        })
+    }
 }
