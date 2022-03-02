@@ -35,7 +35,7 @@
           :current-page.sync="currentPage"
           :page-size="5"
           layout="total, prev, pager, next"
-          :total="10">
+          :total="dataListTotal">
       </el-pagination>
     </div>
   </div>
@@ -51,6 +51,7 @@ export default {
       temp: '',
       timer:'',
       currentPage:1,
+      dataListTotal: 0
     }
   },
   mounted() {
@@ -62,7 +63,8 @@ export default {
     drawterminalCommunication() {
       // this.GLOBAL.NETSEG = this.temp
       netSegStatus.getTerminalCommunication(this.GLOBAL.NETSEG).then(resp => {
-        this.tableValue=resp.data.segCommStatusList;
+        this.tableValue=resp.data.segCommStatusList.list;
+        this.dataListTotal=resp.data.segCommStatusList.total;
       });
     },
     handleSizeChange(val) {
