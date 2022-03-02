@@ -139,7 +139,7 @@ export default {
         visualMap: {
           show: false,
           min: 0,
-          max: 1000,
+          max: 20,
           text: ["High", "Low"],
           realtime: false,
           calculable: true,
@@ -180,8 +180,8 @@ export default {
 
             symbol: "circle",
             symbolSize: function (value) {
-              var r = value[2] / 50;
-              return r > 5 ? (r > 20 ? 20 : r) : 5;
+              var r = value[2] / 3;
+              return r >4 ? (r > 10 ? 10 : r) : 5;
             },
             symbolOffset: [0, 0],
             label: {
