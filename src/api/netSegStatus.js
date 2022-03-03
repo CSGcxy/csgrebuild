@@ -20,9 +20,9 @@ export default {
             method:'get'
         })
     },
-    getTerminalCommunication(segment){
+    getTerminalCommunication(segment,current){
         return request({
-            url: base + '/getSegCommStatus/' + segment,
+            url: base + '/getSegCommStatus/' + segment + '/' + current,
             method:'get'
         })
     },

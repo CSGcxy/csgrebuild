@@ -62,7 +62,7 @@ export default {
   methods:{
     drawterminalCommunication() {
       // this.GLOBAL.NETSEG = this.temp
-      netSegStatus.getTerminalCommunication(this.GLOBAL.NETSEG).then(resp => {
+      netSegStatus.getTerminalCommunication(this.GLOBAL.NETSEG,this.currentPage).then(resp => {
         this.tableValue=resp.data.segCommStatusList.list;
         this.dataListTotal=resp.data.segCommStatusList.total;
       });
@@ -71,7 +71,9 @@ export default {
       console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+      // console.log(`当前页: ${val}`);
+      // console.log(this.currentPage)
+      this.drawterminalCommunication();
     },
   },
   beforeDestroy() {
