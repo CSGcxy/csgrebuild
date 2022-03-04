@@ -87,10 +87,18 @@ export default {
     this.drawActiveTerminal();
     this.timer = setInterval(this.drawActiveTerminal,this.GLOBAL.refreshTime);
   },
+  computed:{
+
+  },
   methods:{
     drawActiveTerminal() {
       netSegStatus.getFlowTiming(this.GLOBAL.NETSEG).then(resp => {
-        this.activeTerminalOption.xAxis.data = resp.data.terminalTrendList.timeStamp;
+        var  xdata= resp.data.terminalTrendList.timeStamp;
+        let changexData=[]
+        xdata.forEach((item,index) =>{
+          changexData.push(item.slice(5))
+        })
+        this.activeTerminalOption.xAxis.data=changexData
         this.activeTerminalOption.series[0].data = resp.data.terminalTrendList.onlineNum;
         this.activeTerminalChart.setOption(this.activeTerminalOption);
       });

@@ -88,7 +88,12 @@ export default {
   methods:{
     drawFlowTimingRecived() {
       netSegStatus.getFlowTiming(this.GLOBAL.NETSEG).then(resp => {
-        this.flowTimingRecivedChartOption.xAxis.data = resp.data.terminalTrendList.timeStamp;
+        var  xdata=  resp.data.terminalTrendList.timeStamp;
+        let changexData=[]
+        xdata.forEach((item,index) =>{
+          changexData.push(item.slice(5))
+        })
+        this.flowTimingRecivedChartOption.xAxis.data=changexData
         this.flowTimingRecivedChartOption.series[0].data = resp.data.terminalTrendList.downrate;
         this.flowTimingRecivedChart.setOption(this.flowTimingRecivedChartOption);
 

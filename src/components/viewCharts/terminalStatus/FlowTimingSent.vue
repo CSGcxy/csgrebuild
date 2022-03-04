@@ -50,6 +50,7 @@ export default {
             lineStyle: {
               type: 'solid',
               color: '#F8F8FF',//左边线的颜色
+              // width:'0.5'//坐标线的宽度
             }
           },
           data: []
@@ -89,6 +90,13 @@ export default {
     drawFlowTimingSent() {
       netSegStatus.getFlowTiming(this.GLOBAL.NETSEG).then(resp => {
         this.flowTimingSentChartOption.xAxis.data = resp.data.terminalTrendList.timeStamp;
+        var  xdata=  resp.data.terminalTrendList.timeStamp;
+        let changexData=[]
+        xdata.forEach((item,index) =>{
+          changexData.push(item.slice(5))
+        })
+        this.flowTimingSentChartOption.xAxis.data=changexData
+        console.log( this.flowTimingSentChartOption.xAxis.data)
         this.flowTimingSentChartOption.series[0].data = resp.data.terminalTrendList.uprate;
         this.flowTimingSentChart.setOption(this.flowTimingSentChartOption);
       });
