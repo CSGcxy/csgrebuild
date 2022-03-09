@@ -96,7 +96,6 @@ export default {
           changexData.push(item.slice(5))
         })
         this.flowTimingSentChartOption.xAxis.data=changexData
-        console.log( this.flowTimingSentChartOption.xAxis.data)
         this.flowTimingSentChartOption.series[0].data = resp.data.terminalTrendList.uprate;
         this.flowTimingSentChart.setOption(this.flowTimingSentChartOption);
       });

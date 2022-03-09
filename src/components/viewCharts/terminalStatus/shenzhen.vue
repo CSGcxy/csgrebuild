@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       realData: [],
+      timer:'',
       // 各个分局坐标
       geoCoordMap: {
         宝安区: [113.88308, 22.55329],
@@ -62,17 +63,18 @@ export default {
   },
 
   mounted() {
-    this.getLocs();
+    this.getLocs()
+    this.timer = setInterval(this.getLocs,this.GLOBAL.refreshTime);
     // this.initCharts();
   },
   methods: {
     getLocs() {
       netSegStatus.getlocation(this.GLOBAL.NETSEG).then(resp => {
-        console.log("展示")
-        console.log(resp.data.locationList)
+        console.log("地图")
+        // console.log(resp.data.locationList)
         // this.realData= JSON.parse(resp.data.locationList)
         this.realData = resp.data.locationList
-        console.log(this.realData[0].name)
+        // console.log(this.realData[0].name)
         this.initCharts()
       })
 
@@ -92,7 +94,6 @@ export default {
       }
 
       this.initshenzhen(res)
-      console.log(res)
 
 
     },
@@ -139,7 +140,7 @@ export default {
         visualMap: {
           show: false,
           min: 0,
-          max: 20,
+          max: 25,
           text: ["High", "Low"],
           realtime: false,
           calculable: true,
@@ -180,8 +181,8 @@ export default {
 
             symbol: "circle",
             symbolSize: function (value) {
-              var r = value[2] / 3;
-              return r >4 ? (r > 10 ? 10 : r) : 5;
+              var r = value[2] / 5;
+              return r > 2 ? (r > 5 ? 20 : r*2) : 5;
             },
             symbolOffset: [0, 0],
             label: {
@@ -215,9 +216,12 @@ export default {
         ],
       };
       myChart.setOption(shenzhenOption);
+    },
+
+    beforeDestroy() {
+      clearInterval(this.timer);
+      this.timer = null;
     }
-
-
   }
 
 }
