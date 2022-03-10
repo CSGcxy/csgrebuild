@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from "@/components/Home";
-import Flow from "@/components/Flow";
+import FormatCheck from "@/components/FormatCheck";
 import TerminalStatus from "@/components/TerminalStatus";
 import SecurityAssess from "@/components/SecurityAssess";
 import OffTerminal from "@/components/OffTerminal";
@@ -20,9 +20,9 @@ const routes = [
     component: Home,
     children:[
       {
-        path: '/flow',
-        name: 'Flow',
-        component: Flow
+        path: '/formatCheck',
+        name: 'FormatCheck',
+        component: FormatCheck
       },
       {
         path: '/securityAssess',
@@ -50,7 +50,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

@@ -5,7 +5,7 @@
         <div class="topTitle">
           <div class="left nav">
             <ul style="margin-right: 2%;margin-left: 1%;">
-              <li :class="{nav_active:show=='/flow'}"><router-link to="/flow"><i class="nav_1"></i>流量分析</router-link></li>
+              <li :class="{nav_active:show=='/formatCheck'}"><router-link to="/formatCheck"><i class="nav_1"></i>格式校验</router-link></li>
               <li :class="{nav_active:show=='/securityAssess'}"><router-link to='/securityAssess'><i class="nav_2"></i>安全评估</router-link> </li>
               <li :class="{nav_active:show=='/networkTraffic'}"><router-link to='/networkTraffic'><i class="nav_6"></i>网段流量</router-link> </li>
             </ul>

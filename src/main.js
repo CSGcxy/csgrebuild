@@ -8,13 +8,13 @@ import global_variable from "@/utils/global_variable";
 
 Vue.config.productionTip = false
 
-//vue中使用网页防复制
-document.onselectstart = function () {
-  return false;
-};
-document.oncontextmenu = function () {
-  return false;
-};
+// //vue中使用网页防复制
+// document.onselectstart = function () {
+//   return false;
+// };
+// document.oncontextmenu = function () {
+//   return false;
+// };
 
 //进行挂载
 Vue.use(ElementUI);
