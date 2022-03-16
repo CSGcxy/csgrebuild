@@ -8,7 +8,12 @@
             <h6>CompliantNum</h6>
           </div>
           <div class="left-top-Count">
-            <CompliantNum />
+            <div class="compliantNumOne">
+              <CompliantNumOne />
+            </div>
+            <div class="compliantNumTwo ">
+              <CompliantNumTwo />
+            </div>
           </div>
         </div>
         <div class="left-mid">
@@ -35,7 +40,8 @@
 </template>
 
 <script>
-import CompliantNum from "./viewCharts/formatCheck/CompliantNum";
+import CompliantNumOne from "./viewCharts/formatCheck/CompliantNumOne";
+import CompliantNumTwo from "./viewCharts/formatCheck/CompliantNumTwo";
 import NonCompliant from "./viewCharts/formatCheck/NonCompliant";
 import PacketProportion from "./viewCharts/formatCheck/PacketProportion";
 
@@ -43,7 +49,8 @@ export default {
   name: "OfflineTerminal",
   components: {
     NonCompliant,
-    CompliantNum,
+    CompliantNumOne,
+    CompliantNumTwo,
     PacketProportion,
   },
   mounted() {},

@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div style="width: 100%;height:100%;">
     <div class="center-active-detail">
       <div class="active-detail-table">
         <h3>不合规packet明细</h3>
-        <table>
-          <thead>
+        <div class="table-box">
+          <table>
+            <thead>
             <tr>
               <th>timestamp</th>
               <th>Src ip</th>
@@ -12,86 +13,91 @@
               <th>Dst ip</th>
               <th>Dst port</th>
             </tr>
-          </thead>
-          <tr>
-            <td>111</td>
-            <td>222</td>
-            <td>333</td>
-            <td>444</td>
-            <td>5555</td>
-          </tr>
-          <tr>
-            <td>111</td>
-            <td>222</td>
-            <td>333</td>
-            <td>444</td>
-            <td>5555</td>
-          </tr>
-          <tr>
-            <td>111</td>
-            <td>222</td>
-            <td>333</td>
-            <td>444</td>
-            <td>5555</td>
-          </tr>
-          <tr>
-            <td>111</td>
-            <td>222</td>
-            <td>333</td>
-            <td>444</td>
-            <td>5555</td>
-          </tr>
-          <tr>
-            <td>111</td>
-            <td>222</td>
-            <td>333</td>
-            <td>444</td>
-            <td>5555</td>
-          </tr>
-          <tr>
-            <td>111</td>
-            <td>222</td>
-            <td>333</td>
-            <td>444</td>
-            <td>5555</td>
-          </tr>
-          <tr>
-            <td>111</td>
-            <td>222</td>
-            <td>333</td>
-            <td>444</td>
-            <td>5555</td>
-          </tr>
-          <tr>
-            <td>111</td>
-            <td>222</td>
-            <td>333</td>
-            <td>444</td>
-            <td>5555</td>
-          </tr>
-          <tr>
-            <td>111</td>
-            <td>222</td>
-            <td>333</td>
-            <td>444</td>
-            <td>5555</td>
-          </tr>
-          <tr>
-            <td>111</td>
-            <td>222</td>
-            <td>333</td>
-            <td>444</td>
-            <td>5555</td>
-          </tr>
-        </table>
+            </thead>
+            <tr>
+              <td>111</td>
+              <td>222</td>
+              <td>333</td>
+              <td>444</td>
+              <td>5555</td>
+            </tr>
+            <tr>
+              <td>111</td>
+              <td>222</td>
+              <td>333</td>
+              <td>444</td>
+              <td>5555</td>
+            </tr>
+            <tr>
+              <td>111</td>
+              <td>222</td>
+              <td>333</td>
+              <td>444</td>
+              <td>5555</td>
+            </tr>
+            <tr>
+              <td>111</td>
+              <td>222</td>
+              <td>333</td>
+              <td>444</td>
+              <td>5555</td>
+            </tr>
+            <tr>
+              <td>111</td>
+              <td>222</td>
+              <td>333</td>
+              <td>444</td>
+              <td>5555</td>
+            </tr>
+            <tr>
+              <td>111</td>
+              <td>222</td>
+              <td>333</td>
+              <td>444</td>
+              <td>5555</td>
+            </tr>
+            <tr>
+              <td>111</td>
+              <td>222</td>
+              <td>333</td>
+              <td>444</td>
+              <td>5555</td>
+            </tr>
+            <tr>
+              <td>111</td>
+              <td>222</td>
+              <td>333</td>
+              <td>444</td>
+              <td>5555</td>
+            </tr>
+            <tr>
+              <td>111</td>
+              <td>222</td>
+              <td>333</td>
+              <td>444</td>
+              <td>5555</td>
+            </tr>
+            <tr>
+              <td>111</td>
+              <td>222</td>
+              <td>333</td>
+              <td>444</td>
+              <td>5555</td>
+            </tr>
+          </table>
+        </div>
+
       </div>
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="100"
-        class="page"
-      >
-      </el-pagination>
+      <div class="page-box">
+        <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="100"
+            class="page"
+        >
+        </el-pagination>
+      </div>
+
     </div>
   </div>
 </template>
@@ -125,44 +131,61 @@ export default {
 </script>
 
 <style scoped>
-.center-active-detail > .active-detail-table {
+.center-active-detail {
   width: 100%;
   height: 100%;
-  /* background: gold; */
-  position: relative;
+
+}
+
+.center-active-detail > .active-detail-table {
+  width: 100%;
+  height: 92%;
+  float: left;
+  /*overflow: auto;*/
+}
+
+table-box{
+  width:100%;
+  height:92%;
 }
 .center-active-detail > .active-detail-table h3 {
   /* background: #000; */
   text-align: center;
   color: #fff;
 }
+
 .center-active-detail > .active-detail-table table {
   width: 100%;
   height: 100%;
   border-collapse: collapse;
-  position: absolute;
   text-align: center;
-  margin-top: 2.5%;
-  margin-left: 2.5%;
+
 }
 
 .center-active-detail > .active-detail-table table thead th {
   color: #61d2f7;
-  font-size: 25px;
+  font-size: 150%;
   font-weight: 600;
-  padding-top: 5px;
-  padding-bottom: 50px;
+  padding-bottom: 3%;
 }
 
 .center-active-detail > .active-detail-table table tr td {
   color: #61d2f7;
-  font-size: 20px;
+  font-size: 100%;
   font-weight: 600;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding:1% 1%;
+  /*height:10px;*/
+}
+
+.page-box {
+  width: 100%;
+  height: 8%;
+  margin-top:2%;
+  float: left;
 }
 .page {
-  margin-left: 37%;
-  padding-top: 82%;
+  /*margin:3px auto;*/
+  width:60%;
+  margin:1px auto;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div
     id="left-bottom-NonCompliant"
-    style="width: 100%; height: 200%; margin-top: 5%"
+    style="width: 100%; height: 100%; margin-top: 1%"
   ></div>
 </template>
 

@@ -96,17 +96,17 @@ table{
 
 table tr{
   color: #61d2f7;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  /*padding-top: 1px;*/
+  /*padding-bottom:1px;*/
 }
 table thead th {
   color: #F5F5F5;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 600;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  /*padding-top: 2px;*/
+  /*padding-bottom: 2px;*/
 }
 td {
   color: 	#F5F5F5;
