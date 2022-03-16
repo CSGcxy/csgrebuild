@@ -103,6 +103,7 @@ export default {
     return {
       timer: "",
       tableValue: [],
+      test: [],
     };
   },
   mounted() {
