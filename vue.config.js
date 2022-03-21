@@ -7,7 +7,7 @@ module.exports = {
         // proxy: 'http://localhost:9001'
         proxy: {
             '/':{
-                target: 'http://cxyabc.vaiwan.cn',
+                target: 'http://csgabc.vaiwan.cn',
                 // target: 'http://localhost:9001',
                 changeOrigin: true,
                 pathRewrite:{
