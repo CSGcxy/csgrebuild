@@ -7,11 +7,11 @@ import * as echarts from "echarts";
 import checkFormat from "../../../api/checkFormat";
 export default {
   name: "CompliantNumTwo",
-  data(){
-    return{
-      UnqualifiedPacketCountChart:null,
-      timer: '',
-      UnqualifiedPacketCountOption : {
+  data() {
+    return {
+      UnqualifiedPacketCountChart: null,
+      timer: "",
+      UnqualifiedPacketCountOption: {
         title: {
           text: "合规packet占比",
           // subtext: "Fake Data",
@@ -32,7 +32,7 @@ export default {
             color: "#ffffff", //字体颜色
           },
 
-          data: ["合规packet", "不合规packet"],
+          // data: ["合规packet", "不合规packet"],
         },
         series: [
           {
@@ -41,8 +41,8 @@ export default {
             center: ["50%", "50%"],
             selectedMode: "single",
             data: [
-              { value: 735, name: "合规packet" },
-              { value: 510, name: "不合规packet" },
+              // { value: 735, name: "合规packet" },
+              // { value: 510, name: "不合规packet" },
             ],
             itemStyle: {
               normal: {
@@ -67,21 +67,37 @@ export default {
           },
         ],
       },
-
-    }
+    };
   },
 
   mounted() {
-    this.UnqualifiedPacketCountChart = this.$echarts.init(document.getElementById('CompliantNumTwo'));
+    this.UnqualifiedPacketCountChart = this.$echarts.init(
+      document.getElementById("CompliantNumTwo")
+    );
     this.drawUnqualifiedPacketCount();
+    this.timer = setInterval(
+      this.drawUnqualifiedPacketCount,
+      this.GLOBAL.refreshTime
+    );
   },
   methods: {
     drawUnqualifiedPacketCount() {
-      checkFormat.getUnqualifiedPacketCount().then(resp => {
-        console.log(resp)
-        // this.UnqualifiedPacketCountChart.setOption(UnqualifiedPacketCountOption);
-      });
+      checkFormat.getUnqualifiedPacketCount().then((resp) => {
+        console.log(resp);
 
+        var PacketUnQualifiedCountData = resp.data.packetUnQualifiedCount;
+        this.UnqualifiedPacketCountOption.series[0].data.push({
+          value: PacketUnQualifiedCountData.qualifiedCount,
+          name: "合规packet",
+        });
+        this.UnqualifiedPacketCountOption.series[0].data.push({
+          value: PacketUnQualifiedCountData.unqualifiedCount,
+          name: "不合规packet",
+        });
+        this.UnqualifiedPacketCountChart.setOption(
+          this.UnqualifiedPacketCountOption
+        );
+      });
     },
   },
 };

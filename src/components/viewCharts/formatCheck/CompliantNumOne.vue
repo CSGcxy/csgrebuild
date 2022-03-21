@@ -7,11 +7,11 @@ import checkFormat from "../../../api/checkFormat";
 import * as echarts from "echarts";
 export default {
   name: "CompliantNumOne",
-  data(){
+  data() {
     return {
-      PacketCountChart:null,
-      timer: '',
-      PacketCountOption : {
+      PacketCountChart: null,
+      timer: "",
+      PacketCountOption: {
         title: {
           text: "不同类型packet占比",
           // subtext: "Fake Data",
@@ -70,28 +70,29 @@ export default {
           },
         ],
       },
-
-    }
+    };
   },
 
   mounted() {
-    this.PacketCountChart = this.$echarts.init(document.getElementById('CompliantNumOne'));
+    this.PacketCountChart = this.$echarts.init(
+      document.getElementById("CompliantNumOne")
+    );
     this.drawPacketCount();
-    this.timer = setInterval(this.drawPacketCount,this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawPacketCount, this.GLOBAL.refreshTime);
     // this.PacketCountChart .setOption(this.PacketCountOption);
   },
   methods: {
     drawPacketCount() {
-      checkFormat.getPacketCount().then(resp => {
-        console.log(resp)
-        var PacketCountData=resp.data.packetCountVoList
-        PacketCountData.forEach((entry) =>{
+      checkFormat.getPacketCount().then((resp) => {
+        console.log(resp);
+        var PacketCountData = resp.data.packetCountVoList;
+        PacketCountData.forEach((entry) => {
           this.PacketCountOption.series[0].data.push({
-            value:entry.count,
-            name:'afn='+entry.afn,
-          })
-        })
-        this.PacketCountChart .setOption(this.PacketCountOption);
+            value: entry.count,
+            name: "afn=" + entry.afn,
+          });
+        });
+        this.PacketCountChart.setOption(this.PacketCountOption);
       });
     },
   },
