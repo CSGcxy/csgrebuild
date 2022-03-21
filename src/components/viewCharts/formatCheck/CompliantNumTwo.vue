@@ -4,12 +4,14 @@
 
 <script>
 import * as echarts from "echarts";
+import checkFormat from "../../../api/checkFormat";
 export default {
   name: "CompliantNumTwo",
-  methods: {
-    BarChart() {
-      var myChart = echarts.init(document.getElementById("CompliantNumTwo"));
-      var option = {
+  data(){
+    return{
+      UnqualifiedPacketCountChart:null,
+      timer: '',
+      UnqualifiedPacketCountOption : {
         title: {
           text: "合规packet占比",
           // subtext: "Fake Data",
@@ -64,13 +66,23 @@ export default {
             },
           },
         ],
-      };
+      },
 
-      myChart.setOption(option);
-    },
+    }
   },
+
   mounted() {
-    this.BarChart();
+    this.UnqualifiedPacketCountChart = this.$echarts.init(document.getElementById('CompliantNumTwo'));
+    this.drawUnqualifiedPacketCount();
+  },
+  methods: {
+    drawUnqualifiedPacketCount() {
+      checkFormat.getUnqualifiedPacketCount().then(resp => {
+        console.log(resp)
+        // this.UnqualifiedPacketCountChart.setOption(UnqualifiedPacketCountOption);
+      });
+
+    },
   },
 };
 </script>

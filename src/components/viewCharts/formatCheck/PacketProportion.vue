@@ -91,9 +91,12 @@
       <div class="page-box">
         <el-pagination
             background
-            layout="prev, pager, next"
-            :total="100"
+            layout="total,prev, pager, next"
+            :total="total"
             class="page"
+            :page-size.sync="pageSize"
+            :current-page.sync="pageNum"
+
         >
         </el-pagination>
       </div>
@@ -107,6 +110,9 @@ export default {
   name: "PacketProportion",
   data() {
     return {
+      total:100,
+      pageNum:1,
+      pageSize:10,
       timer: "",
       tableValue: [],
       test: [],
@@ -118,9 +124,9 @@ export default {
   },
   methods: {
     drawActiveTraffic() {
-      netTraffic.getActiveTraffic(this.GLOBAL.NETSEG).then((resp) => {
-        this.tableValue = resp.data.activeFlowsList;
-      });
+      // netTraffic.getActiveTraffic(this.GLOBAL.NETSEG).then((resp) => {
+      //   this.tableValue = resp.data.activeFlowsList;
+      // });
     },
   },
   beforeDestroy() {
