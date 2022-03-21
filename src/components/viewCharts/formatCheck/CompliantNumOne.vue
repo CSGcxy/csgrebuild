@@ -22,10 +22,11 @@ export default {
         },
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)",
+          // formatter: "{a} <br/>{b} : {c} ({d}%)",
+          formatter: "{b} : {c} ({d}%)",
         },
         legend: {
-          bottom: 10,
+          bottom: 4,
           left: "center",
           textStyle: {
             fontSize: 14, //字体大小

@@ -70,21 +70,21 @@
 /*左部详情*/
 .box-left>.left-top {
     width: 95%;
-    height: 40%;
+    height: 45%;
     background: #10121A;
     /*float: left;*/
 }
 .box-left>.left-mid {
     width: 95%;
-    height: 60%;
+    height: 55%;
     background: #10121A;
     /*float: left;*/
 }
 
 .box-left>.left-top>.left-top-Count {
     width: 100%;
-    height: 81%;
-    background-color: #10121A;
+    height: 88%;
+    /*background-color: #10121A;*/
     position: relative;
 
 }
