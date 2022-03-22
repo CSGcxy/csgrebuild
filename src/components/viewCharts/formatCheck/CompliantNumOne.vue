@@ -11,13 +11,16 @@ export default {
     return {
       PacketCountChart: null,
       timer: "",
+      PacketCountData:"",
       PacketCountOption: {
         title: {
           text: "不同类型packet占比",
           // subtext: "Fake Data",
+          top:"4%",
           left: "center",
           textStyle: {
             color: "#fff",
+            fontSize:14
           },
         },
         tooltip: {
@@ -26,10 +29,13 @@ export default {
           formatter: "{b} : {c} ({d}%)",
         },
         legend: {
-          bottom: 4,
+          bottom: 5,
           left: "center",
+          align: "auto",
+          itemWidth: 8,
+          itemGap:4,
           textStyle: {
-            fontSize: 14, //字体大小
+            fontSize: 10, //字体大小
             color: "#ffffff", //字体颜色
           },
 
@@ -38,7 +44,7 @@ export default {
         series: [
           {
             type: "pie",
-            radius: "60%",
+            radius: "70%",
             center: ["50%", "50%"],
             selectedMode: "single",
             data: [
@@ -84,9 +90,8 @@ export default {
   methods: {
     drawPacketCount() {
       checkFormat.getPacketCount().then((resp) => {
-        console.log(resp);
-        var PacketCountData = resp.data.packetCountVoList;
-        PacketCountData.forEach((entry) => {
+        this.PacketCountData = resp.data.packetCountVoList;
+        this.PacketCountData.forEach((entry) => {
           this.PacketCountOption.series[0].data.push({
             value: entry.count,
             name: "afn=" + entry.afn,

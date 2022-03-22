@@ -11,13 +11,16 @@ export default {
     return {
       UnqualifiedPacketCountChart: null,
       timer: "",
+      PacketUnQualifiedCountData: "",
       UnqualifiedPacketCountOption: {
         title: {
           text: "合规packet占比",
           // subtext: "Fake Data",
+          top:"4%",
           left: "center",
           textStyle: {
             color: "#fff",
+            fontSize:14
           },
         },
         tooltip: {
@@ -25,10 +28,10 @@ export default {
           formatter: "{a} <br/>{b} : {c} ({d}%)",
         },
         legend: {
-          bottom: 10,
+          bottom: 5,
           left: "center",
           textStyle: {
-            fontSize: 14, //字体大小
+            fontSize: 12, //字体大小
             color: "#ffffff", //字体颜色
           },
 
@@ -37,7 +40,7 @@ export default {
         series: [
           {
             type: "pie",
-            radius: "60%",
+            radius: "70%",
             center: ["50%", "50%"],
             selectedMode: "single",
             data: [
@@ -83,15 +86,14 @@ export default {
   methods: {
     drawUnqualifiedPacketCount() {
       checkFormat.getUnqualifiedPacketCount().then((resp) => {
-        console.log(resp);
 
-        var PacketUnQualifiedCountData = resp.data.packetUnQualifiedCount;
+        this.PacketUnQualifiedCountData = resp.data.packetUnQualifiedCount;
         this.UnqualifiedPacketCountOption.series[0].data.push({
-          value: PacketUnQualifiedCountData.qualifiedCount,
+          value: this.PacketUnQualifiedCountData.qualifiedCount,
           name: "合规packet",
         });
         this.UnqualifiedPacketCountOption.series[0].data.push({
-          value: PacketUnQualifiedCountData.unqualifiedCount,
+          value: this.PacketUnQualifiedCountData.unqualifiedCount,
           name: "不合规packet",
         });
         this.UnqualifiedPacketCountChart.setOption(

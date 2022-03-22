@@ -3,7 +3,7 @@
     <div class="center-active-detail">
       <div class="active-detail-table">
         <!--        <h3>不合规packet明细</h3>-->
-        <div class="h1">不合规packet明细</div>
+        <div class="h1_title">不合规packet明细</div>
         <div class="table-box">
           <table>
             <thead>
@@ -76,10 +76,7 @@ export default {
   },
   methods: {
     drawPacketProportion() {
-      checkFormat
-        .getUnqualifiedDetails(this.pageNum, this.pageSize)
-        .then((resp) => {
-          console.log(resp);
+      checkFormat.getUnqualifiedDetails(this.pageNum, this.pageSize).then((resp) => {
           this.total = resp.data.unqualifiedDetails.total;
           this.tableValue = resp.data.unqualifiedDetails.list;
         });
@@ -110,8 +107,8 @@ table-box {
   height: 90%;
 
 }
-.h1 {
-  font-size: 22px;
+.h1_title {
+  font-size: 14px;
   font-weight: bolder;
   color: #fff;
   width: 100%;

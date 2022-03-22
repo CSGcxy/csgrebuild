@@ -15,16 +15,18 @@ export default {
       second: 5,
       NonCompliantChart: null,
       timer: "",
+      AfnData: "",
       NonCompliantChartOption: {
-        title: {
-          text: "合规packet数量",
-          // subtext: "Fake Data",
-          left: "center",
-          top: "top",
-          textStyle: {
-            color: "#fff",
-          },
-        },
+        // title: {
+        //   text: "合规packet数量",
+        //   // subtext: "Fake Data",
+        //   left: "center",
+        //   top: "top",
+        //   textStyle: {
+        //     color: "#fff",
+        //     fontSize:14
+        //   },
+        // },
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -35,7 +37,7 @@ export default {
           left: "center",
           top: "bottom",
           textStyle: {
-            fontSize: 18, //字体大小
+            fontSize: 14, //字体大小
             color: "#ffffff", //字体颜色
           },
           // data: ["afn=0", "afn=2", "afn=4"],
@@ -88,7 +90,7 @@ export default {
           {
             type: "value",
             axisLabel: {
-              fontSize: 18, //字体大小
+              fontSize: 14, //字体大小
               color: "#ffffff", //字体颜色
             },
             splitLine: {
@@ -160,13 +162,10 @@ export default {
   },
   methods: {
     drawNonCompliant() {
-      checkFormat
-        .getDiffrentAfnCount(this.second)
-        .then((resp) => {
-          console.log(resp);
+      checkFormat.getDiffrentAfnCount(this.second).then((resp) => {
           // 显示x坐标
-          var AfnData = resp.data.afnVoList.timeList;
-          AfnData.forEach((entry) => {
+          this.AfnData = resp.data.afnVoList.timeList;
+          this.AfnData.forEach((entry) => {
             // console.log(entry);
             this.NonCompliantChartOption.xAxis[0].data.push({
               value: entry,
@@ -183,8 +182,6 @@ export default {
             // key值放在xArray容器中
             xArray.push(key);
           }
-          console.log(yArray);
-          console.log(xArray);
 
           // 显示data\name
           for (var i = 0; i <= yArray.length - 1; i++) {

@@ -15,8 +15,7 @@
               <th>传输总字节数</th>
             </tr>
           </thead>
-          <!-- <tr v-for="value in tableValue"> -->
-          <tr>
+           <tr v-for="value in tableValue">
             <td>{{ value.appProto }}</td>
             <td>{{ value.proto }}</td>
             <td>{{ value.srcIp }}</td>
@@ -49,6 +48,7 @@ export default {
   methods: {
     drawActiveTraffic() {
       netTraffic.getActiveTraffic(this.GLOBAL.NETSEG).then((resp) => {
+        console.log(resp)
         this.tableValue = resp.data.activeFlowsList;
       });
     },
