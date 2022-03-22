@@ -1,47 +1,45 @@
 <template>
-  <div style="width: 100%;height:100%;">
+  <div style="width: 100%; height: 100%">
     <div class="center-active-detail">
       <div class="active-detail-table">
-<!--        <h3>不合规packet明细</h3>-->
-        <div class="h1">
-          不合规packet明细
-        </div>
+        <!--        <h3>不合规packet明细</h3>-->
+        <div class="h1">不合规packet明细</div>
         <div class="table-box">
           <table>
             <thead>
-            <tr >
-              <th v-for="(item,ind) in columnList" :key="ind">{{item.name}}</th>
-            </tr>
+              <tr>
+                <th v-for="(item, ind) in columnList" :key="ind">
+                  {{ item.name }}
+                </th>
+              </tr>
             </thead>
-            <tr v-for='(item,index) in tableValue' :key="index">
-              <td v-for='(it,ind) in columnList' :key="ind">{{item[it.eng]}}</td>
+            <tr v-for="(item, index) in tableValue" :key="index">
+              <td v-for="(it, ind) in columnList" :key="ind">
+                {{ item[it.eng] }}
+              </td>
             </tr>
-<!--            <tr>-->
-<!--              <td>111</td>-->
-<!--              <td>222</td>-->
-<!--              <td>333</td>-->
-<!--              <td>444</td>-->
-<!--              <td>5555</td>-->
-<!--            </tr>-->
-
+            <!--            <tr>-->
+            <!--              <td>111</td>-->
+            <!--              <td>222</td>-->
+            <!--              <td>333</td>-->
+            <!--              <td>444</td>-->
+            <!--              <td>5555</td>-->
+            <!--            </tr>-->
           </table>
         </div>
-
       </div>
       <div class="page-box">
         <el-pagination
-            background
-            layout="total,prev, pager, next"
-            :total="total"
-            class="page"
-            :page-size.sync="pageSize"
-            :current-page.sync="pageNum"
-            @current-change="drawPacketProportion"
-
+          background
+          layout="total,prev, pager, next"
+          :total="total"
+          class="page"
+          :page-size.sync="pageSize"
+          :current-page.sync="pageNum"
+          @current-change="drawPacketProportion"
         >
         </el-pagination>
       </div>
-
     </div>
   </div>
 </template>
@@ -53,17 +51,17 @@ export default {
   name: "PacketProportion",
   data() {
     return {
-      total:100,
-      pageNum:1,
-      pageSize:10,
+      total: 100,
+      pageNum: 1,
+      pageSize: 10,
       timer: "",
       // columnList:["timestamp","Src ip","Src port","Dst ip","Dst port"],
-      columnList:[
-        {eng:'ts', name:"timestamp"},
-        {eng:'srcip',name:'Src ip'},
-        {eng:'srcport',name:'Src port'},
-        {eng:'dstip',name:'Dst ip'},
-        {eng:'dstport',name:'Dst port'},
+      columnList: [
+        { eng: "ts", name: "timestamp" },
+        { eng: "srcip", name: "Src ip" },
+        { eng: "srcport", name: "Src port" },
+        { eng: "dstip", name: "Dst ip" },
+        { eng: "dstport", name: "Dst port" },
       ],
       tableValue: [],
       test: [],
@@ -71,16 +69,20 @@ export default {
   },
   mounted() {
     this.drawPacketProportion();
-    this.timer = setInterval(this.drawPacketProportion, this.GLOBAL.refreshTime);
+    this.timer = setInterval(
+      this.drawPacketProportion,
+      this.GLOBAL.refreshTime
+    );
   },
   methods: {
     drawPacketProportion() {
-      checkFormat.getUnqualifiedDetails(this.pageNum,this.pageSize).then(resp=>{
-        console.log(resp)
-        this.total=resp.data.unqualifiedDetails.total
-        this.tableValue=resp.data.unqualifiedDetails.list
-          }
-      )
+      checkFormat
+        .getUnqualifiedDetails(this.pageNum, this.pageSize)
+        .then((resp) => {
+          console.log(resp);
+          this.total = resp.data.unqualifiedDetails.total;
+          this.tableValue = resp.data.unqualifiedDetails.list;
+        });
     },
   },
   beforeDestroy() {
@@ -94,7 +96,6 @@ export default {
 .center-active-detail {
   width: 100%;
   height: 100%;
-
 }
 
 .center-active-detail > .active-detail-table {
@@ -104,9 +105,9 @@ export default {
   /*overflow: auto;*/
 }
 
-table-box{
-  width:100%;
-  height:92%;
+table-box {
+  width: 100%;
+  height: 92%;
 }
 .h1 {
   font-size: 20px;
@@ -128,7 +129,6 @@ table-box{
   height: 100%;
   border-collapse: collapse;
   text-align: center;
-
 }
 
 .center-active-detail > .active-detail-table table thead th {
@@ -142,19 +142,19 @@ table-box{
   color: #61d2f7;
   font-size: 100%;
   font-weight: 600;
-  padding:1% 1%;
+  padding: 1% 1%;
   /*height:10px;*/
 }
 
 .page-box {
   width: 100%;
   height: 8%;
-  margin-top:2%;
+  margin-top: 2%;
   float: left;
 }
 .page {
   /*margin:3px auto;*/
-  width:60%;
-  margin:1px auto;
+  width: 60%;
+  margin: 1px auto;
 }
 </style>

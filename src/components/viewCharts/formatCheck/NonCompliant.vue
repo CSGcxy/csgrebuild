@@ -7,198 +7,195 @@
 
 <script>
 import * as echarts from "echarts";
+import checkFormat from "../../../api/checkFormat";
 export default {
-  name: "NonCompliant",
+  name: "left-bottom-NonCompliant",
+  data() {
+    return {
+      second: 5,
+      NonCompliantChart: null,
+      timer: "",
+      NonCompliantChartOption: {
+        title: {
+          text: "合规packet数量",
+          // subtext: "Fake Data",
+          left: "center",
+          top: "top",
+          textStyle: {
+            color: "#fff",
+          },
+        },
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow",
+          },
+        },
+        legend: {
+          left: "center",
+          top: "bottom",
+          textStyle: {
+            fontSize: 18, //字体大小
+            color: "#ffffff", //字体颜色
+          },
+          // data: ["afn=0", "afn=2", "afn=4"],
+        },
+        xAxis: [
+          {
+            type: "category",
+            axisTick: {
+              alignWithLabel: true, //柱状图中心是否对齐刻度位置
+              show: false,
+            },
+            axisLabel: {
+              fontSize: 12, //字体大小
+              color: "#ffffff", //字体颜色
+              interval: 0,
+              formatter: function (value) {
+                var ret = ""; //拼接加\n返回的类目项
+                var maxLength = 10; //每项显示文字个数
+                var valLength = value.length; //X轴类目项的文字个数
+                var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
+                if (rowN > 1) {
+                  //如果类目项的文字大于5,
+                  for (var i = 0; i < rowN; i++) {
+                    var temp = ""; //每次截取的字符串
+                    var start = i * maxLength; //开始截取的位置
+                    var end = start + maxLength; //结束截取的位置
+                    //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
+                    temp = value.substring(start, end) + "\n";
+                    ret += temp; //凭借最终的字符串
+                  }
+                  return ret;
+                } else {
+                  return value;
+                }
+              },
+            },
+            splitLine: {
+              show: false,
+            },
+            data: [
+              // "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00"
+            ],
+          },
+        ],
+
+        yAxis: [
+          {
+            type: "value",
+            axisLabel: {
+              fontSize: 18, //字体大小
+              color: "#ffffff", //字体颜色
+            },
+            splitLine: {
+              show: false,
+            },
+          },
+        ],
+        series: [
+          {
+            // name: "afn=0",
+            name: "",
+            type: "bar",
+            emphasis: {
+              focus: "series",
+            },
+            // data: [1.3, 2.7, 4.5, 4],
+            data: [],
+          },
+          {
+            // name: "afn=0",
+            name: "",
+            type: "bar",
+            emphasis: {
+              focus: "series",
+            },
+            // data: [1.3, 2.7, 4.5, 4],
+            data: [],
+          },
+          {
+            // name: "afn=0",
+            name: "",
+            type: "bar",
+            emphasis: {
+              focus: "series",
+            },
+            // data: [1.3, 2.7, 4.5, 4],
+            data: [],
+          },
+          {
+            // name: "afn=0",
+            name: "",
+            type: "bar",
+            emphasis: {
+              focus: "series",
+            },
+            // data: [1.3, 2.7, 4.5, 4],
+            data: [],
+          },
+          {
+            // name: "afn=0",
+            name: "",
+            type: "bar",
+            emphasis: {
+              focus: "series",
+            },
+            // data: [1.3, 2.7, 4.5, 4],
+            data: [],
+          },
+        ],
+      },
+    };
+  },
   mounted() {
-    var myChart = echarts.init(
+    this.NonCompliantChart = this.$echarts.init(
       document.getElementById("left-bottom-NonCompliant")
     );
-    const posList = [
-      "left",
-      "right",
-      "top",
-      "bottom",
-      "inside",
-      "insideTop",
-      "insideLeft",
-      "insideRight",
-      "insideBottom",
-      "insideTopLeft",
-      "insideTopRight",
-      "insideBottomLeft",
-      "insideBottomRight",
-    ];
-    app.configParameters = {
-      rotate: {
-        min: -90,
-        max: 90,
-      },
-      align: {
-        options: {
-          left: "left",
-          center: "center",
-          right: "right",
-        },
-      },
-      verticalAlign: {
-        options: {
-          top: "top",
-          middle: "middle",
-          bottom: "bottom",
-        },
-      },
-      position: {
-        options: posList.reduce(function (map, pos) {
-          map[pos] = pos;
-          return map;
-        }, {}),
-      },
-      distance: {
-        min: 0,
-        max: 100,
-      },
-    };
-    app.config = {
-      rotate: 90,
-      align: "left",
-      verticalAlign: "middle",
-      position: "insideBottom",
-      distance: 15,
-      onChange: function () {
-        const labelOption = {
-          rotate: app.config.rotate,
-          align: app.config.align,
-          verticalAlign: app.config.verticalAlign,
-          position: app.config.position,
-          distance: app.config.distance,
-        };
-        myChart.setOption({
-          series: [
-            {
-              label: labelOption,
-            },
-            {
-              label: labelOption,
-            },
-            {
-              label: labelOption,
-            },
-            {
-              label: labelOption,
-            },
-          ],
+    this.drawNonCompliant();
+    this.timer = setInterval(this.drawNonCompliant, this.GLOBAL.refreshTime);
+  },
+  methods: {
+    drawNonCompliant() {
+      checkFormat
+        .getDiffrentAfnCount(this.second)
+        .then((resp) => {
+          console.log(resp);
+          // 显示x坐标
+          var AfnData = resp.data.afnVoList.timeList;
+          AfnData.forEach((entry) => {
+            // console.log(entry);
+            this.NonCompliantChartOption.xAxis[0].data.push({
+              value: entry,
+            });
+          });
+          // 给afnHashMap一个容器
+          var ydata = resp.data.afnVoList.afnHashMap;
+          var xArray = [];
+          var yArray = [];
+          // 循环获得key值和数组
+          for (var key in ydata) {
+            // 数组放在yArray容器中
+            yArray.push(ydata[key]);
+            // key值放在xArray容器中
+            xArray.push(key);
+          }
+          console.log(yArray);
+          console.log(xArray);
+
+          // 显示data\name
+          for (var i = 0; i <= yArray.length - 1; i++) {
+            this.NonCompliantChartOption.series[i].data = yArray[i];
+            this.NonCompliantChartOption.series[i].name =
+              "afn = " + Object.keys(resp.data.afnVoList.afnHashMap)[i];
+          }
+
+          this.NonCompliantChart.setOption(this.NonCompliantChartOption);
+        })
+        .catch((err) => {
+          this.$message.error(err);
         });
-      },
-    };
-    const labelOption = {
-      show: false,
-      position: app.config.position,
-      distance: app.config.distance,
-      align: app.config.align,
-      verticalAlign: app.config.verticalAlign,
-      rotate: app.config.rotate,
-      formatter: "{c}  {name|{a}}",
-      fontSize: 16,
-      rich: {
-        name: {},
-      },
-    };
-    var option = {
-      title: {
-        text: "合规packet数量",
-        // subtext: "Fake Data",
-        left: "center",
-        top: "top",
-        textStyle: {
-          color: "#fff",
-        },
-      },
-      tooltip: {
-        trigger: "axis",
-        axisPointer: {
-          type: "shadow",
-        },
-      },
-      legend: {
-        left: "center",
-        top: "bottom",
-        textStyle: {
-          fontSize: 18, //字体大小
-          color: "#ffffff", //字体颜色
-        },
-        data: ["afn=0", "afn=2", "afn=4"],
-      },
-      // toolbox: {
-      //   show: true,
-      //   orient: "vertical",
-      //   left: "right",
-      //   top: "center",
-      //   feature: {
-      //     mark: { show: true },
-      //     dataView: { show: true, readOnly: false },
-      //     magicType: { show: true, type: ["line", "bar", "stack"] },
-      //     restore: { show: true },
-      //     saveAsImage: { show: true },
-      //   },
-      // },
-      xAxis: [
-        {
-          type: "category",
-          axisTick: { show: false },
-          axisLabel: {
-            fontSize: 18, //字体大小
-            color: "#ffffff", //字体颜色
-          },
-          splitLine: {
-            show: false,
-          },
-          data: ["14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00"],
-        },
-      ],
-      yAxis: [
-        {
-          type: "value",
-          axisLabel: {
-            fontSize: 18, //字体大小
-            color: "#ffffff", //字体颜色
-          },
-          splitLine: {
-            show: false,
-          },
-        },
-      ],
-      series: [
-        {
-          name: "afn=0",
-          type: "bar",
-          barGap: 0,
-          label: labelOption,
-          emphasis: {
-            focus: "series",
-          },
-          data: [1.3, 2.7, 4.5, 4],
-        },
-        {
-          name: "afn=2",
-          type: "bar",
-          label: labelOption,
-          emphasis: {
-            focus: "series",
-          },
-          data: [1.1, 2, 4, 3],
-        },
-        {
-          name: "afn=4",
-          type: "bar",
-          label: labelOption,
-          emphasis: {
-            focus: "series",
-          },
-          data: [4.1, 2.3, 1.8, 3.5],
-        },
-      ],
-    };
-    myChart.setOption(option);
+    },
   },
 };
 </script>
