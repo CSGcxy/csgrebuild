@@ -100,21 +100,22 @@ export default {
 
 .center-active-detail > .active-detail-table {
   width: 100%;
-  height: 92%;
+  height: 88%;
   float: left;
   /*overflow: auto;*/
 }
 
 table-box {
   width: 100%;
-  height: 92%;
+  height: 90%;
+
 }
 .h1 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bolder;
   color: #fff;
   width: 100%;
-  margin: 0 auto;
+  margin: 3% auto;
   text-align: center;
 }
 
@@ -129,13 +130,14 @@ table-box {
   height: 100%;
   border-collapse: collapse;
   text-align: center;
+
 }
 
 .center-active-detail > .active-detail-table table thead th {
   color: #61d2f7;
   font-size: 150%;
   font-weight: 600;
-  padding-bottom: 1%;
+  padding-bottom: 2%;
 }
 
 .center-active-detail > .active-detail-table table tr td {
@@ -143,14 +145,16 @@ table-box {
   font-size: 100%;
   font-weight: 600;
   padding: 1% 1%;
+  margin-bottom: 1%;
   /*height:10px;*/
 }
 
 .page-box {
   width: 100%;
-  height: 8%;
+  height:12%;
   margin-top: 2%;
   float: left;
+
 }
 .page {
   /*margin:3px auto;*/
