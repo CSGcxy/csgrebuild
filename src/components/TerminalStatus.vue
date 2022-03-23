@@ -48,15 +48,6 @@
         <div class="center-bottom">
           <div class="title-box">
             <h6>终端流量时序图</h6>
-            <select class='terminalFlow'>
-              <option :value="ip" v-for="ip in ipList">{{ ip }}</option>
-              <!--              <option value="2">终端2</option>-->
-              <!--              <option value="3">终端3</option>-->
-              <!--              <option value="4">终端4</option>-->
-              <!--              <option value="5">终端5</option>-->
-              <!--              <option value="6">终端6</option>-->
-              <!--              <option value="7">终端7</option>-->
-            </select>
           </div>
           <FlowTimingRecived v-if="isRouterAlive"/>
           <FlowTimingSent v-if="isRouterAlive"/>

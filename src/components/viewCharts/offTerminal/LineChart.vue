@@ -48,7 +48,7 @@ export default {
         },
         series: [
           {
-            name: 'PW',
+            name: this.GLOBAL.trendSEG,
             type: 'line',
             stack: 'Total',
             // data: [120, 132, 101, 134, 90, 230, 210]

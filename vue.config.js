@@ -8,9 +8,8 @@ module.exports = {
         proxy: {
             '/':{
                 // target: 'http://csgabc.vaiwan.cn',
-                // target: 'http://localhost:9001',
+                target: 'http://localhost:9001',
                 // target: 'http://csgabc.ngrok.24k.fun',
-                target:'http://csgtest.vaiwan.com',
                 changeOrigin: true,
                 pathRewrite:{
                     '^/': ''
