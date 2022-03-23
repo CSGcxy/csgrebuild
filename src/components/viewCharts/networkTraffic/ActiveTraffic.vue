@@ -33,8 +33,8 @@
             :total="total"
             class="page"
             :page-size.sync="pageSize"
-            :current-page.sync="pageNum"
-            @current-change="drawPacketProportion"
+            :current-page.sync="currentPage"
+            @current-change="drawActiveTraffic"
         >
         </el-pagination>
       </div>
@@ -52,7 +52,7 @@ export default {
       tableValue: [],
       total:60,
       pageSize:5,
-      PageNum:1,
+      currentPage:5,
     };
   },
   mounted() {
@@ -61,9 +61,10 @@ export default {
   },
   methods: {
     drawActiveTraffic() {
-      netTraffic.getActiveTraffic(this.GLOBAL.NETSEG).then((resp) => {
+      netTraffic.getActiveTraffic(this.GLOBAL.NETSEG,this.currentPage).then((resp) => {
         console.log(resp)
-        this.tableValue = resp.data.activeFlowsList;
+        this.tableValue = resp.data.activeFlowsList.list;
+        this.total=resp.data.activeFlowsList.total;
       });
     },
   },
@@ -90,7 +91,7 @@ position: relative;
   height:12%;
   /*margin-top: 1%;*/
   position:absolute;
-  bottom:6px;
+  bottom:8px;
   /*background-color: #F5F5F5;*/
 }
 
@@ -106,22 +107,7 @@ table{
   /*border-collapse:separate;*/
   /*border-spacing:1px 1px;*/
 }
-/* table tr{*/
-/*  color: #61d2f7;*/
-/*  font-size: 12px;*/
-/*  font-weight: 600;*/
-/*  padding-top: 0px;*/
-/*  padding-bottom: 0px;*/
-/*}*/
 
-/* table  td {*/
-/*  !*color: #61d2f7;*!*/
-/*   color:#fff;*/
-/*  font-size: 10px;*/
-/*  !*font-weight: 600;*!*/
-/*  padding-top: 0px;*/
-/*  padding-bottom: 0px;*/
-/*}*/
 table tr{
   color: #61d2f7;
   font-size: 12px;
@@ -130,7 +116,7 @@ table tr{
   /*padding-bottom:1px;*/
 }
 table thead th {
-  color: #F5F5F5;
+  color: #61d2f7;
   font-size: 12px;
   font-weight: 600;
   /*padding-top: 2px;*/
@@ -138,7 +124,7 @@ table thead th {
 }
 td {
   font-size: 10px;
-  color: 	#F5F5F5;
+  color: #61d2f7;
   /*height: 18px;*/
 }
 /*分页*/

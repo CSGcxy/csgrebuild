@@ -8,9 +8,9 @@ export default {
             method: 'get'
         })
     },
-    getActiveTraffic(segment) {
+    getActiveTraffic(segment,currentPage) {
         return request({
-            url: base + '/getActiveFlows/' + segment + '_Flows',
+            url: base + '/getActiveFlows/' + segment+ '_Flows' +'/'+currentPage,
             method: 'get'
         })
     },
