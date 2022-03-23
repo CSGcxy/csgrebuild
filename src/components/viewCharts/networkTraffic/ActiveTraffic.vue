@@ -52,7 +52,7 @@ export default {
       tableValue: [],
       total:60,
       pageSize:5,
-      currentPage:5,
+      currentPage:1,
     };
   },
   mounted() {
