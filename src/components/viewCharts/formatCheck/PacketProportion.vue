@@ -30,7 +30,6 @@
       </div>
       <div class="page-box">
         <el-pagination
-          background
           layout="total,prev, pager, next"
           :total="total"
           class="page"
@@ -157,5 +156,18 @@ table-box {
   /*margin:3px auto;*/
   width: 60%;
   margin: 1px auto;
+}
+
+/deep/ .el-pager li{
+  background-color:#10121A;
+}
+/deep/ .el-pagination .btn-prev {
+  background-color:#10121A;
+}
+/deep/ .el-pagination .btn-next {
+  background-color: #10121A;
+}
+/deep/ .el-pagination {
+  color:#606266;
 }
 </style>

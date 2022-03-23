@@ -27,6 +27,17 @@
           </tr>
         </table>
       </div>
+      <div class="page-box">
+        <el-pagination
+            layout="total,prev, pager, next"
+            :total="total"
+            class="page"
+            :page-size.sync="pageSize"
+            :current-page.sync="pageNum"
+            @current-change="drawPacketProportion"
+        >
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +50,9 @@ export default {
     return {
       timer: "",
       tableValue: [],
+      total:60,
+      pageSize:5,
+      PageNum:1,
     };
   },
   mounted() {
@@ -61,12 +75,23 @@ export default {
 </script>
 
 <style scoped>
-.center-active-detail > .active-detail-table {
+.center-active-detail{
   width: 100%;
   height: 100%;
-  background: gold;
-  position: relative;
+  /*position: relative;*/
 }
+.active-detail-table {
+  width: 100%;
+  height: 86%;
+}
+.page-box {
+  width: 100%;
+  height:14%;
+  /*margin-top: 1%;*/
+  position:absolute;
+  bottom:1%;
+}
+
 
 .center-active-detail > .active-detail-table table {
   width: 100%;
@@ -74,6 +99,7 @@ export default {
   border-collapse: collapse;
   position: absolute;
   text-align: center;
+  /*background-color: aquamarine;*/
 }
 
 .center-active-detail > .active-detail-table table thead th {
@@ -90,5 +116,25 @@ export default {
   font-weight: 600;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+/*分页*/
+
+.page {
+  /*margin:3px auto;*/
+  width: 60%;
+  margin: 1px auto;
+}
+
+/deep/ .el-pager li{
+  background-color:#10121A;
+}
+/deep/ .el-pagination .btn-prev {
+  background-color:#10121A;
+}
+/deep/ .el-pagination .btn-next {
+  background-color: #10121A;
+}
+/deep/ .el-pagination {
+  color:#606266;
 }
 </style>

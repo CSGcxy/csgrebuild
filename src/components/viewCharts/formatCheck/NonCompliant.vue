@@ -1,7 +1,7 @@
 <template>
   <div
     id="left-bottom-NonCompliant"
-    style="width: 100%; height: 100%; margin-top: 1%"
+    style="width: 100%; height: 100%;position:absolute;left:1%;bottom:1%;"
   ></div>
 </template>
 
@@ -98,6 +98,12 @@ export default {
             },
           },
         ],
+        grid:{
+          x:50,
+          y:30,
+          x2:3,
+          y2:60,
+        },
         series: [
           {
             // name: "afn=0",
