@@ -81,41 +81,65 @@ export default {
   /*position: relative;*/
 }
 .active-detail-table {
-  width: 100%;
-  height: 86%;
+position: relative;
+
+  /*background-color: #4b8df8;*/
 }
 .page-box {
   width: 100%;
-  height:14%;
+  height:12%;
   /*margin-top: 1%;*/
   position:absolute;
-  bottom:1%;
+  bottom:6px;
+  /*background-color: #F5F5F5;*/
 }
 
 
-.center-active-detail > .active-detail-table table {
+table{
   width: 100%;
-  height: 100%;
+  height: 87%;
   border-collapse: collapse;
   position: absolute;
   text-align: center;
-  /*background-color: aquamarine;*/
+  /*background-color: blueviolet;*/
+  top: 1px;
+  /*border-collapse:separate;*/
+  /*border-spacing:1px 1px;*/
 }
+/* table tr{*/
+/*  color: #61d2f7;*/
+/*  font-size: 12px;*/
+/*  font-weight: 600;*/
+/*  padding-top: 0px;*/
+/*  padding-bottom: 0px;*/
+/*}*/
 
-.center-active-detail > .active-detail-table table thead th {
+/* table  td {*/
+/*  !*color: #61d2f7;*!*/
+/*   color:#fff;*/
+/*  font-size: 10px;*/
+/*  !*font-weight: 600;*!*/
+/*  padding-top: 0px;*/
+/*  padding-bottom: 0px;*/
+/*}*/
+table tr{
   color: #61d2f7;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  /*padding-top: 1px;*/
+  /*padding-bottom:1px;*/
 }
-
-.center-active-detail > .active-detail-table table tr td {
-  color: #61d2f7;
-  font-size: 14px;
+table thead th {
+  color: #F5F5F5;
+  font-size: 12px;
   font-weight: 600;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  /*padding-top: 2px;*/
+  /*padding-bottom: 2px;*/
+}
+td {
+  font-size: 10px;
+  color: 	#F5F5F5;
+  /*height: 18px;*/
 }
 /*分页*/
 
@@ -136,5 +160,6 @@ export default {
 }
 /deep/ .el-pagination {
   color:#606266;
+  padding:0 3px;
 }
 </style>
