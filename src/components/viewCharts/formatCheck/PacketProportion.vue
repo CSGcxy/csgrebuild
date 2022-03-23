@@ -92,18 +92,19 @@ export default {
 .center-active-detail {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .center-active-detail > .active-detail-table {
   width: 100%;
-  height: 88%;
+  /*height: 88%;*/
   float: left;
   /*overflow: auto;*/
 }
 
 table-box {
   width: 100%;
-  height: 90%;
+  /*height: 90%;*/
 
 }
 .h1_title {
@@ -123,7 +124,7 @@ table-box {
 
 .center-active-detail > .active-detail-table table {
   width: 100%;
-  height: 100%;
+  /*height: 100%;*/
   border-collapse: collapse;
   text-align: center;
 
@@ -147,10 +148,11 @@ table-box {
 
 .page-box {
   width: 100%;
-  height:12%;
-  margin-top: 2%;
-  float: left;
-
+  height:8%;
+  margin-top: 5%;
+  /*position: absolute;*/
+  /*bottom:3px;*/
+  float:left;
 }
 .page {
   /*margin:3px auto;*/
