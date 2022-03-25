@@ -86,8 +86,8 @@ export default {
   methods: {
     drawUnqualifiedPacketCount() {
       checkFormat.getUnqualifiedPacketCount().then((resp) => {
-
         this.PacketUnQualifiedCountData = resp.data.packetUnQualifiedCount;
+        this.UnqualifiedPacketCountOption.series[0].data = []
         this.UnqualifiedPacketCountOption.series[0].data.push({
           value: this.PacketUnQualifiedCountData.qualifiedCount,
           name: "合规packet",
@@ -102,6 +102,10 @@ export default {
       });
     },
   },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
+  }
 };
 </script>
 

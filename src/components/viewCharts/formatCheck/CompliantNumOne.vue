@@ -91,6 +91,7 @@ export default {
     drawPacketCount() {
       checkFormat.getPacketCount().then((resp) => {
         this.PacketCountData = resp.data.packetCountVoList;
+        this.PacketCountOption.series[0].data = []
         this.PacketCountData.forEach((entry) => {
           this.PacketCountOption.series[0].data.push({
             value: entry.count,
@@ -101,6 +102,10 @@ export default {
       });
     },
   },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
+  }
 };
 </script>
 

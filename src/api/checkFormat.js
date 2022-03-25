@@ -16,7 +16,7 @@ export default {
 
     getDiffrentAfnCount(second) {
         return request({
-            url: base + '/getDiffrentAfnCount/'+second,
+            url: base + '/getDifAfnCount/'+second,
             method:'get'
         })
     },

@@ -171,6 +171,7 @@ export default {
       checkFormat.getDiffrentAfnCount(this.second).then((resp) => {
           // 显示x坐标
           this.AfnData = resp.data.afnVoList.timeList;
+        this.NonCompliantChartOption.xAxis[0].data = []
           this.AfnData.forEach((entry) => {
             // console.log(entry);
             this.NonCompliantChartOption.xAxis[0].data.push({
@@ -203,6 +204,10 @@ export default {
         });
     },
   },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
+  }
 };
 </script>
 
