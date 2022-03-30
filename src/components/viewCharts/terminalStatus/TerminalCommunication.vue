@@ -63,7 +63,7 @@ export default {
     drawterminalCommunication() {
       // this.GLOBAL.NETSEG = this.temp
       netSegStatus.getTerminalCommunication(this.GLOBAL.NETSEG,this.currentPage).then(resp => {
-        this.tableValue=resp.data.segCommStatusList.list;
+        this.tableValue=resp.data.segCommStatusList.records;
         this.dataListTotal=resp.data.segCommStatusList.total;
       });
     },

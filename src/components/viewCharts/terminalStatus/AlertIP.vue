@@ -47,7 +47,7 @@ export default {
   methods: {
     drawTopHosts() {
       netSegStatus.getAlertFlow().then(resp =>{
-        this.tableData = resp.data.AlertFlowList.list
+        this.tableData = resp.data.AlertFlowList.records
       })
     },
 

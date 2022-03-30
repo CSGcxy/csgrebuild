@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-let base = 'offTerminalStatus'
+let base = 'checkoff/offTerminalStatus'
 export default {
     getOffTerminalCount() {
         return request({

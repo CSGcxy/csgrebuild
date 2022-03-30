@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-let base = 'terminalStatus'
+let base = 'segflow/terminalStatus'
 
 export default {
     getNetSegs() {

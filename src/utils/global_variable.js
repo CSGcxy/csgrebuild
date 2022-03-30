@@ -1,7 +1,7 @@
 const NETSEG = 'PW';
 const trendSEG = 'PW';
 const timeRange = null;
-const refreshTime = 5000;
+const refreshTime = 5000000;
 const mapData = {
     type: "FeatureCollection",
     features: [

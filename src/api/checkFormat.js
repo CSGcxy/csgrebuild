@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-let base = 'checkFormat'
+let base = 'checkoff/checkFormat'
 export default {
     getPacketCount() {
         return request({
