@@ -1,174 +1,183 @@
-<template>
-  <div class="wrap" id="login" v-title data-title="登录">
-    <el-form ref="userForm" :model="userForm" :rules="rules">
-      <div class="center">
-        <div class="center-con">
-          <h1>Nice To See You Again!</h1>
-          <h3>用户名</h3>
-          <el-form-item prop="account">
-            <el-input
-              type="text"
-              class="text"
-              placeholder="用户名"
-              v-model="userForm.account"
-            ></el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <h3>密&nbsp;&nbsp;&nbsp;&nbsp;码</h3>
-            <el-input
-              type="password"
-              class="text"
-              placeholder="密码"
-              v-model="userForm.password"
-            ></el-input>
-          </el-form-item>
-          <el-button
-            type="primary"
-            @click.native.prevent="login('userForm')"
-            class="btn"
-            value="LOGIN"
-            >确&nbsp;&nbsp;&nbsp;&nbsp;定</el-button
-          >
-        </div>
+<template >
+  <div id="login-container">
+    <el-form
+      :model="ruleForm"
+      status-icon
+      :rules="rules"
+      ref="ruleForm"
+      class="login-form"
+    >
+      <div class="title-container" style="text-align: center; height: 50px">
+        <h3 class="title">欢迎使用</h3>
       </div>
+      <el-form-item prop="user">
+        <span class="icon-container">
+          <i class="el-icon-user"></i>
+        </span>
+        <el-input
+          type="text"
+          v-model="ruleForm.user"
+          autocomplete="off"
+          placeholder="用户名"
+        ></el-input>
+      </el-form-item>
+      <el-form-item prop="pass">
+        <span class="icon-container">
+          <i class="el-icon-more"></i>
+        </span>
+        <el-input
+          type="password"
+          v-model="ruleForm.pass"
+          autocomplete="off"
+          placeholder="密码"
+          @keyup.enter.native="login"
+        ></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="login" class="btn-container"
+          >提交</el-button
+        >
+        <el-button @click="resetForm('ruleForm')" class="btn-container"
+          >重置</el-button
+        >
+      </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
+// import axios from 'axios'
 export default {
-  name: "Login",
+  name: "login",
   data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入账户"));
+      } else {
+        if (this.ruleForm.pass !== "") {
+          this.$refs.ruleForm.validateField("pass");
+        }
+        callback();
+      }
+    };
+    var validatePass2 = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        callback();
+      }
+    };
     return {
-      userForm: {
-        account: "",
-        password: "",
+      ruleForm: {
+        user: "",
+        pass: "",
       },
       rules: {
-        account: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { max: 10, message: "不能大于10个字符", trigger: "blur" },
-        ],
-        password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          { max: 10, message: "不能大于10个字符", trigger: "blur" },
-        ],
+        user: [{ validator: validatePass, trigger: "blur" }],
+        pass: [{ validator: validatePass2, trigger: "blur" }],
       },
     };
   },
   methods: {
-    login(formName) {
-      let that = this;
+    login() {
+      //自己设置账号 密码
+      if (this.ruleForm.user === "和嘉宾" && this.ruleForm.pass === "666") {
+        // 登录成功
+        // 1. 存储 token
+        // //                             键,值
+        localStorage.setItem("token", "Bearer xxxx");
+        // // 2. 跳转到后台主页
+        // //传用户名
 
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          that.$store
-            .dispatch("login", that.userForm)
-            .then(() => {
-              that.$router.go(-1);
-            })
-            .catch((error) => {
-              if (error !== "error") {
-                that.$message({
-                  message: error,
-                  type: "error",
-                  showClose: true,
-                });
-              }
-            });
-        } else {
-          return false;
-        }
-      });
+        window.sessionStorage.setItem(
+          "user",
+          JSON.stringify(this.ruleForm.user)
+        );
+        this.$bus.$emit("updateData", {
+          isLogin: false,
+          isUser: true,
+        });
+        this.$router.push("/home");
+      } else {
+        alert("用户名或密码错误，请重试~");
+        // 登录失败，清空
+        localStorage.removeItem("token");
+      }
+    },
+
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
     },
   },
 };
 </script>
 
-<style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  overflow: hidden;
-}
-
-.wrap {
-  position: absolute;
+<style lang="scss"  scoped>
+#login-container {
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
+  position: absolute;
   justify-content: center;
   align-items: center;
   background-color: #10121a;
-}
 
-.el-form {
-  width: 450px;
-  height: 320px;
-  display: flex;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-}
+  .el-input {
+    display: inline-block;
+    height: 47px;
+    width: 85%;
 
-.center {
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    /deep/ input {
+      background: transparent;
+      border: 0px;
+      -webkit-appearance: none;
+      border-radius: 0px;
+      padding: 12px 5px 12px 15px;
+      color: #fff !important;
+      height: 47px;
+      caret-color: #fff !important;
+    }
+  }
 
-.center-con {
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
+  /deep/ .el-form-item {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: #454545;
+    text-align: center;
+  }
 
-h1 {
-  font-size: 26px;
-  color: rgb(0, 0, 0);
-  font-weight: 400;
-  padding-bottom: 10px;
-}
+  .login-form {
+    width: 520px;
+    max-width: 100%;
+    padding: 0 22px;
+    margin-top: 15%;
+    margin-left: 30%;
+  }
 
-h3 {
-  font-size: 18px;
-  font-weight: 400;
-  color: rgb(0, 0, 0);
-  /* padding: -20px 0; */
-}
+  .icon-container {
+    padding: 6px 5px 6px 15px;
+    color: #889aa4;
+    vertical-align: middle;
+    display: inline-block;
+  }
 
-.text {
-  width: 100%;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid rgb(0, 0, 0);
-  color: #366ae6;
-  background-color: rgba(0, 0, 0, 0);
-}
+  .title-container {
+    position: relative;
 
-.btn {
-  width: 100%;
-  height: 40px;
-  border-radius: 20px;
-  border: none;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
-  background-color: rgb(36, 108, 136);
-}
+    .title {
+      font-size: 26px;
+      color: #eee;
+      margin: 0px auto 40px auto;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
 
-.btn:hover {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  .btn-container {
+    width: 20%;
+    font-size: 14px;
+  }
 }
 </style>

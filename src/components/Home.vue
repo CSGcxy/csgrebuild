@@ -11,7 +11,7 @@
                 >
               </li>
               <li :class="{ nav_active: show == '/securityAssess' }">
-                <router-link to="/securityAssess"
+                <router-link to="/securityAssessTwo"
                   ><i class="nav_2"></i>安全评估</router-link
                 >
               </li>
@@ -39,31 +39,37 @@
               </li>
             </ul>
           </div>
-          <!-- <template v-if="!user.login">
+          <!-- <template v-show="info.isLogin">
             <div class="login">
               <router-link to="/login">登录</router-link>
             </div>
-          </template>
-          <el-menu
-            :default-active="activeIndex2"
-            background-color="#10121a"
-            text-color="#ffffff"
-            active-text-color="#ffffff"
-          >
-            <template v-else>
-              <el-submenu index>
-                <template slot="title">
-                  <img class="me-header-picture" :src="user.avatar" />
-                </template>
-                <el-menu-item index @click="logout">退出</el-menu-item>
-                <el-menu-item index="#">菜单一</el-menu-item
-                ><el-menu-item index="#">菜单二</el-menu-item>
-              </el-submenu>
-            </template>
-          </el-menu> -->
+          </template> -->
+          <div class="username">
+            <el-dropdown trigger="click">
+              <span class="el-dropdown-link">
+                {{ username }}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item icon="el-icon-notebook-1"
+                  >菜单一</el-dropdown-item
+                >
+                <el-dropdown-item icon="el-icon-notebook-2"
+                  >菜单二</el-dropdown-item
+                >
+                <el-dropdown-item icon="el-icon-user-solid"
+                  >用户管理</el-dropdown-item
+                >
+                <router-link to="/login">
+                  <el-dropdown-item icon="el-icon-remove"
+                    >退出
+                  </el-dropdown-item></router-link
+                >
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
         </div>
       </el-header>
-
       <el-main class="home-main">
         <router-view />
       </el-main>
@@ -77,6 +83,7 @@ export default {
   data() {
     return {
       show: 0,
+      username: "",
     };
   },
   /*高亮选中：用路由跳转来判断*/
@@ -85,30 +92,12 @@ export default {
       this.show = this.$route.path;
     },
   },
-  computed: {
-    user() {
-      let login = this.$store.state.account.length != 0;
-      let avatar = this.$store.state.avatar;
-      return {
-        login,
-        avatar,
-      };
-    },
-  },
-  methods: {
-    logout() {
-      let that = this;
-      this.$store
-        .dispatch("logout")
-        .then(() => {
-          this.$router.push({ path: "/login" });
-        })
-        .catch((error) => {
-          if (error !== "error") {
-            that.$message({ message: error, type: "error", showClose: true });
-          }
-        });
-    },
+  computed: {},
+  methods: {},
+  mounted() {
+    this.username = window.sessionStorage.getItem("user");
+    this.username = eval(this.username);
+    // console.log(this.username);
   },
 };
 </script>
@@ -134,14 +123,5 @@ export default {
 .home-main {
   background-color: #10121a;
   height: 80%;
-}
-
-.me-header-picture {
-  width: 36px;
-  height: 36px;
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  vertical-align: middle;
-  background-color: #00aaff;
 }
 </style>

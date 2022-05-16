@@ -4,6 +4,7 @@ import Home from "@/components/Home";
 import FormatCheck from "@/components/FormatCheck";
 import TerminalStatus from "@/components/TerminalStatus";
 import SecurityAssess from "@/components/SecurityAssess";
+import securityAssessTwo from "@/components/SecurityAssessTwo";
 import OffTerminal from "@/components/OffTerminal";
 import NetworkTraffic from "@/components/NetworkTraffic";
 import Login from "@/components/Login";
@@ -14,7 +15,12 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: "/",
-    redirect: "/home"
+    redirect: "/login"
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/home',
@@ -30,6 +36,11 @@ const routes = [
         path: '/securityAssess',
         name: "SecurityAssess",
         component: SecurityAssess
+      },
+      {
+        path: '/securityAssessTwo',
+        name: "SecurityAssessTwo",
+        component: securityAssessTwo
       },
       {
         path: '/networkTraffic',
@@ -48,11 +59,7 @@ const routes = [
       }
     ]
   },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login
-  },
+
 ]
 
 const router = new VueRouter({

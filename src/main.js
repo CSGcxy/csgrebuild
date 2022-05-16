@@ -5,7 +5,6 @@ import './plugins/element.js'
 import ElementUI from 'element-ui'
 import * as echarts from 'echarts'
 import global_variable from "@/utils/global_variable";
-import store from './store'
 
 Vue.config.productionTip = false
 
@@ -24,7 +23,9 @@ Vue.prototype.$echarts = echarts;
 Vue.prototype.GLOBAL = global_variable;
 
 new Vue({
+  beforeCreate() {
+    Vue.prototype.$bus = this
+  },
   router,
-  store,
   render: h => h(App)
 }).$mount('#app')
