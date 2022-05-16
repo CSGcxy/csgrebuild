@@ -23,6 +23,9 @@ Vue.prototype.$echarts = echarts;
 Vue.prototype.GLOBAL = global_variable;
 
 new Vue({
+  beforeCreate() {
+    Vue.prototype.$bus = this
+  },
   router,
   render: h => h(App)
 }).$mount('#app')

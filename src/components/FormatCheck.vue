@@ -46,7 +46,7 @@ import NonCompliant from "./viewCharts/formatCheck/NonCompliant";
 import PacketProportion from "./viewCharts/formatCheck/PacketProportion";
 
 export default {
-  name: "OfflineTerminal",
+  name: "FormatCheck",
   components: {
     NonCompliant,
     CompliantNumOne,
@@ -55,23 +55,9 @@ export default {
   },
   mounted() {},
   data() {
-    return {
-      netSeg: "",
-      terTrendAlive: true,
-    };
+    return {};
   },
-  methods: {
-    toSelectTrend() {
-      this.GLOBAL.trendSEG = this.netSeg;
-      this.reloadPage();
-    },
-    reloadPage() {
-      this.terTrendAlive = false;
-      this.$nextTick(function () {
-        this.terTrendAlive = true;
-      });
-    },
-  },
+  methods: {},
 };
 </script>
 
