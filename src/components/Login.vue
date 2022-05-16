@@ -33,7 +33,8 @@
           @keyup.enter.native="login"
         ></el-input>
       </el-form-item>
-      <el-form-item>
+
+      <el-form-item class="btn-form-item">
         <el-button type="primary" @click="login" class="btn-container"
           >提交</el-button
         >
@@ -112,7 +113,7 @@ export default {
 };
 </script>
 
-<style lang="scss"  scoped>
+<style lang="scss" scoped>
 #login-container {
   width: 100%;
   height: 100%;
@@ -147,13 +148,18 @@ export default {
     color: #454545;
     text-align: center;
   }
-
+  /deep/ .el-form-item.btn-form-item {
+    border: 1px solid #10121a;
+    background-color: #10121a;
+    border-radius: 5px;
+    text-align: center;
+  }
   .login-form {
-    width: 520px;
+    width: 320px;
     max-width: 100%;
     padding: 0 22px;
-    margin-top: 15%;
-    margin-left: 30%;
+    margin-top: 17%;
+    margin-left: 35%;
   }
 
   .icon-container {
