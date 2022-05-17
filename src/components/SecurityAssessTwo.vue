@@ -8,7 +8,7 @@
             <h6>综合评分</h6>
           </div>
           <div class="left-top-Count">
-            <CompliantNum />
+            <overallScore />
           </div>
         </div>
         <div class="left-mid">
@@ -16,7 +16,7 @@
             <h6>评分详情</h6>
           </div>
           <div class="left-mid-company">
-            <NonCompliant />
+            <scoreDetails />
           </div>
         </div>
       </div>
@@ -26,17 +26,23 @@
             <h6>PacketProportion</h6>
           </div>
           <div class="center-top-Map">
-            <PacketProportion />
+            <scoreSheet />
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-export default {};
+import overallScore from "./viewCharts/securityAssessTwo/overallScore";
+import scoreDetails from "./viewCharts/securityAssessTwo/scoreDetails";
+import scoreSheet from "./viewCharts/securityAssessTwo/scoreSheet";
+export default {
+  name: "SecurityAssessTwo",
+  components: { overallScore, scoreDetails, scoreSheet },
+};
 </script>
+
 
 
 <style scoped src="../assets/css/securityAssessTwo.css">
