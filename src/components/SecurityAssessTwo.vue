@@ -14,6 +14,11 @@
         <div class="left-mid">
           <div class="title-box">
             <h6>评分详情</h6>
+            <!-- <select class="segmentTraffic">
+              <option v-for="(t, index) in options" :key="index">
+                {{ t.substring(10, 19) }}
+              </option>
+            </select> -->
           </div>
           <div class="left-mid-company">
             <scoreDetails />
@@ -39,7 +44,18 @@ import scoreDetails from "./viewCharts/securityAssessTwo/scoreDetails";
 import scoreSheet from "./viewCharts/securityAssessTwo/scoreSheet";
 export default {
   name: "SecurityAssessTwo",
+  data() {
+    return {
+      options: [],
+    };
+  },
   components: { overallScore, scoreDetails, scoreSheet },
+  mounted() {
+    // this.$bus.$on("timer", (data) => {
+    //   // console.log("收到数据", data);
+    //   this.options = data;
+    // });
+  },
 };
 </script>
 

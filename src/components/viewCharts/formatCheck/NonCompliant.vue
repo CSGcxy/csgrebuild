@@ -1,7 +1,7 @@
 <template>
   <div
     id="left-bottom-NonCompliant"
-    style="width: 100%; height: 100%;position:absolute;left:1%;bottom:1%;"
+    style="width: 100%; height: 100%; position: absolute; left: 1%; bottom: 1%"
   ></div>
 </template>
 
@@ -72,9 +72,9 @@ export default {
                 // } else {
                 //   return value;
                 // }
-                var temp1=value.substring(5,10)+"\n"
-                var temp2=value.substring(10,19)
-                return temp1+temp2
+                var temp1 = value.substring(5, 10) + "\n";
+                var temp2 = value.substring(10, 19);
+                return temp1 + temp2;
               },
             },
             splitLine: {
@@ -98,11 +98,11 @@ export default {
             },
           },
         ],
-        grid:{
-          x:50,
-          y:30,
-          x2:3,
-          y2:60,
+        grid: {
+          x: 50,
+          y: 30,
+          x2: 3,
+          y2: 60,
         },
         series: [
           {
@@ -168,10 +168,12 @@ export default {
   },
   methods: {
     drawNonCompliant() {
-      checkFormat.getDiffrentAfnCount(this.second).then((resp) => {
+      checkFormat
+        .getDiffrentAfnCount(this.second)
+        .then((resp) => {
           // 显示x坐标
           this.AfnData = resp.data.afnVoList.timeList;
-        this.NonCompliantChartOption.xAxis[0].data = []
+          this.NonCompliantChartOption.xAxis[0].data = [];
           this.AfnData.forEach((entry) => {
             // console.log(entry);
             this.NonCompliantChartOption.xAxis[0].data.push({
@@ -180,6 +182,7 @@ export default {
           });
           // 给afnHashMap一个容器
           var ydata = resp.data.afnVoList.afnHashMap;
+          console.log(ydata);
           var xArray = [];
           var yArray = [];
           // 循环获得key值和数组
@@ -207,7 +210,7 @@ export default {
   beforeDestroy() {
     clearInterval(this.timer);
     this.timer = null;
-  }
+  },
 };
 </script>
 

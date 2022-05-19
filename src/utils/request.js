@@ -13,7 +13,7 @@ service.interceptors.response.use(response => {
             console.log(resp.message);
             return Promise.reject('error');
         }
-    }else {
+    } else {
         return resp;
     }
 

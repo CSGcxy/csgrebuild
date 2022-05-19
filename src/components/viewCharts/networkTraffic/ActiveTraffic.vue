@@ -15,7 +15,7 @@
               <th>传输总字节数</th>
             </tr>
           </thead>
-           <tr v-for="value in tableValue">
+          <tr v-for="value in tableValue">
             <td>{{ value.appProto }}</td>
             <td>{{ value.proto }}</td>
             <td>{{ value.srcIp }}</td>
@@ -29,12 +29,12 @@
       </div>
       <div class="page-box">
         <el-pagination
-            layout="total,prev, pager, next"
-            :total="total"
-            class="page"
-            :page-size.sync="pageSize"
-            :current-page.sync="currentPage"
-            @current-change="drawActiveTraffic"
+          layout="total,prev, pager, next"
+          :total="total"
+          class="page"
+          :page-size.sync="pageSize"
+          :current-page.sync="currentPage"
+          @current-change="drawActiveTraffic"
         >
         </el-pagination>
       </div>
@@ -50,9 +50,9 @@ export default {
     return {
       timer: "",
       tableValue: [],
-      total:60,
-      pageSize:5,
-      currentPage:1,
+      total: 60,
+      pageSize: 5,
+      currentPage: 1,
     };
   },
   mounted() {
@@ -61,10 +61,13 @@ export default {
   },
   methods: {
     drawActiveTraffic() {
-      netTraffic.getActiveTraffic(this.GLOBAL.NETSEG,this.currentPage).then((resp) => {
-        this.tableValue = resp.data.activeFlowsList.list;
-        this.total=resp.data.activeFlowsList.total;
-      });
+      netTraffic
+        .getActiveTraffic(this.GLOBAL.NETSEG, this.currentPage)
+        .then((resp) => {
+          this.tableValue = resp.data.activeFlowsList.list;
+          console.log(this.tableValue);
+          this.total = resp.data.activeFlowsList.total;
+        });
     },
   },
   beforeDestroy() {
@@ -75,27 +78,26 @@ export default {
 </script>
 
 <style scoped>
-.center-active-detail{
+.center-active-detail {
   width: 100%;
   height: 100%;
   /*position: relative;*/
 }
 .active-detail-table {
-position: relative;
+  position: relative;
 
   /*background-color: #4b8df8;*/
 }
 .page-box {
   width: 100%;
-  height:12%;
+  height: 12%;
   /*margin-top: 1%;*/
-  position:absolute;
-  bottom:8px;
+  position: absolute;
+  bottom: 8px;
   /*background-color: #F5F5F5;*/
 }
 
-
-table{
+table {
   width: 100%;
   height: 87%;
   border-collapse: collapse;
@@ -107,7 +109,7 @@ table{
   /*border-spacing:1px 1px;*/
 }
 
-table tr{
+table tr {
   color: #61d2f7;
   font-size: 12px;
   font-weight: 600;
@@ -134,17 +136,17 @@ td {
   margin: 1px auto;
 }
 
-/deep/ .el-pager li{
-  background-color:#10121A;
+/deep/ .el-pager li {
+  background-color: #10121a;
 }
 /deep/ .el-pagination .btn-prev {
-  background-color:#10121A;
+  background-color: #10121a;
 }
 /deep/ .el-pagination .btn-next {
-  background-color: #10121A;
+  background-color: #10121a;
 }
 /deep/ .el-pagination {
-  color:#606266;
-  padding:0 3px;
+  color: #606266;
+  padding: 0 3px;
 }
 </style>

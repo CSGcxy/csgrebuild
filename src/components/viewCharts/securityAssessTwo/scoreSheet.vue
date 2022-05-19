@@ -6,161 +6,95 @@
       row-key="id"
       default-expand-all
     >
-      <el-table-column prop="Network" label="网段"> </el-table-column>
-      <el-table-column prop="IP" label="IP"> </el-table-column>
-      <el-table-column prop="Location" label="位置" sortable width="80">
+      <el-table-column prop="Network" label="网段">
+        <template slot-scope="scope">
+          <span> {{ scope.row.segment }} </span>
+        </template>
       </el-table-column>
-      <el-table-column prop="Time" label="时间" sortable width="120">
+      <el-table-column prop="ip" label="IP" width="130">
+        <template slot-scope="scope">
+          <span> {{ scope.row.ip }} </span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="Location" label="位置" sortable width="80">
+        <template slot-scope="scope">
+          <span> {{ scope.row.location }} </span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="Time" label="时间" sortable width="110">
+        <template slot-scope="scope">
+          <span> {{ scope.row.ts }} </span>
+        </template>
       </el-table-column>
       <el-table-column prop="TotalSpeed" label="总速率" sortable>
+        <template slot-scope="scope">
+          <span> {{ scope.row.totalrate }} </span>
+        </template>
       </el-table-column>
       <el-table-column prop="UplinkRate" label="上行速率" sortable>
+        <template slot-scope="scope">
+          <span> {{ scope.row.uprate }} </span>
+        </template>
       </el-table-column>
       <el-table-column prop="DownlinkRate" label="下行速率" sortable>
+        <template slot-scope="scope">
+          <span> {{ scope.row.downrate }} </span>
+        </template>
       </el-table-column>
-      <el-table-column prop="Rate" label="评分" sortable> </el-table-column>
+      <el-table-column prop="Rate" label="评分" sortable>
+        <template slot-scope="scope">
+          <span> {{ scope.row.totalrateScore.toFixed(2) }} </span>
+        </template>
+      </el-table-column>
     </el-table>
+    <div class="page-box">
+      <el-pagination
+        layout="total,prev, pager, next"
+        :total="total"
+        class="page"
+        :page-size.sync="pageSize"
+        :current-page.sync="pageNum"
+        @current-change="drawScoreSheet"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 
 <script>
+import securityAssess from "../../../api/securityAssess";
 export default {
   name: "scoreSheet",
   data() {
     return {
-      tableData: [
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-        {
-          Network: "PW",
-          IP: "172.35.68.73",
-          Location: "横岗",
-          Time: "2022.5.12 8:00",
-          TotalSpeed: "268Kb/s",
-          UplinkRate: "100Kb/s",
-          DownlinkRate: "120Kb/s",
-          Rate: 90,
-        },
-      ],
+      total: 100,
+      pageNum: 1,
+      pageSize: 10,
+      timer: "",
+      tableData: [],
     };
+  },
+  mounted() {
+    this.drawScoreSheet();
+    this.timer = setInterval(this.drawScoreSheet, this.GLOBAL.refreshTime);
+  },
+  methods: {
+    drawScoreSheet() {
+      securityAssess
+        .getTerminalTotalRateScore(this.pageNum, this.pageSize)
+        .then((resp) => {
+          this.total = resp.data.pageInfoVo.totalNum;
+          this.tableData = resp.data.pageInfoVo.terminalScoreEntityVoPage;
+          console.log();
+          // console.log(resp.data.pageInfoVo.pageNum);
+          // console.log(resp.data);
+          console.log(this.tableData);
+        });
+    },
+    beforeDestroy() {
+      clearInterval(this.timer);
+      this.timer = null;
+    },
   },
 };
 </script>
@@ -182,5 +116,35 @@ export default {
 
 .my_table >>> .el-table tbody tr:hover > td {
   background-color: transparent;
+}
+
+.my_table >>> .el-table .el-table__cell {
+  padding: 5px 0;
+}
+.page-box {
+  width: 100%;
+  height: 8%;
+  margin-top: 2%;
+  /*position: absolute;*/
+  /*bottom:3px;*/
+  float: left;
+}
+.page {
+  /*margin:3px auto;*/
+  width: 60%;
+  margin: 1px auto;
+}
+
+.my_table >>> .el-pager li {
+  background-color: #10121a;
+}
+.my_table >>> .el-pagination .btn-prev {
+  background-color: #10121a;
+}
+.my_table >>> .el-pagination .btn-next {
+  background-color: #10121a;
+}
+.my_table >>> .el-pagination {
+  color: #606266;
 }
 </style>

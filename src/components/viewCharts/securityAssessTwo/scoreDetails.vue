@@ -1,155 +1,103 @@
 <template>
   <div class="my_table">
-    <el-table :data="AllData" style="width: 100%">
-      <el-table-column prop="title" label="统计"> </el-table-column>
-      <el-table-column
-        v-for="(item, index) in allList"
-        :prop="item.key"
-        :key="index"
-        :label="item.feeName"
-      >
+    <el-table
+      :data="tableData"
+      style="width: 100%"
+      row-key="id"
+      default-expand-all
+    >
+      <el-table-column prop="" label="评分" width="110">
+        <template slot-scope="scope">
+          <span>{{ textArr[scope.$index] }}</span>
+        </template>
       </el-table-column>
-      <!-- <el-table-column prop="join" label="合计"> </el-table-column> -->
+      <el-table-column prop="" label="ZZ" width="40">
+        <template slot-scope="scope">
+          <span>{{ scope.row.zz }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="" label="PW" width="45">
+        <template slot-scope="scope">
+          <span>{{ scope.row.pw }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="" label="WX230" width="50">
+        <template slot-scope="scope">
+          <span>{{ scope.row.wx230 }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="" label="LT4G" width="40">
+        <template slot-scope="scope">
+          <span>{{ scope.row.lt4G }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="" label="YDWLW" width="80" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.ydwlw }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="" label="YD4G" width="45">
+        <template slot-scope="scope">
+          <span>{{ scope.row.yd4G }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="" label="YD5G" width="45">
+        <template slot-scope="scope">
+          <span>{{ scope.row.yd5G }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="" label="Others" width="77">
+        <template slot-scope="scope">
+          <span>{{ scope.row.others.toFixed(2) }}</span>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
 
 <script>
+import securityAssess from "../../../api/securityAssess";
 export default {
   name: "scoreDetails",
   data() {
     return {
-      AllData: [],
-      allList: [],
+      textArr: [
+        "上行速率评分",
+        "下行速率评分",
+        "在线设备评分",
+        "离线设备评分",
+        "告警流数评分",
+        "活跃流数评分",
+      ],
+      tableData: [],
+      // tableTime: [],
     };
   },
-  methods: {
-    setData() {
-      //这里请求后台的统计信息，合计可以在我这里进行运算
-      var getData = [
-        {
-          title: "上行速率评分",
-          data: [
-            {
-              feeName: "网段1",
-              num: 86,
-            },
-            {
-              feeName: "网段2",
-              num: 82,
-            },
-            {
-              feeName: "网段3",
-              num: 89,
-            },
-          ],
-        },
-        {
-          title: "下行速率评分",
-          data: [
-            {
-              feeName: "网段1",
-              num: 52,
-            },
-            {
-              feeName: "网段2",
-              num: 47,
-            },
-            {
-              feeName: "网段3",
-              num: 57,
-            },
-          ],
-        },
-        {
-          title: "在线设备评分",
-          data: [
-            {
-              feeName: "网段1",
-              num: 89,
-            },
-            {
-              feeName: "网段2",
-              num: 98,
-            },
-            {
-              feeName: "网段3",
-              num: 98,
-            },
-          ],
-        },
-        {
-          title: "离线设备评分",
-          data: [
-            {
-              feeName: "网段1",
-              num: 78,
-            },
-            {
-              feeName: "网段2",
-              num: 72,
-            },
-            {
-              feeName: "网段3",
-              num: 63,
-            },
-          ],
-        },
-        {
-          title: "告警流数评分",
-          data: [
-            {
-              feeName: "网段1",
-              num: 96,
-            },
-            {
-              feeName: "网段2",
-              num: 86,
-            },
-            {
-              feeName: "网段3",
-              num: 92,
-            },
-          ],
-        },
-        {
-          title: "活跃流数评分",
-          data: [
-            {
-              feeName: "网段1",
-              num: 71,
-            },
-            {
-              feeName: "网段2",
-              num: 72,
-            },
-            {
-              feeName: "网段3",
-              num: 80,
-            },
-          ],
-        },
-      ];
-      for (var i in getData) {
-        var a = {};
-        var b = [];
-        a["title"] = getData[i].title;
-        var x = 0;
-        // var join = 0;
-        getData[i].data.forEach(function (e) {
-          x += 1;
-          // join += e.num;
-          b.push({ feeName: e.feeName, key: "num" + x });
-          a["num" + x] = e.num;
-          // a["join"] = join;
-        });
-        this.AllData.push(a);
-        this.allList = b;
-      }
-    },
+  mounted() {
+    this.drawScoreDetails();
+    this.timer = setInterval(this.drawScoreDetails, this.GLOBAL.refreshTime);
   },
-  created() {
-    this.setData();
+  methods: {
+    drawScoreDetails() {
+      securityAssess.getSegAssessScore().then((resp) => {
+        this.tableData = resp.data.segScoreAllTimeVo.latestTimeSegDeatils;
+        // console.log(this.tableData);
+
+        // this.tableData = res.map((v,i) => ({...v,limit: limit[i]}))
+
+        // this.AfnData = resp.data.segScoreAllTimeVo.timeArray;
+        // this.AfnData.forEach((entry) => {
+        //   // console.log(entry);
+        //   this.tableTime.push(entry);
+        // });
+        // // console.log(this.tableTime);
+        // this.$bus.$emit("timer", this.AfnData);
+      });
+    },
+    beforeDestroy() {
+      clearInterval(this.timer);
+      this.timer = null;
+    },
   },
 };
 </script>
@@ -160,16 +108,24 @@ export default {
   height: 0;
 }
 
-.my_table >>> .el-table thead {
+/* .my_table >>> .el-table thead {
   color: #fff;
   font-size: 20px;
 }
 .my_table >>> .el-table {
   color: #fff;
   font-size: 16px;
-}
+} */
 
 .my_table >>> .el-table tbody tr:hover > td {
   background-color: transparent;
 }
+
+.my_table >>> .el-table .el-table__cell {
+  padding: 10px 0;
+}
+
+/* .my_table >>> .el-table th.el-table__cell > .cell {
+  width: 50%; */
+/* } */
 </style>

@@ -75,9 +75,12 @@ export default {
   },
   methods: {
     drawPacketProportion() {
-      checkFormat.getUnqualifiedDetails(this.pageNum, this.pageSize).then((resp) => {
+      checkFormat
+        .getUnqualifiedDetails(this.pageNum, this.pageSize)
+        .then((resp) => {
           this.total = resp.data.unqualifiedDetails.total;
           this.tableValue = resp.data.unqualifiedDetails.list;
+          console.log(this.tableValue);
         });
     },
   },
@@ -105,7 +108,6 @@ export default {
 table-box {
   width: 100%;
   /*height: 90%;*/
-
 }
 .h1_title {
   font-size: 14px;
@@ -127,7 +129,6 @@ table-box {
   /*height: 100%;*/
   border-collapse: collapse;
   text-align: center;
-
 }
 
 .center-active-detail > .active-detail-table table thead th {
@@ -148,11 +149,11 @@ table-box {
 
 .page-box {
   width: 100%;
-  height:8%;
+  height: 8%;
   margin-top: 5%;
   /*position: absolute;*/
   /*bottom:3px;*/
-  float:left;
+  float: left;
 }
 .page {
   /*margin:3px auto;*/
@@ -160,16 +161,16 @@ table-box {
   margin: 1px auto;
 }
 
-/deep/ .el-pager li{
-  background-color:#10121A;
+/deep/ .el-pager li {
+  background-color: #10121a;
 }
 /deep/ .el-pagination .btn-prev {
-  background-color:#10121A;
+  background-color: #10121a;
 }
 /deep/ .el-pagination .btn-next {
-  background-color: #10121A;
+  background-color: #10121a;
 }
 /deep/ .el-pagination {
-  color:#606266;
+  color: #606266;
 }
 </style>
