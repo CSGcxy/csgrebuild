@@ -40,12 +40,12 @@
             </ul>
           </div>
           <!-- <template v-show="info.isLogin">
-            <div class="login">
-              <router-link to="/login">登录</router-link>
+            <div class="user">
+              <router-link to="/user">登录</router-link>
             </div>
           </template> -->
           <div class="username">
-            <el-dropdown trigger="click">
+            <el-dropdown @command="handleCommand" trigger="click" >
               <span class="el-dropdown-link">
                 {{ username }}
                 <i class="el-icon-arrow-down el-icon--right"></i>
@@ -60,11 +60,9 @@
                 <el-dropdown-item icon="el-icon-user-solid"
                   >用户管理</el-dropdown-item
                 >
-                <router-link to="/login">
-                  <el-dropdown-item icon="el-icon-remove"
-                    >退出
-                  </el-dropdown-item></router-link
-                >
+                <el-dropdown-item icon="el-icon-remove" command="logout">
+                   退出
+                </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -78,6 +76,7 @@
 </template>
 
 <script>
+import user from "@/api/user";
 export default {
   name: "Home",
   data() {
@@ -93,7 +92,22 @@ export default {
     },
   },
   computed: {},
-  methods: {},
+  methods: {
+    handleCommand(command) {
+      if (command == "logout") {
+        this.doLogout();
+      }
+    },
+    doLogout() {
+      user.logout().then(resp => {
+        if(resp.success==true)
+          window.localStorage.removeItem("uToken");
+          this.$message.success(resp.message)
+          window.location.href = "/"
+        // console.log(resp);
+      });
+    }
+  },
   mounted() {
     this.username = window.sessionStorage.getItem("user");
     this.username = eval(this.username);
