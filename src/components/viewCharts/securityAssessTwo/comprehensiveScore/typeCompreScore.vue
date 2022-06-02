@@ -65,7 +65,7 @@ export default {
             },
             detail: {
               valueAnimation: true,
-              formatter: '{value}',
+              formatter: '{value}分',
               color: 'auto',
               textStyle: {
                 fontSize: 23
@@ -74,7 +74,7 @@ export default {
             data: [
               {
                 value: 50,
-                name: "终端类型正常",
+                name: "终端类型正常评分",
               }
             ]
           }
@@ -85,19 +85,16 @@ export default {
 
   mounted() {
     this.drawScoreChart();
-    this.typeCompreScoreChart = this.$echarts.init(
-        document.getElementById("center-mid-2-details")
-    );
-    this.typeCompreScoreChart.setOption(this.typeCompreScoreChartOption);
-
     // this.timer = setInterval(this.drawOverallScore, this.GLOBAL.refreshTime);
   },
   methods: {
     drawScoreChart() {
-      securityAssess.getOnlineAndTypeScore().then((resp) => {
-        console.log(resp);
+      securityAssess.getTypeScore().then((resp) => {
         this.typeCompreScoreChartOption.series[0].data[0].value = resp.data.explicitScore;
-        console.log(this.typeCompreScoreChartOption.series[0].data[0].value);
+        this.typeCompreScoreChart = this.$echarts.init(
+            document.getElementById("center-mid-2-details")
+        );
+        this.typeCompreScoreChart.setOption(this.typeCompreScoreChartOption);
       });
     }
   },

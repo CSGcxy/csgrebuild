@@ -7,6 +7,8 @@
 
 <script>
 
+import securityAssess from "@/api/securityAssess";
+
 export default {
   name: "packageCompreScore",
   data() {
@@ -65,7 +67,7 @@ export default {
             },
             detail: {
               valueAnimation: true,
-              formatter: '{value}',
+              formatter: '{value}分',
               color: 'auto',
               textStyle: {
                 fontSize: 23
@@ -74,7 +76,7 @@ export default {
             data: [
               {
                 value: 80.5,
-                name: "包格式正常",
+                name: "包格式正常评分",
               }
             ]
           }
@@ -83,15 +85,21 @@ export default {
     };
   },
   mounted() {
-    this.packageCompreScoreChart = this.$echarts.init(
-      document.getElementById("center-mid-1-details")
-    );
-    this.packageCompreScoreChart.setOption(this.packageCompreScoreChartOption);
+    this.drawScoreChart();
+
 
     // this.timer = setInterval(this.drawOverallScore, this.GLOBAL.refreshTime);
   },
   methods: {
-
+    drawScoreChart() {
+      securityAssess.getPackageScore().then((resp) => {
+        this.packageCompreScoreChartOption.series[0].data[0].value = resp.data.packageScore;
+        this.packageCompreScoreChart = this.$echarts.init(
+            document.getElementById("center-mid-1-details")
+        );
+        this.packageCompreScoreChart.setOption(this.packageCompreScoreChartOption);
+      });
+    }
   },
   beforeDestroy() {
     clearInterval(this.timer);

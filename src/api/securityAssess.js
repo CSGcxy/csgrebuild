@@ -13,10 +13,29 @@ export default {
             method: 'get'
         })
     },
-    getOnlineAndTypeScore() {
+    getTypeScore() {
         return request({
-            url: base + '/getOnlineAndTypeScore/',
+            url: base + '/getExplicitScore/',
             method: 'get'
         })
     },
+    getOnlineIPScore() {
+        return request({
+            url: base + '/getOnlineIPScore/',
+            method: 'get'
+        })
+    },
+    getOnlineNIPScore() {
+        return request({
+            url: base + '/getOnlineNIPScore/',
+            method: 'get'
+        })
+    },
+    getPackageScore() {
+        return request({
+            url: base + '/getPackageScore/',
+            method: 'get'
+        })
+    },
+
 }

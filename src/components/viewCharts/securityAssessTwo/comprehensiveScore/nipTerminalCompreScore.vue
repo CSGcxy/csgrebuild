@@ -7,6 +7,8 @@
 
 <script>
 
+import securityAssess from "@/api/securityAssess";
+
 export default {
   name: "nipTerminalCompreScore",
   data() {
@@ -65,7 +67,7 @@ export default {
             },
             detail: {
               valueAnimation: true,
-              formatter: '{value}',
+              formatter: '{value}分',
               color: 'auto',
               textStyle: {
                 fontSize: 23,
@@ -74,7 +76,7 @@ export default {
             data: [
               {
                 value: 80.5,
-                name: "非IP终端在线",
+                name: "非IP终端在线评分",
               }
             ]
           }
@@ -83,15 +85,20 @@ export default {
     };
   },
   mounted() {
-    this.nipTerminalCompreScoreChart = this.$echarts.init(
-        document.getElementById("center-mid-4-details")
-    );
-    this.nipTerminalCompreScoreChart.setOption(this.nipTerminalCompreScoreChartOption);
+    this.drawScoreChart();
 
     // this.timer = setInterval(this.drawOverallScore, this.GLOBAL.refreshTime);
   },
   methods: {
-
+    drawScoreChart() {
+      securityAssess.getOnlineNIPScore().then((resp) => {
+        this.nipTerminalCompreScoreChartOption.series[0].data[0].value = resp.data.onlineNIPScore;
+        this.nipTerminalCompreScoreChart = this.$echarts.init(
+            document.getElementById("center-mid-4-details")
+        );
+        this.nipTerminalCompreScoreChart.setOption(this.nipTerminalCompreScoreChartOption);
+      });
+    }
   },
   // beforeDestroy() {
   //   clearInterval(this.timer);

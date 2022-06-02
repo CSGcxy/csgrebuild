@@ -7,6 +7,8 @@
 
 <script>
 
+import securityAssess from "@/api/securityAssess";
+
 export default {
   name: "overallScore",
   data() {
@@ -65,7 +67,7 @@ export default {
             },
             detail: {
               valueAnimation: true,
-              formatter: '{value}',
+              formatter: '{value}分',
               color: 'auto',
               textStyle: {
                 fontSize: 23
@@ -74,7 +76,7 @@ export default {
             data: [
               {
                 value: 80.5,
-                name: "IP终端在线",
+                name: "IP终端在线评分",
               }
             ]
           }
@@ -83,14 +85,19 @@ export default {
     };
   },
   mounted() {
-    this.ipTerminalCompreScoreChart = this.$echarts.init(
-        document.getElementById("center-mid-3-details")
-    );
-    this.ipTerminalCompreScoreChart.setOption(this.ipTerminalCompreScoreChartOption);
+    this.drawScoreChart();
     // this.timer = setInterval(this.drawOverallScore, this.GLOBAL.refreshTime);
   },
   methods: {
-
+    drawScoreChart() {
+      securityAssess.getOnlineIPScore().then((resp) => {
+        this.ipTerminalCompreScoreChartOption.series[0].data[0].value = resp.data.onlineIPScore;
+        this.ipTerminalCompreScoreChart = this.$echarts.init(
+            document.getElementById("center-mid-3-details")
+        );
+        this.ipTerminalCompreScoreChart.setOption(this.ipTerminalCompreScoreChartOption);
+      });
+    }
   },
   beforeDestroy() {
     clearInterval(this.timer);
