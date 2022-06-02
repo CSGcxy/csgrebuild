@@ -4,15 +4,15 @@ const service = axios.create({
     timeout: 10000 // 请求超时时间
 })
 
-//request 请求拦截器
-service.interceptors.request.use(config => {
-    if (window.localStorage.getItem("uToken")) {
-        config.headers['token'] = window.localStorage.getItem("uToken")
-    }
-    return config;
-}, error => {
-    return Promise.reject(error)
-});
+// //request 请求拦截器
+// service.interceptors.request.use(config => {
+//     if (window.localStorage.getItem("uToken")) {
+//         config.headers['token'] = window.localStorage.getItem("uToken")
+//     }
+//     return config;
+// }, error => {
+//     return Promise.reject(error)
+// });
 
 // response 响应拦截器
 service.interceptors.response.use(response => {

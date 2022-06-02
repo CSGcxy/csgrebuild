@@ -13,4 +13,10 @@ export default {
             method: 'get'
         })
     },
+    getOnlineAndTypeScore() {
+        return request({
+            url: base + '/getOnlineAndTypeScore/',
+            method: 'get'
+        })
+    },
 }

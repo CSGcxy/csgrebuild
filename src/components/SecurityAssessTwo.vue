@@ -28,10 +28,25 @@
       <div class="box-center">
         <div class="center-top">
           <div class="title-box">
-            <h6>PacketProportion</h6>
+            <h6>当前出现网段下低分终端详情</h6>
           </div>
           <div class="center-top-Map">
             <scoreSheet />
+          </div>
+        </div>
+
+        <div class="center-mid">
+          <div class="center-mid-1">
+            <packageCompreScore />
+          </div>
+          <div class="center-mid-2">
+            <typeCompreScore />
+          </div>
+          <div class="center-mid-3">
+            <ipTerminalCompreScore />
+          </div>
+          <div class="center-mid-4">
+            <nipTerminalCompreScore />
           </div>
         </div>
       </div>
@@ -42,6 +57,11 @@
 import overallScore from "./viewCharts/securityAssessTwo/overallScore";
 import scoreDetails from "./viewCharts/securityAssessTwo/scoreDetails";
 import scoreSheet from "./viewCharts/securityAssessTwo/scoreSheet";
+import packageCompreScore from "@/components/viewCharts/securityAssessTwo/comprehensiveScore/packageCompreScore";
+import typeCompreScore from "@/components/viewCharts/securityAssessTwo/comprehensiveScore/typeCompreScore";
+import ipTerminalCompreScore from "@/components/viewCharts/securityAssessTwo/comprehensiveScore/ipTerminalCompreScore";
+import nipTerminalCompreScore from "./viewCharts/securityAssessTwo/comprehensiveScore/nipTerminalCompreScore";
+
 export default {
   name: "SecurityAssessTwo",
   data() {
@@ -49,7 +69,7 @@ export default {
       options: [],
     };
   },
-  components: { overallScore, scoreDetails, scoreSheet },
+  components: { overallScore, scoreDetails, scoreSheet,packageCompreScore,typeCompreScore,ipTerminalCompreScore,nipTerminalCompreScore },
   mounted() {
     // this.$bus.$on("timer", (data) => {
     //   // console.log("收到数据", data);

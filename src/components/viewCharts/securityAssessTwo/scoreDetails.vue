@@ -21,12 +21,12 @@
           <span>{{ scope.row.pw }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="" label="WX230" width="50">
+      <el-table-column prop="" label="WX230" width="85">
         <template slot-scope="scope">
           <span>{{ scope.row.wx230 }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="" label="LT4G" width="40">
+      <el-table-column prop="" label="LT4G" width="57">
         <template slot-scope="scope">
           <span>{{ scope.row.lt4G }}</span>
         </template>
@@ -36,12 +36,12 @@
           <span>{{ scope.row.ydwlw }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="" label="YD4G" width="45">
+      <el-table-column prop="" label="YD4G" width="77">
         <template slot-scope="scope">
           <span>{{ scope.row.yd4G }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="" label="YD5G" width="45">
+      <el-table-column prop="" label="YD5G" width="77">
         <template slot-scope="scope">
           <span>{{ scope.row.yd5G }}</span>
         </template>

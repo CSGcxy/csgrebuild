@@ -69,7 +69,7 @@ export default {
     return {
       total: 100,
       pageNum: 1,
-      pageSize: 10,
+      pageSize: 7,
       timer: "",
       tableData: [],
     };
