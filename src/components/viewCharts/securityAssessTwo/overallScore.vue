@@ -3,7 +3,7 @@
     id="left-top-overallScore"
     style="width: 100%; height: 100%; position: absolute; left: 1%; bottom: 1%"
   ></div>
-</template>      
+</template>
 
 <script>
 import securityAssess from "../../../api/securityAssess";
@@ -199,7 +199,7 @@ export default {
       document.getElementById("left-top-overallScore")
     );
     this.drawOverallScore();
-    this.timer = setInterval(this.drawOverallScore, this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawOverallScore, 5000);  // 每5s执行一次
   },
   methods: {
     drawOverallScore() {

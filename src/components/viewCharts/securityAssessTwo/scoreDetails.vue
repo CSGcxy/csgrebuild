@@ -11,12 +11,12 @@
           <span>{{ textArr[scope.$index] }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="" label="ZZ" width="40">
+      <el-table-column prop="" label="ZZ" width="70">
         <template slot-scope="scope">
           <span>{{ scope.row.zz }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="" label="PW" width="45">
+      <el-table-column prop="" label="PW" width="71">
         <template slot-scope="scope">
           <span>{{ scope.row.pw }}</span>
         </template>
@@ -26,7 +26,7 @@
           <span>{{ scope.row.wx230 }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="" label="LT4G" width="57">
+      <el-table-column prop="" label="LT4G" width="67">
         <template slot-scope="scope">
           <span>{{ scope.row.lt4G }}</span>
         </template>
@@ -75,7 +75,7 @@ export default {
   },
   mounted() {
     this.drawScoreDetails();
-    this.timer = setInterval(this.drawScoreDetails, this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawScoreDetails, 5000);  // 每5s执行一次
   },
   methods: {
     drawScoreDetails() {
