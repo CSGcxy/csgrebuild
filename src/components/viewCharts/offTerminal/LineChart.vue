@@ -81,7 +81,6 @@ export default {
 
       offTer.getOffTerminalSegTimeSequence(this.GLOBAL.trendSEG).then(resp =>{
         if (resp.code == 20000) {
-          console.log(resp)
           this.lineChartChartOption.xAxis.data=resp.data.offTerminalSegTimeSequenceList.timestamp;
           this.lineChartChartOption.series[0].data=resp.data.offTerminalSegTimeSequenceList.offTerminalCount;
           this.lineChartChart.setOption(this.lineChartChartOption);

@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-let base = 'checkoff/offTerminalStatus'
+let base = 'csg/checkoff/offTerminalStatus'
 export default {
     getOffTerminalCount() {
         return request({

@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-let base = 'safetyAssessment'
+let base = 'csg/safetyAssessment'
 export default {
     getSegAssessScore() {
         return request({
