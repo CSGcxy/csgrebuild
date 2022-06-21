@@ -37,7 +37,7 @@
 
         <el-form-item class="btn-form-item">
           <el-button type="primary" @click="doLogin" class="btn-container"
-          >提交</el-button
+          >登录</el-button
           >
           <el-button @click="resetForm('userForm')" class="btn-container"
           >重置</el-button
@@ -89,18 +89,19 @@ export default {
   },
   methods: {
     doLogin() {
-      user.login(this.userForm).then(resp=>{
-        if (resp.code==20000 && resp.success==true){
-          this.$message.success(resp.message);
-          window.localStorage.setItem("uToken",resp.data.token)
-          //登录成功后获取用户信息
-          user.test().then(resp => {
-            console.log(resp);
-            this.$router.push("/home")
-          });
-          // localStorage
-        }
-      })
+      this.$message.warning("暂时不能登录！请用访客模式查看")
+      // user.login(this.userForm).then(resp=>{
+      //   if (resp.code==20000 && resp.success==true){
+      //     this.$message.success(resp.message);
+      //     window.localStorage.setItem("uToken",resp.data.token)
+      //     //登录成功后获取用户信息
+      //     user.test().then(resp => {
+      //       console.log(resp);
+      //       this.$router.push("/home")
+      //     });
+      //     // localStorage
+      //   }
+      // })
       // //自己设置账号 密码
       // if (this.ruleForm.user === "和嘉宾" && this.ruleForm.pass === "666") {
       //   // 登录成功
@@ -125,14 +126,9 @@ export default {
       //   localStorage.removeItem("token");
       // }
     },
-
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    //访客模式
-    goVisitorMode(){
-      this.$router.push({name:'Home'})
-    }
   },
 };
 </script>

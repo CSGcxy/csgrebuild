@@ -1,5 +1,10 @@
 <template>
-  <div class="homeWrap">
+  <div class="homeWrap"
+       v-loading="fullscreenLoading"
+       element-loading-text="加载中"
+       element-loading-spinner="el-icon-loading"
+       element-loading-background="rgba(0, 0, 0, 0.8)"
+  >
     <el-container class="home-container">
       <el-header class="home-header" height="70px">
         <div class="topTitle">
@@ -83,6 +88,7 @@ export default {
     return {
       show: 0,
       username: "",
+      fullscreenLoading: false
     };
   },
   /*高亮选中：用路由跳转来判断*/
@@ -106,11 +112,18 @@ export default {
           window.location.href = "/"
         // console.log(resp);
       });
+    },
+    doLoading() {
+      this.fullscreenLoading = true;
+      setTimeout(() => {
+        this.fullscreenLoading = false;
+      }, 500);
     }
   },
   mounted() {
-    this.username = window.sessionStorage.getItem("user");
-    this.username = eval(this.username);
+    this.doLoading()
+    // this.username = window.sessionStorage.getItem("user");
+    // this.username = eval(this.username);
     // console.log(this.username);
   },
 };
