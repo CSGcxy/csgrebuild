@@ -126,7 +126,7 @@ export default {
             axisLabel: {
               color: '#edefe8',
               fontSize: 15,
-              distance: -60,
+              distance: -50,
               formatter: function (value) {
                 if (value === 0.00) {
                   return 0;
