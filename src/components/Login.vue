@@ -235,9 +235,11 @@ export default {
   .visitorMode{
     //font-size: 26px;
     text-align: center;
-    color: #fff;
+    //color: #fff;
     text-decoration: underline;
   }
-
+  a:-webkit-any-link {
+    color: dodgerblue;
+  }
 }
 </style>
