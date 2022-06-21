@@ -76,7 +76,7 @@ export default {
   },
   mounted() {
     this.drawScoreSheet();
-    this.timer = setInterval(this.drawScoreSheet, this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawScoreSheet, 5000);  // 每5s执行一次
   },
   methods: {
     drawScoreSheet() {

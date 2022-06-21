@@ -86,8 +86,7 @@ export default {
   },
   mounted() {
     this.drawScoreChart();
-
-    // this.timer = setInterval(this.drawOverallScore, this.GLOBAL.refreshTime);
+    this.timer = setInterval(this.drawScoreChart, 20000);  // 每20s执行一次
   },
   methods: {
     drawScoreChart() {
@@ -100,10 +99,10 @@ export default {
       });
     }
   },
-  // beforeDestroy() {
-  //   clearInterval(this.timer);
-  //   this.timer = null;
-  // },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
+  },
 };
 </script>
 
