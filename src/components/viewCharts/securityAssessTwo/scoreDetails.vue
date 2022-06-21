@@ -18,7 +18,7 @@
       </el-table-column>
       <el-table-column prop="" label="PW" width="71">
         <template slot-scope="scope">
-          <span>{{ scope.row.pw }}</span>
+          <span>{{ scope.row.pw}}</span>
         </template>
       </el-table-column>
       <el-table-column prop="" label="WX230" width="85">
@@ -31,11 +31,16 @@
           <span>{{ scope.row.lt4G }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="" label="YDWLW" width="80" align="center">
+      <el-table-column prop="" label="YDWLW" width="80" >
         <template slot-scope="scope">
-          <span>{{ scope.row.ydwlw }}</span>
+          <span>{{ scope.row.ydwlw}}</span>
         </template>
       </el-table-column>
+<!--      <el-table-column prop="" label="YDWLW" width="80">-->
+<!--        <template slot-scope="scope">-->
+<!--          <span>{{ scope.row.ydwlw.toFixed(2)}}</span>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
       <el-table-column prop="" label="YD4G" width="77">
         <template slot-scope="scope">
           <span>{{ scope.row.yd4G }}</span>
@@ -48,7 +53,7 @@
       </el-table-column>
       <el-table-column prop="" label="Others" width="77">
         <template slot-scope="scope">
-          <span>{{ scope.row.others.toFixed(2) }}</span>
+          <span>{{ scope.row.others}}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -80,8 +85,20 @@ export default {
   methods: {
     drawScoreDetails() {
       securityAssess.getSegAssessScore().then((resp) => {
-        this.tableData = resp.data.segScoreAllTimeVo.latestTimeSegDeatils;
-        // console.log(this.tableData);
+        console.log( resp.data.segScoreAllTimeVo.latestTimeSegDeatils[0].pw)
+        console.log( resp.data.segScoreAllTimeVo.latestTimeSegDeatils[0].ydwlw)
+        let rowTableData = resp.data.segScoreAllTimeVo.latestTimeSegDeatils;
+        console.log(rowTableData)
+        rowTableData.forEach(function (tableList){
+          tableList.pw=tableList.pw.toFixed(2)
+          tableList.others=tableList.others.toFixed(2)
+          if (tableList.ydwlw==="NaN"){
+            tableList.ydwlw=NaN
+          }else{
+            tableList.ydwlw=tableList.ydwlw.toFixed(2)
+          }
+        })
+        this.tableData=rowTableData
 
         // this.tableData = res.map((v,i) => ({...v,limit: limit[i]}))
 
@@ -103,19 +120,22 @@ export default {
 </script>
 
 <style scoped>
+.my_table{
+  margin-top:20px;
+}
 .my_table >>> .el-table::before {
   /* 去除下边框 */
   height: 0;
 }
 
-/* .my_table >>> .el-table thead {
-  color: #fff;
-  font-size: 20px;
+ .my_table >>> .el-table thead {
+  color: #61d2f7;
+  /*font-size: 20px;*/
 }
 .my_table >>> .el-table {
   color: #fff;
-  font-size: 16px;
-} */
+  /*font-size: 16px;*/
+}
 
 .my_table >>> .el-table tbody tr:hover > td {
   background-color: transparent;

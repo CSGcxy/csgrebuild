@@ -16,67 +16,154 @@ export default {
       packageCompreScoreChart: null,
       timer: "",
       packageCompreScoreChartOption: {
+        // #region
+        // series: [
+        //   {
+        //     type: 'gauge',
+        //     radius: "86%", //仪表大小
+        //     axisLine: {
+        //       lineStyle: {
+        //         width: 20,
+        //         color: [
+        //           [0.3, 'hsl(0, 100%, 70%)'],
+        //           [0.7, 'hsl(213, 100%, 70%)'],
+        //           [1, 'hsl(150, 49%, 70%)']
+        //         ]
+        //       }
+        //     },
+        //     pointer: {
+        //       itemStyle: {
+        //         color: 'auto'
+        //       }
+        //     },
+        //     axisTick: {
+        //       distance: -30,
+        //       length: 8,
+        //       lineStyle: {
+        //         color: '#fff',
+        //         width: 2
+        //       }
+        //     },
+        //     splitLine: {
+        //       distance: -30,
+        //       length: 20,
+        //       lineStyle: {
+        //         color: '#fff',
+        //         width: 4
+        //       }
+        //     },
+        //     axisLabel: {
+        //       color: 'auto',
+        //       distance: 40,
+        //       fontSize: 10
+        //     },
+        //     title: {
+        //       offsetCenter: [0, '100%'], // x, y，单位px
+        //       textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+        //         fontWeight: 'bolder',
+        //         color: '#fff',
+        //         shadowColor: '#a', //默认透明
+        //         shadowBlur: 10
+        //       }
+        //     },
+        //     detail: {
+        //       valueAnimation: true,
+        //       formatter: '{value}分',
+        //       color: 'auto',
+        //       textStyle: {
+        //         fontSize: 23
+        //       }
+        //     },
+        //     data: [
+        //       {
+        //         value: 80.5,
+        //         name: "包格式正常评分",
+        //       }
+        //     ]
+        //   }
+        // ]
+    // #endRegion
         series: [
           {
             type: 'gauge',
-            radius: "86%", //仪表大小
+            startAngle: 180,
+            endAngle: 0,
+            min: 0,
+            max: 1,
+            splitNumber: 10,
             axisLine: {
               lineStyle: {
-                width: 20,
+                width: 2,
                 color: [
-                  [0.3, '#fd666d'],
-                  [0.7, '#37a2da'],
-                  [1, '#67e0e3']
+                  [0.25, '#FF6E76'],
+                  [0.5, '#FDDD60'],
+                  [0.75, '#58D9F9'],
+                  [1, '#7CFFB2']
                 ]
               }
             },
             pointer: {
+              icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+              length: '30%',
+              width: 10,
+              offsetCenter: [0, '-35%'],
               itemStyle: {
                 color: 'auto'
               }
             },
             axisTick: {
-              distance: -30,
-              length: 8,
+              length: 12,
               lineStyle: {
-                color: '#fff',
+                color: 'auto',
                 width: 2
               }
             },
             splitLine: {
-              distance: -30,
-              length: 20,
+              length: 15,
               lineStyle: {
-                color: '#fff',
+                color: 'auto',
                 width: 4
               }
             },
             axisLabel: {
-              color: 'auto',
-              distance: 40,
-              fontSize: 10
+              color: '#edefe8',
+              fontSize: 15,
+              distance: -60,
+              formatter: function (value) {
+                if (value === 0.00) {
+                  return 0;
+                }else if (value === 0.20) {
+                  return 20;
+                } else if (value === 0.40) {
+                  return 40;
+                } else if (value === 0.60) {
+                  return 60;
+                } else if (value === 0.80) {
+                  return 80;
+                }else if (value === 1.00) {
+                  return 100;
+                }
+                return '';
+              }
             },
             title: {
-              offsetCenter: [0, '100%'], // x, y，单位px
-              textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                fontWeight: 'bolder',
-                color: '#fff',
-                shadowColor: '#a', //默认透明
-                shadowBlur: 10
-              }
+              offsetCenter: [0, '40%'],
+              fontSize: 16,
+              color:'#fff',
             },
             detail: {
+              fontSize: 15,
+              offsetCenter: [0, '0%'],
               valueAnimation: true,
-              formatter: '{value}分',
-              color: 'auto',
-              textStyle: {
-                fontSize: 23
-              }
+              formatter: function (value){
+                return value*100 + '分'
+              } ,
+              color: 'auto'
             },
             data: [
               {
-                value: 80.5,
-                name: "包格式正常评分",
+                value: 0.7,
+                name: '包格式正常评分'
               }
             ]
           }
@@ -86,12 +173,17 @@ export default {
   },
   mounted() {
     this.drawScoreChart();
-    this.timer = setInterval(this.drawScoreChart, 20000);  // 每20s执行一次
+    // this.timer = setInterval(this.drawScoreChart, 20000);  // 每20s执行一次
   },
   methods: {
     drawScoreChart() {
       securityAssess.getPackageScore().then((resp) => {
-        this.packageCompreScoreChartOption.series[0].data[0].value = resp.data.packageScore;
+        console.log(resp.data.packageScore)
+        if (resp.data.packageScore===undefined){
+          this.packageCompreScoreChartOption.series[0].data[0].value =0.0
+        }else{
+          this.packageCompreScoreChartOption.series[0].data[0].value = resp.data.packageScore/100;
+        }
         this.packageCompreScoreChart = this.$echarts.init(
             document.getElementById("center-mid-1-details")
         );
@@ -100,8 +192,8 @@ export default {
     }
   },
   beforeDestroy() {
-    clearInterval(this.timer);
-    this.timer = null;
+    // clearInterval(this.timer);
+    // this.timer = null;
   },
 };
 </script>

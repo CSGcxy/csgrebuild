@@ -105,14 +105,14 @@ export default {
   height: 0;
 }
 
-/* .my_table >>> .el-table thead {
-  color: #fff;
-  font-size: 20px;
+ .my_table >>> .el-table thead {
+  color: #61d2f7;
+  /*font-size: 20px;*/
 }
 .my_table >>> .el-table {
   color: #fff;
-  font-size: 16px;
-} */
+  /*font-size: 16px;*/
+}
 
 .my_table >>> .el-table tbody tr:hover > td {
   background-color: transparent;
