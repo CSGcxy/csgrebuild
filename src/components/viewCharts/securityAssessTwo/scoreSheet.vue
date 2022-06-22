@@ -76,7 +76,7 @@ export default {
   },
   mounted() {
     this.drawScoreSheet();
-    this.timer = setInterval(this.drawScoreSheet, 5000);  // 每5s执行一次
+    this.timer = setInterval(this.drawScoreSheet, this.GLOBAL.refreshTime);  // 每5s执行一次
   },
   methods: {
     drawScoreSheet() {
@@ -85,10 +85,8 @@ export default {
         .then((resp) => {
           this.total = resp.data.pageInfoVo.totalNum;
           this.tableData = resp.data.pageInfoVo.terminalScoreEntityVoPage;
-          console.log();
           // console.log(resp.data.pageInfoVo.pageNum);
           // console.log(resp.data);
-          console.log(this.tableData);
         });
     },
     beforeDestroy() {

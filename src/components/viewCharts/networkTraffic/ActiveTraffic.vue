@@ -65,7 +65,6 @@ export default {
         .getActiveTraffic(this.GLOBAL.NETSEG, this.currentPage)
         .then((resp) => {
           this.tableValue = resp.data.activeFlowsList.list;
-          console.log(this.tableValue);
           this.total = resp.data.activeFlowsList.total;
         });
     },

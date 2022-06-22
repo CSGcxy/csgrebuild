@@ -8,8 +8,8 @@ module.exports = {
         proxy: {
             '/': {
                 // target: 'http://csgabc.vaiwan.cn',
-                target: 'http://103.131.169.220:8098',
-                // target: 'http://localhost:9001',
+                // target: 'http://10.10.15.79:9001',
+                target: 'http://223.243.100.141:35772',
                 // target: 'http://csgabc.ngrok.24k.fun',
                 changeOrigin: true,
                 pathRewrite: {

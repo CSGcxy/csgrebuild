@@ -199,7 +199,7 @@ export default {
       document.getElementById("left-top-overallScore")
     );
     this.drawOverallScore();
-    this.timer = setInterval(this.drawOverallScore, 5000);  // 每5s执行一次
+    this.timer = setInterval(this.drawOverallScore, this.GLOBAL.refreshTime);  // 每5s执行一次
   },
   methods: {
     drawOverallScore() {

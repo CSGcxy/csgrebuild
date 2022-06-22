@@ -80,7 +80,6 @@ export default {
         .then((resp) => {
           this.total = resp.data.unqualifiedDetails.total;
           this.tableValue = resp.data.unqualifiedDetails.list;
-          console.log(this.tableValue);
         });
     },
   },

@@ -26,7 +26,7 @@ export default {
         } else {
           this.outname=resp.data.data[0];
           this.outvalue=resp.data.data[1];
-          console.log(resp.data.data[1]);
+          // console.log(resp.data.data[1]);
           var outdata=[];
 
 

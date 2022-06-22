@@ -80,15 +80,12 @@ export default {
   },
   mounted() {
     this.drawScoreDetails();
-    this.timer = setInterval(this.drawScoreDetails, 5000);  // 每5s执行一次
+    this.timer = setInterval(this.drawScoreDetails, this.GLOBAL.refreshTime);  // 每5s执行一次
   },
   methods: {
     drawScoreDetails() {
       securityAssess.getSegAssessScore().then((resp) => {
-        console.log( resp.data.segScoreAllTimeVo.latestTimeSegDeatils[0].pw)
-        console.log( resp.data.segScoreAllTimeVo.latestTimeSegDeatils[0].ydwlw)
         let rowTableData = resp.data.segScoreAllTimeVo.latestTimeSegDeatils;
-        console.log(rowTableData)
         rowTableData.forEach(function (tableList){
           tableList.pw=tableList.pw.toFixed(2)
           tableList.others=tableList.others.toFixed(2)

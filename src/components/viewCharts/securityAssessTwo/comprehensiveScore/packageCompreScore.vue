@@ -173,12 +173,11 @@ export default {
   },
   mounted() {
     this.drawScoreChart();
-    // this.timer = setInterval(this.drawScoreChart, 20000);  // 每20s执行一次
+    this.timer = setInterval(this.drawScoreChart, this.GLOBAL.refreshTime);  // 每20s执行一次
   },
   methods: {
     drawScoreChart() {
       securityAssess.getPackageScore().then((resp) => {
-        console.log(resp.data.packageScore)
         if (resp.data.packageScore===undefined){
           this.packageCompreScoreChartOption.series[0].data[0].value =0.0
         }else{
@@ -192,8 +191,8 @@ export default {
     }
   },
   beforeDestroy() {
-    // clearInterval(this.timer);
-    // this.timer = null;
+    clearInterval(this.timer);
+    this.timer = null;
   },
 };
 </script>

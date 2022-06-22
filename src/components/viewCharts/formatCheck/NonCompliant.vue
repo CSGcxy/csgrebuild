@@ -182,7 +182,7 @@ export default {
           });
           // 给afnHashMap一个容器
           var ydata = resp.data.afnVoList.afnHashMap;
-          console.log(ydata);
+          // console.log(ydata);
           var xArray = [];
           var yArray = [];
           // 循环获得key值和数组

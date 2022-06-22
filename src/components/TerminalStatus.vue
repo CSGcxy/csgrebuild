@@ -169,7 +169,7 @@ export default {
     getIpList() {
       netSegStatus.getIpList(this.GLOBAL.NETSEG).then(resp => {
         this.ipList = resp.data;
-        console.log(resp)
+        // console.log(resp)
       });
     }
   }
