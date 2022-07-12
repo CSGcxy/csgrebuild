@@ -12,7 +12,7 @@ export default {
   name: "left-bottom-NonCompliant",
   data() {
     return {
-      second: 5,
+      second: 20,
       NonCompliantChart: null,
       timer: "",
       AfnData: "",
@@ -105,56 +105,7 @@ export default {
           y2: 60,
         },
         series: [
-          {
-            // name: "afn=0",
-            name: "",
-            type: "bar",
-            emphasis: {
-              focus: "series",
-            },
-            // data: [1.3, 2.7, 4.5, 4],
-            data: [],
-          },
-          {
-            // name: "afn=0",
-            name: "",
-            type: "bar",
-            emphasis: {
-              focus: "series",
-            },
-            // data: [1.3, 2.7, 4.5, 4],
-            data: [],
-          },
-          {
-            // name: "afn=0",
-            name: "",
-            type: "bar",
-            emphasis: {
-              focus: "series",
-            },
-            // data: [1.3, 2.7, 4.5, 4],
-            data: [],
-          },
-          {
-            // name: "afn=0",
-            name: "",
-            type: "bar",
-            emphasis: {
-              focus: "series",
-            },
-            // data: [1.3, 2.7, 4.5, 4],
-            data: [],
-          },
-          {
-            // name: "afn=0",
-            name: "",
-            type: "bar",
-            emphasis: {
-              focus: "series",
-            },
-            // data: [1.3, 2.7, 4.5, 4],
-            data: [],
-          },
+
         ],
       },
     };
@@ -171,36 +122,26 @@ export default {
       checkFormat
         .getDiffrentAfnCount(this.second)
         .then((resp) => {
+          console.log(resp)
           // 显示x坐标
-          this.AfnData = resp.data.afnVoList.timeList;
-          this.NonCompliantChartOption.xAxis[0].data = [];
-          this.AfnData.forEach((entry) => {
-            // console.log(entry);
-            this.NonCompliantChartOption.xAxis[0].data.push({
-              value: entry,
-            });
-          });
+          this.NonCompliantChartOption.xAxis[0].data=resp.data.afnVoList.timeList;
           // 给afnHashMap一个容器
           var ydata = resp.data.afnVoList.afnHashMap;
-          // console.log(ydata);
-          var xArray = [];
-          var yArray = [];
+          var dataArray=[]
           // 循环获得key值和数组
           for (var key in ydata) {
-            // 数组放在yArray容器中
-            yArray.push(ydata[key]);
-            // key值放在xArray容器中
-            xArray.push(key);
+            dataArray.push(
+                {
+                  name: "afn = " + key,
+                  type: "bar",
+                  emphasis: {
+                    focus: "series",
+                  },
+                  data: ydata[key],
+                }
+            )
           }
-          var dataArray=[]
-
-          // 显示data\name
-          for (var i = 0; i <= yArray.length - 1; i++) {
-            this.NonCompliantChartOption.series[i].data = yArray[i];
-            this.NonCompliantChartOption.series[i].name =
-              "afn = " + Object.keys(resp.data.afnVoList.afnHashMap)[i];
-          }
-
+          this.NonCompliantChartOption.series=dataArray
           this.NonCompliantChart.setOption(this.NonCompliantChartOption);
         })
         .catch((err) => {
