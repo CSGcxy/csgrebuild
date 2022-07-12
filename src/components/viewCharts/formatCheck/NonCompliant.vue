@@ -192,6 +192,7 @@ export default {
             // key值放在xArray容器中
             xArray.push(key);
           }
+          var dataArray=[]
 
           // 显示data\name
           for (var i = 0; i <= yArray.length - 1; i++) {

@@ -95,7 +95,7 @@ export default {
         this.PacketCountData.forEach((entry) => {
           this.PacketCountOption.series[0].data.push({
             value: entry.count,
-            name: "afn=" + entry.afn,
+            name: entry.afn,
           });
         });
         this.PacketCountChart.setOption(this.PacketCountOption);

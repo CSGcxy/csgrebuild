@@ -5,7 +5,7 @@
       <div class="box-left">
         <div class="left-top">
           <div class="title-box">
-            <h6>packet占比</h6>
+            <h6>异常packet分布</h6>
           </div>
           <div class="left-top-Count">
             <div class="compliantNumOne">
@@ -18,7 +18,7 @@
         </div>
         <div class="left-mid">
           <div class="title-box">
-            <h6>合规packet数量</h6>
+            <h6>异常packet数量</h6>
           </div>
           <div class="left-mid-company">
             <NonCompliant />
@@ -28,7 +28,7 @@
       <div class="box-center">
         <div class="center-top">
           <div class="title-box">
-            <h6>不合规packet</h6>
+            <h6>异常packet明细</h6>
           </div>
           <div class="center-top-Map">
             <PacketProportion />

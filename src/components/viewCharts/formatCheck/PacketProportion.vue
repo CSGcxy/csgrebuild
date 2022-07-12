@@ -58,9 +58,9 @@ export default {
       columnList: [
         { eng: "ts", name: "timestamp" },
         { eng: "srcip", name: "Src ip" },
-        { eng: "srcport", name: "Src port" },
-        { eng: "dstip", name: "Dst ip" },
-        { eng: "dstport", name: "Dst port" },
+        { eng: "dstip", name: "Src ip" },
+        { eng: "wd", name: "Segment" },
+        { eng: "info", name: "Info" },
       ],
       tableValue: [],
       test: [],
