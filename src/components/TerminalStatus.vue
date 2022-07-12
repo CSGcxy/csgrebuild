@@ -30,12 +30,12 @@
             <!--            <TerminalLocationMap v-if="isRouterAlive"/>-->
              <shenzhen v-if="isRouterAlive"/>
           </div>
-          <div class="center-right">
-            <div class="center-right-hosts">
-              <!--              <div id="topHosts"></div>-->
-              <AlertIP v-if="isRouterAlive"/>
-            </div>
-          </div>
+<!--          <div class="center-right">-->
+<!--            <div class="center-right-hosts">-->
+<!--              &lt;!&ndash;              <div id="topHosts"></div>&ndash;&gt;-->
+<!--              <AlertIP v-if="isRouterAlive"/>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
         <div class="center-mid">
           <div class="title-box">
@@ -61,7 +61,7 @@
 <script>
 import netSegStatus from "@/api/netSegStatus";
 import NetworkSegmentTerminalTotal from "./viewCharts/terminalStatus/NetworkSegmentTerminalTotal";
-import AlertIP from "./viewCharts/terminalStatus/AlertIP";
+// import AlertIP from "./viewCharts/terminalStatus/AlertIP";
 import TerminalCommunication from "./viewCharts/terminalStatus/TerminalCommunication";
 import FlowTimingRecived from "./viewCharts/terminalStatus/FlowTimingRecived";
 import FlowTimingSent from "./viewCharts/terminalStatus/FlowTimingSent";
@@ -69,7 +69,7 @@ import shenzhen from "./viewCharts/terminalStatus/shenzhen";
 import ActiveTerminal from "./viewCharts/terminalStatus/ActiveTerminal";
 export default {
   name: "TerminalStatus",
-  components:{NetworkSegmentTerminalTotal,AlertIP,TerminalCommunication,FlowTimingRecived,FlowTimingSent,shenzhen,ActiveTerminal },
+  components:{NetworkSegmentTerminalTotal,TerminalCommunication,FlowTimingRecived,FlowTimingSent,shenzhen,ActiveTerminal },
   data() {
 
     return {

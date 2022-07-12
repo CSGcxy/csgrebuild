@@ -7,9 +7,9 @@
       <div class="txt">
         <h2>下行速率</h2>
       </div>
-      <div class="txt">
-        <h2>告警流数</h2>
-      </div>
+<!--      <div class="txt">-->
+<!--        <h2>告警流数</h2>-->
+<!--      </div>-->
       <div class="txt">
         <h2>上行字节数</h2>
       </div>
@@ -19,12 +19,12 @@
       <div class="txt">
         <h2>在线设备数</h2>
       </div>
-      <div class="txt">
-        <h2>离线设备数</h2>
-      </div>
-      <div class="txt">
-        <h2>活跃流数</h2>
-      </div>
+<!--      <div class="txt">-->
+<!--        <h2>离线设备数</h2>-->
+<!--      </div>-->
+<!--      <div class="txt">-->
+<!--        <h2>活跃流数</h2>-->
+<!--      </div>-->
     </div>
     <div class="left-num">
       <div class="Num">
@@ -35,10 +35,10 @@
         <h1>{{dataList.downrate}}</h1>
         <h1>kbps</h1>
       </div>
-      <div class="Num">
-        <h1>{{dataList.alertFlow}}</h1>
-<!--        <h1>{{ temp  }}</h1>-->
-      </div>
+<!--      <div class="Num">-->
+<!--        <h1>{{dataList.alertFlow}}</h1>-->
+<!--&lt;!&ndash;        <h1>{{ temp  }}</h1>&ndash;&gt;-->
+<!--      </div>-->
       <div class="Num">
         <h1>{{dataList.upbytes}}</h1>
       </div>
@@ -48,12 +48,12 @@
       <div class="Num">
         <h1>{{dataList.ondevicecount}}</h1>
       </div>
-      <div class="Num">
-        <h1>{{dataList.offdevicecount}}</h1>
-      </div>
-      <div class="Num">
-        <h1>{{dataList.activeFlowCount}}</h1>
-      </div>
+<!--      <div class="Num">-->
+<!--        <h1>{{dataList.offdevicecount}}</h1>-->
+<!--      </div>-->
+<!--      <div class="Num">-->
+<!--        <h1>{{dataList.activeFlowCount}}</h1>-->
+<!--      </div>-->
     </div>
   </div>
 </template>
@@ -123,7 +123,7 @@ export default {
 }
 .left-top>.chart-box>.left-num>.Num{
   width: 100%;
-  height: 12.5%;
+  height: 20%;
   float: left;
   display: flex;
   align-items: center;
@@ -135,7 +135,7 @@ export default {
 }
 .left-top>.chart-box>.left-name>.txt{
   width: 100%;
-  height: 12.5%;
+  height: 20%;
   float: left;
   display: flex;
   align-items: center;

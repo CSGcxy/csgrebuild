@@ -172,7 +172,7 @@
 
 
 .center-top>.center-left {
-    width: 35%;
+    width: 40%;
     height: 100%;
     float: left;
 }
@@ -234,7 +234,7 @@
 }
 
 .center-top>.center-center {
-    width: 40%;
+    width: 55%;
     height: 100%;
     float: left;
     background: #10121A;
@@ -250,7 +250,7 @@
 .center-top>.center-right {
     width: 25%;
     height: 100%;
-    float: left;
+    float: right;
 }
 .center-top>.center-right>.center-right-hosts {
     width: 100%;

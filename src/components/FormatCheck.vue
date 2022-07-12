@@ -11,9 +11,9 @@
             <div class="compliantNumOne">
               <CompliantNumOne />
             </div>
-            <div class="compliantNumTwo ">
-              <CompliantNumTwo />
-            </div>
+<!--            <div class="compliantNumTwo ">-->
+<!--              <CompliantNumTwo />-->
+<!--            </div>-->
           </div>
         </div>
         <div class="left-mid">
@@ -41,7 +41,7 @@
 
 <script>
 import CompliantNumOne from "./viewCharts/formatCheck/CompliantNumOne";
-import CompliantNumTwo from "./viewCharts/formatCheck/CompliantNumTwo";
+// import CompliantNumTwo from "./viewCharts/formatCheck/CompliantNumTwo";
 import NonCompliant from "./viewCharts/formatCheck/NonCompliant";
 import PacketProportion from "./viewCharts/formatCheck/PacketProportion";
 
@@ -50,7 +50,6 @@ export default {
   components: {
     NonCompliant,
     CompliantNumOne,
-    CompliantNumTwo,
     PacketProportion,
   },
   mounted() {},

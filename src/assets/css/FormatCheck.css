@@ -90,15 +90,15 @@
 
 }
 .box-left>.left-top>.left-top-Count>.compliantNumOne{
-    width:50%;
+    width:100%;
     height:100%;
     float:left;
 }
-.box-left>.left-top>.left-top-Count>.compliantNumTwo{
-    width:50%;
-    height:100%;
-    float:left;
-}
+/*.box-left>.left-top>.left-top-Count>.compliantNumTwo{*/
+/*    width:50%;*/
+/*    height:100%;*/
+/*    float:left;*/
+/*}*/
 .box-left>.left-mid>.left-mid-company {
     width: 100%;
     height: 88%;
