@@ -13,9 +13,9 @@
 <!--          <h3 class="title">XXXX监控系统平台</h3>-->
         </div>
         <el-form-item prop="userName" @keyup.enter.native="doLogin">
-          <span class="icon-container">
-            <i class="el-icon-user"></i>
-          </span>
+<!--          <span class="icon-container">-->
+<!--            <i class="el-icon-user"></i>-->
+<!--          </span>-->
           <el-input
               type="text"
               v-model="userForm.userName"
@@ -24,9 +24,9 @@
           ></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <span class="icon-container">
-            <i class="el-icon-unlock"></i>
-          </span>
+<!--          <span class="icon-container">-->
+<!--            <i class="el-icon-unlock"></i>-->
+<!--          </span>-->
           <el-input
               type="text"
               v-model="userForm.password"
@@ -36,17 +36,16 @@
           ></el-input>
         </el-form-item>
         <el-form-item prop="code">
-          <span class="icon-container">
-            <i class="el-icon-message"></i>
-          </span>
+<!--          <span class="icon-container">-->
+<!--            <i class="el-icon-message"></i>-->
+<!--          </span>-->
           <el-input
-              type="text"
               v-model="userForm.code"
               autocomplete="off"
               placeholder="验证码"
           >
-            <template slot="append"><img style="margin: 0 10px 0 10px" @click="getCatcha"
-                                         alt="验证码" height="30" width="100">
+            <template slot="append"><img style="margin: 0 2px 0 2px;" @click="getCatcha" :src="captchaUrl"
+                                         alt="验证码" height="30" width="80">
             </template>
           </el-input>
         </el-form-item>
@@ -75,6 +74,7 @@ export default {
   name: "login",
   data() {
     return {
+
       userForm: {
         userName: "",
         password: "",
@@ -95,15 +95,19 @@ export default {
   methods: {
     doLogin() {
       // this.$message.warning("暂时不能登录！请用访客模式查看")
+      this.fullscreenLoading = true;
       user.login(this.userForm).then(resp=>{
-        this.fullscreenLoading = true;
+
         if (resp.code==20000 && resp.success==true){
+          console.log(resp)
+          this.fullscreenLoading = false;
           this.$message.success(resp.message);
           window.localStorage.setItem("uToken",resp.data.token)
+          // this.$router.push("/home")
           //登录成功后获取用户信息
           user.test().then(resp => {
             console.log(resp);
-            this.fullscreenLoading = false;
+            // this.fullscreenLoading = false;
             this.$router.push("/home")
           });
           // localStorage
@@ -132,9 +136,9 @@ export default {
   background-color: #10121a;
 
   .el-input {
-    display: inline-block;
+    //display: inline-block;
     height: 47px;
-    width: 85%;
+    //width: 85%;
 
     /deep/ input {
       background: transparent;
@@ -147,6 +151,9 @@ export default {
       caret-color: #fff !important;
     }
   }
+/deep/ .el-input-group__append, .el-input-group__prepend {
+  padding:2px;
+}
 
   /deep/ .el-form-item {
     border: 1px solid rgba(255, 255, 255, 0.1);
