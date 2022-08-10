@@ -132,7 +132,7 @@ export default {
           for (var key in ydata) {
             dataArray.push(
                 {
-                  name: "afn = " + key,
+                  name: "" + key,
                   type: "bar",
                   emphasis: {
                     focus: "series",

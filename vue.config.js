@@ -7,9 +7,9 @@ module.exports = {
         // proxy: 'http://localhost:9001'
         proxy: {
             '/': {
-                target: 'http://csgabc.vaiwan.com',
+                // target: 'http://csgabc.vaiwan.com',
                 // target: 'http://localhost:9001',
-                // target: 'http://223.243.100.141:35772',
+                target: 'http://testcsg.ngrok.24k.fun',
                 // target: 'http://csgabc.ngrok.24k.fun',
                 changeOrigin: true,
                 pathRewrite: {

@@ -5,22 +5,22 @@
         <table>
           <thead>
             <tr>
-              <th>上层应用协议</th>
-              <th>传输层协议</th>
-              <th>客户端</th>
-              <th>服务器端</th>
-              <th>持续时间</th>
+              <th>时间</th>
+              <th>客户端IP</th>
+              <th>客户端port</th>
+              <th>服务器端IP</th>
+              <th>服务器端port</th>
               <th>前向流传输速率</th>
               <th>后向流传输速率</th>
               <th>传输总字节数</th>
             </tr>
           </thead>
           <tr v-for="value in tableValue">
-            <td>{{ value.appProto }}</td>
-            <td>{{ value.proto }}</td>
-            <td>{{ value.srcIp }}</td>
-            <td>{{ value.dstIp }}</td>
             <td>{{ value.duration }}</td>
+            <td>{{ value.srcIp }}</td>
+            <td>{{ value.sport }}</td>
+            <td>{{ value.dstIp }}</td>
+            <td>{{ value.dport }}</td>
             <td>{{ value.frontRate.toFixed(2) + "Mbit/s" }}</td>
             <td>{{ value.backRate.toFixed(2) + "Mbit/s" }}</td>
             <td>{{ value.byteCount.toFixed(2) + "MB" }}</td>
@@ -51,7 +51,7 @@ export default {
       timer: "",
       tableValue: [],
       total: 60,
-      pageSize: 5,
+      pageSize: 8,
       currentPage: 1,
     };
   },

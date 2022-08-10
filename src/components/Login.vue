@@ -1,5 +1,5 @@
 <template >
-  <div id="login-container">
+  <div id="login-container" v-loading="fullscreenLoading">
     <h1 class="big-title">XXXX监控系统平台</h1>
     <div class="login-form-container">
       <el-form
@@ -12,10 +12,10 @@
         <div class="title-container" style="text-align: center; height: 50px">
 <!--          <h3 class="title">XXXX监控系统平台</h3>-->
         </div>
-        <el-form-item prop="user" @keyup.enter.native="doLogin">
-        <span class="icon-container">
-          <i class="el-icon-user"></i>
-        </span>
+        <el-form-item prop="userName" @keyup.enter.native="doLogin">
+          <span class="icon-container">
+            <i class="el-icon-user"></i>
+          </span>
           <el-input
               type="text"
               v-model="userForm.userName"
@@ -23,18 +23,33 @@
               placeholder="用户名"
           ></el-input>
         </el-form-item>
-        <el-form-item prop="pass">
-        <span class="icon-container">
-          <i class="el-icon-more"></i>
-        </span>
+        <el-form-item prop="password">
+          <span class="icon-container">
+            <i class="el-icon-unlock"></i>
+          </span>
           <el-input
-              type="password"
+              type="text"
               v-model="userForm.password"
               autocomplete="off"
               placeholder="密码"
+              show-password
           ></el-input>
         </el-form-item>
-
+        <el-form-item prop="code">
+          <span class="icon-container">
+            <i class="el-icon-message"></i>
+          </span>
+          <el-input
+              type="text"
+              v-model="userForm.code"
+              autocomplete="off"
+              placeholder="验证码"
+          >
+            <template slot="append"><img style="margin: 0 10px 0 10px" @click="getCatcha"
+                                         alt="验证码" height="30" width="100">
+            </template>
+          </el-input>
+        </el-form-item>
         <el-form-item class="btn-form-item">
           <el-button type="primary" @click="doLogin" class="btn-container"
           >登录</el-button
@@ -59,72 +74,44 @@ import user from "@/api/user";
 export default {
   name: "login",
   data() {
-    // var validatePass = (rule, value, callback) => {
-    //   if (value === "") {
-    //     callback(new Error("请输入账户"));
-    //   } else {
-    //     if (this.ruleForm.pass !== "") {
-    //       this.$refs.ruleForm.validateField("pass");
-    //     }
-    //     callback();
-    //   }
-    // };
-    // var validatePass2 = (rule, value, callback) => {
-    //   if (value === "") {
-    //     callback(new Error("请输入密码"));
-    //   } else {
-    //     callback();
-    //   }
-    // };
     return {
       userForm: {
         userName: "",
         password: "",
+        code: ""
       },
+      fullscreenLoading: false,
+      captchaUrl: "/manage/captcha/getCaptcha" + '?' + Math.random() * 1000,
       rules: {
         // user: [{ validator: validatePass, trigger: "blur" }],
         // pass: [{ validator: validatePass2, trigger: "blur" }],
       },
     };
   },
+  mounted() {
+    this.getCatcha();
+  },
+
   methods: {
     doLogin() {
-      this.$message.warning("暂时不能登录！请用访客模式查看")
-      // user.login(this.userForm).then(resp=>{
-      //   if (resp.code==20000 && resp.success==true){
-      //     this.$message.success(resp.message);
-      //     window.localStorage.setItem("uToken",resp.data.token)
-      //     //登录成功后获取用户信息
-      //     user.test().then(resp => {
-      //       console.log(resp);
-      //       this.$router.push("/home")
-      //     });
-      //     // localStorage
-      //   }
-      // })
-      // //自己设置账号 密码
-      // if (this.ruleForm.user === "和嘉宾" && this.ruleForm.pass === "666") {
-      //   // 登录成功
-      //   // 1. 存储 token
-      //   // //                             键,值
-      //   localStorage.setItem("token", "Bearer xxxx");
-      //   // // 2. 跳转到后台主页
-      //   // //传用户名
-      //
-      //   window.sessionStorage.setItem(
-      //     "user",
-      //     JSON.stringify(this.ruleForm.user)
-      //   );
-      //   this.$bus.$emit("updateData", {
-      //     isLogin: false,
-      //     isUser: true,
-      //   });
-      //   this.$router.push("/home");
-      // } else {
-      //   alert("用户名或密码错误，请重试~");
-      //   // 登录失败，清空
-      //   localStorage.removeItem("token");
-      // }
+      // this.$message.warning("暂时不能登录！请用访客模式查看")
+      user.login(this.userForm).then(resp=>{
+        this.fullscreenLoading = true;
+        if (resp.code==20000 && resp.success==true){
+          this.$message.success(resp.message);
+          window.localStorage.setItem("uToken",resp.data.token)
+          //登录成功后获取用户信息
+          user.test().then(resp => {
+            console.log(resp);
+            this.fullscreenLoading = false;
+            this.$router.push("/home")
+          });
+          // localStorage
+        }
+      })
+    },
+    getCatcha() {
+      this.captchaUrl = "/manage/captcha/getCaptcha" + '?' + Math.random() * 1000;
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
@@ -207,6 +194,12 @@ export default {
 
   .icon-container {
     padding: 6px 5px 6px 15px;
+    color: #889aa4;
+    vertical-align: middle;
+    display: inline-block;
+  }
+  .icon-container-code {
+    padding: 6px 5px 6px 10px;
     color: #889aa4;
     vertical-align: middle;
     display: inline-block;

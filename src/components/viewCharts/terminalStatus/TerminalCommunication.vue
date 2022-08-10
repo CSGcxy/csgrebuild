@@ -4,25 +4,23 @@
       <table>
         <thead>
         <tr>
+          <th>时间</th>
           <th>IP</th>
-          <th>位置</th>
-          <th>流数</th>
-          <th>总发送字节数</th>
-          <th>名称</th>
-          <th>上次出现时间</th>
-          <th>上下行速率</th>
-          <th>总字节数</th>
+          <th>所属网段</th>
+          <th>所属区局</th>
+          <th>终端类型</th>
+          <th>上行字节数</th>
+          <th>下行字节数</th>
         </tr>
         </thead>
         <tr v-for="value in tableValue">
+          <td>{{ value.time }}</td>
           <td>{{ value.ip }}</td>
           <td>{{ value.location }}</td>
-          <td>{{ value.flows }}</td>
-          <td>{{ value.totalrecvbytes + "bytes" }}</td>
+          <td>{{ value.netseg }}</td>
           <td>{{ value.name }}</td>
-          <td>{{ value.lastseen }}</td>
-          <td>{{ value.rates.toFixed(2) + "bit/s" }}</td>
-          <td>{{ value.totalbytes + "bytes" }}</td>
+          <td>{{ value.upbytes + "bytes" }}</td>
+          <td>{{ value.downbytes + "bytes" }}</td>
         </tr>
 
       </table>
@@ -33,7 +31,7 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page.sync="currentPage"
-          :page-size="5"
+          :page-size="8"
           layout="total, prev, pager, next"
           :total="dataListTotal">
       </el-pagination>
@@ -62,7 +60,7 @@ export default {
   methods:{
     drawterminalCommunication() {
       // this.GLOBAL.NETSEG = this.temp
-      netSegStatus.getTerminalCommunication(this.GLOBAL.NETSEG,this.currentPage).then(resp => {
+      netSegStatus.getTerminalCommunication(this.currentPage).then(resp => {
         this.tableValue=resp.data.segCommStatusList.records;
         this.dataListTotal=resp.data.segCommStatusList.total;
       });

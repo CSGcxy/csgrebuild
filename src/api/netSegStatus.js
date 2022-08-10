@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-let base = 'csg/segflow/terminalStatus'
+let base = 'segflow/terminalStatus'
 
 export default {
     getNetSegs() {
@@ -20,9 +20,9 @@ export default {
             method:'get'
         })
     },
-    getTerminalCommunication(segment,current){
+    getTerminalCommunication(current){
         return request({
-            url: base + '/getSegCommStatus/' + segment + '/' + current,
+            url: base + '/getSegCommStatus/' + current,
             method:'get'
         })
     },
@@ -38,9 +38,9 @@ export default {
             method:'get'
         })
     },
-    getlocation(segment) {
+    getlocation() {
         return request({
-            url: base + '/getlocation/' + segment,
+            url: base + '/getlocation',
             method:'get'
         })
     }

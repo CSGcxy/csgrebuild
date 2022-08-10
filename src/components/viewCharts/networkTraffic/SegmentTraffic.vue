@@ -105,7 +105,6 @@ export default {
   methods:{
     drawSegmentTraffic() {
       if (this.GLOBAL.timeRange != null) {
-        console.log(this.GLOBAL.timeRange)
         let startTime = this.GLOBAL.timeRange[0].getTime();
         let endTime = this.GLOBAL.timeRange[1].getTime();
         this.getSegTotalBytesByTime(startTime, endTime);

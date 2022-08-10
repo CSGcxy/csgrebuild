@@ -1,7 +1,7 @@
-const NETSEG = 'PW';
-const trendSEG = 'PW';
+const NETSEG = 'ZZ';
+const trendSEG = 'ZZ';
 const timeRange = null;
-const refreshTime = 5000000;
+const refreshTime = 60000;
 const mapData = {
     type: "FeatureCollection",
     features: [

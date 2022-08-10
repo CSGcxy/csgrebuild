@@ -14,7 +14,7 @@ export default {
       PacketCountData:"",
       PacketCountOption: {
         title: {
-          text: "不同类型packet占比",
+          text: "异常packet占比",
           // subtext: "Fake Data",
           top:"4%",
           left: "center",

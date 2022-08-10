@@ -29,9 +29,9 @@ export default {
             data: data
         })
     },
-    test() {
+    getCatcha() {
         return request({
-            url: base +  '/testCors',
+            url: base +  '/captcha/getCaptcha',
             method: 'get'
         })
     }

@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-let base = ' csg/segflow/flows'
+let base = 'segflow/flows'
 
 export default {
     getSangji(segment) {
@@ -16,13 +16,13 @@ export default {
     },
     getSegTotalBytesByTime(segment, startTime,endTime) {
         return request({
-            url: 'csg/segflow/terminalStatus' + '/getSegTotalBytesByTime/' + segment + '/' + startTime + '/' + endTime,
+            url: 'segflow/terminalStatus' + '/getSegTotalBytesByTime/' + segment + '/' + startTime + '/' + endTime,
             method: 'get'
         })
     },
     getSegTotalBytes(segment) {
         return request({
-            url: 'csg/segflow/terminalStatus' + '/getSegTotalBytes/' + segment ,
+            url: 'segflow/terminalStatus' + '/getSegTotalBytes/' + segment ,
             method: 'get'
         })
     },

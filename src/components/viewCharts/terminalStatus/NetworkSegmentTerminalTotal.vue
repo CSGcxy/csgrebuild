@@ -28,11 +28,11 @@
     </div>
     <div class="left-num">
       <div class="Num">
-        <h1>{{dataList.uprate}}</h1>
+        <h1>{{dataList.uprate.toFixed(2)}}</h1>
         <h1>kbps</h1>
       </div>
       <div class="Num">
-        <h1>{{dataList.downrate}}</h1>
+        <h1>{{dataList.downrate.toFixed(2)}}</h1>
         <h1>kbps</h1>
       </div>
 <!--      <div class="Num">-->

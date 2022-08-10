@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     getLocs() {
-      netSegStatus.getlocation(this.GLOBAL.NETSEG).then(resp => {
+      netSegStatus.getlocation().then(resp => {
         console.log("地图")
         // console.log(resp.data.locationList)
         // this.realData= JSON.parse(resp.data.locationList)
